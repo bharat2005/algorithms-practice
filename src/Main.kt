@@ -5,8 +5,15 @@ fun main() {
     val n = readLine()!!.toInt()
 
     var ans = 1L
-    repeat(n){
-        ans *= 2 % MOD
+    repeat(n) {
+        ans = (2 * ans) % MOD
     }
-    println(ans % MOD)
+    println(ans)
+
 }
+
+//    var ans = 1L
+//    repeat(n){
+//        ans *= 2 % MOD
+//    }
+//    println(ans % MOD)
