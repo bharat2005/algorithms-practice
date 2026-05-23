@@ -1,4 +1,6 @@
+import kotlin.math.pow
 
 fun main() {
-    println("Hello World!")
+        val r = readLine()!!.toInt()
+        println(2.0.pow(r).toInt())
 }
