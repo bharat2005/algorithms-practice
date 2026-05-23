@@ -1,16 +1,30 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        final int MOD = 1_000_000_000 + 7;
-        int n = Integer.parseInt(new BufferedReader(new InputStreamReader(System.in)).readLine());
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        long ans = 1L;
-        for (int i = 0; i < n; i++) {
-            ans = (2 * ans) % MOD;
+        int fac = Integer.parseInt(br.readLine());
+        int fives = 0;
+        int twos = 0;
+
+        while (fac != 0) {
+
+            int num = fac;
+            while (num % 5 == 0 && num != 0) {
+                fives++;
+                num /= 5;
+            }
+
+            int num2 = fac;
+            while (num2 % 2 == 0 && num2 != 0) {
+                twos++;
+                num2 /= 2;
+            }
+
+            fac--;
         }
-        System.out.println(ans);
+
+        System.out.println(Math.min(twos, fives));
     }
 }
