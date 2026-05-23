@@ -1,12 +1,16 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws Exception {
+        final int MOD = 1_000_000_000 + 7;
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(br.readLine());
 
-        int r = Integer.parseInt(br.readLine());
-        System.out.println((int) Math.pow(2.0, r));
+        long ans = 1L;
+        for (int i = 0; i < n; i++) {
+            ans *= 2 % MOD;
+        }
+
+        System.out.println(ans % MOD);
     }
 }
