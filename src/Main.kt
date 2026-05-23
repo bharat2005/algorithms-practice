@@ -1,5 +1,14 @@
 
 fun main() {
+    val x = readLine()!!.toInt()
+    val str = StringBuilder("HelloWorld")
+    str.deleteCharAt(x - 1)
+    println(str.toString())
+}
+
+
+
+fun maino() {
     var fac = readLine()!!.toInt()
     var fives = 0
     var twos = 0
