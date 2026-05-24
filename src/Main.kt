@@ -1,13 +1,8 @@
 
 fun main(){
     val n = readLine()!!.toInt()
-    var fac = 5
-    var ans = 0
+    val arr = readLine()!!.split(" ").map { it.toInt() }.toSet()
 
-    while(fac <= n){
-        ans += n / fac
-        fac *= 5
-    }
+    print(arr.joinToString(" "))
 
-    println(ans)
 }
