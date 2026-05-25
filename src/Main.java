@@ -1,22 +1,21 @@
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
 public class Main {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         int t = Integer.parseInt(br.readLine());
 
-        for (int tc = 0; tc < t; tc++) {
-            String[] parts = br.readLine().split(" ");
+        while (t-- > 0) {
+            StringTokenizer st = new StringTokenizer(br.readLine());
 
-            int x = Integer.parseInt(parts[0]);
-            int y = Integer.parseInt(parts[1]);
+            int x = Integer.parseInt(st.nextToken());
+            int y = Integer.parseInt(st.nextToken());
 
-            if (((x + y) % 3 == 0) &&
-                    ((x % 3 == 0 && y % 3 == 0) ||
-                            (x % 3 != 0 && y % 3 != 0))) {
-
+            if ((x + y) % 3 == 0 && (2 * Math.min(x, y) >= Math.max(x, y))) {
                 System.out.println("YES");
             } else {
                 System.out.println("NO");
