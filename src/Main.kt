@@ -1,8 +1,14 @@
 
 fun main(){
-    val n = readLine()!!.toInt()
-    val arr = readLine()!!.split(" ").map { it.toInt() }.toSet()
+    val t = readLine()!!.toInt()
 
-    print(arr.joinToString(" "))
+    repeat(t){
+        val (x, y) = readLine()!!.split(" ").map { it.toInt() }
 
+        if( ((x+y) % 3 == 0) && ( (x % 3 == 0 && y % 3 == 0) || (x % 3 != 0 && y % 3 != 0) ) ){
+            println("YES")
+        } else {
+            println("NO")
+        }
+    }
 }
