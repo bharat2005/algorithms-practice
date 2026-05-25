@@ -1,25 +1,52 @@
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.StringTokenizer;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String str = br.readLine();
 
-        int t = Integer.parseInt(br.readLine());
+        // store freq
+        int[] arr = new int[26];
+        for (char ch : str.toCharArray()) {
+            arr[ch - 'A']++;
+        }
 
-        while (t-- > 0) {
-            StringTokenizer st = new StringTokenizer(br.readLine());
+        // check odd count & mid
+        int oddCount = 0;
+        Integer middle = null;
 
-            int x = Integer.parseInt(st.nextToken());
-            int y = Integer.parseInt(st.nextToken());
-
-            if ((x + y) % 3 == 0 && (2 * Math.min(x, y) >= Math.max(x, y))) {
-                System.out.println("YES");
-            } else {
-                System.out.println("NO");
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] % 2 == 1) {
+                oddCount++;
+                middle = i;
             }
         }
+
+        if (oddCount > 1) {
+            System.out.println("NO SOLUTION");
+            return;
+        }
+
+        // create left part
+        StringBuilder left = new StringBuilder();
+
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] % 2 == 0) {
+                for (int j = 0; j < arr[i] / 2; j++) {
+                    left.append((char) ('A' + i));
+                }
+            }
+        }
+
+        String right = left.reverse().toString();
+
+        if (middle != null) {
+            for (int i = 0; i < arr[middle]; i++) {
+                left.append((char) ('A' + middle));
+            }
+        }
+
+        System.out.println(left.toString() + right);
     }
 }
