@@ -32,7 +32,7 @@ fun main(){
         }
     }
 
-    val right = left.reversed().toString()
+    val right = left.reversed()
 
     if(middle != null){
         repeat(arr[middle]){

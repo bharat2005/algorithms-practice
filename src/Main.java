@@ -39,7 +39,7 @@ public class Main {
             }
         }
 
-        String right = left.reverse().toString();
+        String right = new StringBuilder(left).reverse().toString();
 
         if (middle != null) {
             for (int i = 0; i < arr[middle]; i++) {
