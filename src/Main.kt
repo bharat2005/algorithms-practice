@@ -1,20 +1,20 @@
-import kotlin.math.pow
 
 fun main(){
     val n = readLine()!!.toInt()
+    val str = readLine()!!
 
-    for(i in 0 until 2.0.pow(n).toInt()) {
-        val gray = i xor (i shr 1)
-        val str = StringBuilder()
-
-        for(j in 0 until n){
-            if((gray shr j) and 1 == 1){
-                str.append("1")
-            } else {
-                str.append("0")
-            }
+    var currLen = 1
+    var maxLen = 0
+    for(i in 1 until n){
+        if(str[i] == 'x' && str[i-1] == 'x' ){
+            currLen++
+        } else{
+            currLen = 1
         }
 
-        println(str.toString())
+        maxLen = maxOf(currLen, maxLen)
     }
+
+    val res = if(maxLen == 1) 0 else maxLen - 2
+    println(res)
 }

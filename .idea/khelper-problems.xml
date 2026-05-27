@@ -62,6 +62,81 @@
             </ProblemData>
           </value>
         </entry>
+        <entry key="KOTLIN:b_file_name">
+          <value>
+            <ProblemData>
+              <option name="filePath" value="C:\Users\bhara\IdeaProjects\algorithms-practice\src\main\kotlin\problems\b_file_name\KSolution.kt" />
+              <option name="language" value="KOTLIN" />
+              <option name="problem">
+                <Problem>
+                  <option name="batch">
+                    <Batch>
+                      <option name="id" value="ac49c939-ed07-443c-8aac-9e81b9c3ddf2" />
+                      <option name="size" value="1" />
+                    </Batch>
+                  </option>
+                  <option name="group" value="Codeforces - Codeforces Round 481 (Div. 3)" />
+                  <option name="input">
+                    <InputOutput>
+                      <option name="type" value="stdin" />
+                    </InputOutput>
+                  </option>
+                  <option name="languages">
+                    <Languages>
+                      <option name="java">
+                        <JavaLanguage>
+                          <option name="mainClass" value="Main" />
+                          <option name="taskClass" value="BFileName" />
+                        </JavaLanguage>
+                      </option>
+                    </Languages>
+                  </option>
+                  <option name="memoryLimit" value="256" />
+                  <option name="name" value="B. File Name" />
+                  <option name="output">
+                    <InputOutput>
+                      <option name="type" value="stdout" />
+                    </InputOutput>
+                  </option>
+                  <option name="tests">
+                    <list>
+                      <TestCase>
+                        <option name="input" value="6&#10;xxxiii&#10;" />
+                        <option name="output" value="1&#10;" />
+                      </TestCase>
+                      <TestCase>
+                        <option name="input" value="5&#10;xxoxx&#10;" />
+                        <option name="output" value="0&#10;" />
+                      </TestCase>
+                      <TestCase>
+                        <option name="input" value="10&#10;xxxxxxxxxx&#10;" />
+                        <option name="output" value="8&#10;" />
+                      </TestCase>
+                    </list>
+                  </option>
+                  <option name="timeLimit" value="1000" />
+                  <option name="url" value="https://codeforces.com/contest/978/problem/B" />
+                </Problem>
+              </option>
+              <option name="testCases">
+                <list>
+                  <TestCase>
+                    <option name="input" value="6&#10;xxxiii&#10;" />
+                    <option name="output" value="1&#10;" />
+                  </TestCase>
+                  <TestCase>
+                    <option name="input" value="5&#10;xxoxx&#10;" />
+                    <option name="output" value="0&#10;" />
+                  </TestCase>
+                  <TestCase>
+                    <option name="input" value="10&#10;xxxxxxxxxx&#10;" />
+                    <option name="output" value="8&#10;" />
+                  </TestCase>
+                </list>
+              </option>
+            </ProblemData>
+          </value>
+        </entry>
       </map>
     </option>
   </component>
