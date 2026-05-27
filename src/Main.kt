@@ -1,33 +1,24 @@
+import kotlin.math.abs
 
 fun main(){
-    //val str = readLine()!!
-    val str = "aaab"
-    val sb = StringBuilder()
-    val chars = str.toCharArray().sorted()
-    val bools = BooleanArray(chars.size){false}
-    val res = mutableListOf<String>()
+    val n = readLine()!!.toInt()
+    val arr = readLine()!!.split(" ").map { it.toInt() }.sorted()
+//    val n = 5
+//    val arr = intArrayOf(3, 2, 7, 4, 1).sortedDescending()
 
-    fun rec(){
-        if(sb.length == str.length){
-            res.add(sb.toString())
-            return
-        }
+    var g1 = arr[0]
+    var g2 = arr[1]
 
-
-        for(i in chars.indices){
-            if(bools[i]) continue
-            if(i > 0 && chars[i] == chars[i-1] && !bools[i-1]) continue
-
-            bools[i] = true
-            sb.append(chars[i])
-            rec()
-            sb.deleteCharAt(sb.length - 1)
-            bools[i] = false
+    for( i in 2 until n){
+        val num = arr[i]
+        if(abs(g1 + num - g2 ) < abs(g2 + num - g1)){
+         //   println("${abs(g1 + num - g2 )} < ${abs(g2 + num - g1)}")
+            g1 += num
+        } else {
+         //   println("${abs(g1 + num - g2 )} > ${abs(g2 + num - g1)}")
+           g2 += num
         }
     }
 
-    rec()
-
-    println(res.size)
-    res.forEach { println(it) }
+    println(abs(g1 - g2))
 }
