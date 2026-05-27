@@ -3,42 +3,47 @@ import java.util.*;
 
 public class Main {
 
+    static String str;
+    static StringBuilder sb = new StringBuilder();
     static List<String> res = new ArrayList<>();
+    static TreeMap<Character, Integer> map = new TreeMap<>();
 
-    static void rec(String string, List<Character> avail) {
-        if (avail.size() == 0) {
-            res.add(string);
+    static void rec() {
+        if (sb.length() == str.length()) {
+            res.add(sb.toString());
             return;
         }
 
-        List<Character> nAvail = new ArrayList<>(avail);
+        for (Map.Entry<Character, Integer> entry : map.entrySet()) {
+            char ch = entry.getKey();
+            int count = entry.getValue();
 
-        for (char ch : avail) {
-            nAvail.remove(Character.valueOf(ch));
-            rec(string + ch, nAvail);
-            nAvail.add(ch);
+            if (count == 0) continue;
+
+            map.put(ch, count - 1);
+            sb.append(ch);
+
+            rec();
+
+            sb.deleteCharAt(sb.length() - 1);
+            map.put(ch, count);
         }
     }
 
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        String str = br.readLine();
+        str = br.readLine();
 
-        List<Character> avail = new ArrayList<>();
-        for (char c : str.toCharArray()) {
-            avail.add(c);
+        for (char ch : str.toCharArray()) {
+            map.put(ch, map.getOrDefault(ch, 0) + 1);
         }
 
-        rec("", avail);
+        rec();
 
-        List<String> distinct = new ArrayList<>(new LinkedHashSet<>(res));
+        System.out.println(res.size());
 
-        System.out.println(distinct.size());
-
-        Collections.sort(distinct);
-
-        for (String s : distinct) {
+        for (String s : res) {
             System.out.println(s);
         }
     }
