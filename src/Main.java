@@ -5,8 +5,9 @@ public class Main {
 
     static String str;
     static StringBuilder sb = new StringBuilder();
+    static char[] chars;
+    static boolean[] bools;
     static List<String> res = new ArrayList<>();
-    static TreeMap<Character, Integer> map = new TreeMap<>();
 
     static void rec() {
         if (sb.length() == str.length()) {
@@ -14,19 +15,15 @@ public class Main {
             return;
         }
 
-        for (Map.Entry<Character, Integer> entry : map.entrySet()) {
-            char ch = entry.getKey();
-            int count = entry.getValue();
+        for (int i = 0; i < chars.length; i++) {
+            if (bools[i]) continue;
+            if (i > 0 && chars[i] == chars[i - 1] && !bools[i - 1]) continue;
 
-            if (count == 0) continue;
-
-            map.put(ch, count - 1);
-            sb.append(ch);
-
+            bools[i] = true;
+            sb.append(chars[i]);
             rec();
-
             sb.deleteCharAt(sb.length() - 1);
-            map.put(ch, count);
+            bools[i] = false;
         }
     }
 
@@ -34,15 +31,16 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         str = br.readLine();
+        // String str = "aabac";
 
-        for (char ch : str.toCharArray()) {
-            map.put(ch, map.getOrDefault(ch, 0) + 1);
-        }
+        chars = str.toCharArray();
+        Arrays.sort(chars);
+
+        bools = new boolean[chars.length];
 
         rec();
 
         System.out.println(res.size());
-
         for (String s : res) {
             System.out.println(s);
         }
