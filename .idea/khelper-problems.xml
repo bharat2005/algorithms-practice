@@ -137,6 +137,65 @@
             </ProblemData>
           </value>
         </entry>
+        <entry key="KOTLIN:c_alice_bob_and_chocolate">
+          <value>
+            <ProblemData>
+              <option name="filePath" value="C:\Users\bhara\IdeaProjects\algorithms-practice\src\main\kotlin\problems\c_alice_bob_and_chocolate\KSolution.kt" />
+              <option name="language" value="KOTLIN" />
+              <option name="problem">
+                <Problem>
+                  <option name="batch">
+                    <Batch>
+                      <option name="id" value="cbfcc29a-2263-48b5-9e5d-2f62aa5514ed" />
+                      <option name="size" value="1" />
+                    </Batch>
+                  </option>
+                  <option name="group" value="Codeforces - Codeforces Beta Round 6 (Div. 2 Only)" />
+                  <option name="input">
+                    <InputOutput>
+                      <option name="type" value="stdin" />
+                    </InputOutput>
+                  </option>
+                  <option name="languages">
+                    <Languages>
+                      <option name="java">
+                        <JavaLanguage>
+                          <option name="mainClass" value="Main" />
+                          <option name="taskClass" value="CAliceBobAndChocolate" />
+                        </JavaLanguage>
+                      </option>
+                    </Languages>
+                  </option>
+                  <option name="memoryLimit" value="64" />
+                  <option name="name" value="C. Alice, Bob and Chocolate" />
+                  <option name="output">
+                    <InputOutput>
+                      <option name="type" value="stdout" />
+                    </InputOutput>
+                  </option>
+                  <option name="tests">
+                    <list>
+                      <TestCase>
+                        <option name="input" value="5&#10;2 9 8 2 7&#10;" />
+                        <option name="output" value="2 3&#10;" />
+                      </TestCase>
+                    </list>
+                  </option>
+                  <option name="timeLimit" value="2000" />
+                  <option name="url" value="https://codeforces.com/contest/6/problem/C" />
+                </Problem>
+              </option>
+              <option name="testCases">
+                <list>
+                  <TestCase>
+                    <option name="input" value="5&#10;2 9 8 2 7&#10;" />
+                    <option name="output" value="2 3&#10;" />
+                  </TestCase>
+                </list>
+              </option>
+            </ProblemData>
+          </value>
+        </entry>
       </map>
     </option>
   </component>
