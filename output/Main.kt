@@ -4,31 +4,31 @@ fun main() {
     val n = readLine()!!.toInt()
     val arr = readLine()!!.split(" ").map { it.toLong() }
     
-    //create pfx sum arr
-    val pfxSum = LongArray(n)
-    pfxSum[0] = arr[0]
-    for(i in 1 until n){
-        pfxSum[i] = arr[i] + pfxSum[i - 1]
-    }
     
-    //targeted middle value
-    val target = pfxSum[n-1] / 2
-    
-    //binary search
-    var right = n-1
     var left = 0
-    var ans = Int.MAX_VALUE
-    while(left <= right){
-        var mid = left + (right - left) / 2
+    var right = n - 1
     
-        if(target <= pfxSum[mid]){
-            ans = mid
-            right = mid - 1
+    var aliceTime = 0L
+    var bobTime = 0L
+    
+    var aliceCount = 0
+    var bobCount = 0
+    
+    while(left <= right){
+        if(aliceTime <=  bobTime){
+            aliceTime += arr[left]
+            left++
+    
+            aliceCount++
         } else {
-            left = mid + 1
+            bobTime += arr[right]
+            right--
+    
+            bobCount++
         }
     }
     
-    println("${ans} ${n - ans}")
+    
+    println("$aliceCount $bobCount")
     
 }
