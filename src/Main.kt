@@ -1,5 +1,7 @@
 fun main() {
 
+
+
     fun minimumCost(cost: IntArray): Int {
         val ncost = cost.sorted()
         val n = ncost.size
