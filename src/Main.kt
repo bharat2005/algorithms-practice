@@ -1,35 +1,27 @@
+fun main() {
 
-fun main(){
-    val n = readLine()!!.toInt()
-    val arr = readLine()!!.split(" ").map { it.toLong() }
+    fun minimumCost(cost: IntArray): Int {
+        val ncost = cost.sorted()
+        val n = ncost.size
+
+        var money = 0
+        var left = 0
+        var right = n - 1
 
 
-    var left = 0
-    var right = n - 1
-
-    var aliceTime = arr[0]
-    var bobTime = arr[n-1]
-
-    var aliceCount = 0
-    var bobCount = 0
-
-    while(left <= right){
-        if(aliceTime <=  bobTime){
-            aliceTime += arr[left]
-            left++
-
-            aliceCount++
-        } else {
-            bobTime += arr[right]
-            right--
-
-            bobCount++
+        while(left < right && left in 0..n-1 && right in 0..n-1){
+            money += ncost[left] + ncost[right]
+            right -= 2
+            left--
         }
+
+
+        if(ncost.size % 2 != 0 && left in 0..n-1){
+            money += ncost[left]
+        }
+
+        return money
     }
 
 
-    println("$aliceCount $bobCount")
-
 }
-
-
