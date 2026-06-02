@@ -1,26 +1,17 @@
+
+import kotlin.math.max
+
+fun gcd(a: Int, b: Int): Int {
+    return if (b == 0) a else gcd(b, a % b)
+}
+
 fun main() {
-    fun earliestFinishTime(landStartTime: IntArray, landDuration: IntArray, waterStartTime: IntArray, waterDuration: IntArray): Int {
+    val (y, w) = readLine()!!.split(" ").map { it.toInt() }
 
-        var min = Int.MAX_VALUE
-        for(i in landStartTime.indices){
-            for(j in waterStartTime.indices){
-                val a = landStartTime[i]
-                val b = landDuration[i]
+    val favorable = 7 - max(y, w)
+    val total = 6
 
-                val x = waterStartTime[j]
-                val y = waterDuration[j]
+    val g = gcd(favorable, total)
 
-                // maxOf( a + b , x ) + y
-                // maxOf( x + y, a ) + b
-                val m = maxOf(a + b, x) + y
-                val n =  maxOf( x + y, a ) + b
-
-                min = minOf(m, n, min)
-
-            }
-        }
-        return min
-    }
-
-
+    println("${favorable / g}/${total / g}")
 }
