@@ -1,17 +1,19 @@
-
-import kotlin.math.max
-
-fun gcd(a: Int, b: Int): Int {
-    return if (b == 0) a else gcd(b, a % b)
-}
-
 fun main() {
-    val (y, w) = readLine()!!.split(" ").map { it.toInt() }
+    val n = readLine()!!.toInt()
 
-    val favorable = 7 - max(y, w)
-    val total = 6
+    val strings = MutableList(n) {
+        readLine()!!
+    }
 
-    val g = gcd(favorable, total)
+    strings.sortBy { it.length }
 
-    println("${favorable / g}/${total / g}")
+    for (i in 0 until n - 1) {
+        if (!strings[i + 1].contains(strings[i])) {
+            println("NO")
+            return
+        }
+    }
+
+    println("YES")
+    strings.forEach { println(it) }
 }
