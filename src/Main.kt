@@ -1,19 +1,32 @@
+import java.lang.StringBuilder
+
 fun main() {
-    val n = readLine()!!.toInt()
+    val t = readLine()!!.toInt()
+    val out = StringBuilder()
 
-    val strings = MutableList(n) {
-        readLine()!!
-    }
+    repeat(t) {
+        val (n, k) = readLine()!!.split(" ").map { it.toLong() }
 
-    strings.sortBy { it.length }
+        if (n >= k && n % 2 == k % 2) {
+            out.append("YES\n")
 
-    for (i in 0 until n - 1) {
-        if (!strings[i + 1].contains(strings[i])) {
-            println("NO")
-            return
+            repeat((k - 1).toInt()) {
+                out.append("1 ")
+            }
+            out.append(n - (k - 1)).append('\n')
+
+        } else if (n % 2 == 0L && n >= 2 * k) {
+            out.append("YES\n")
+
+            repeat((k - 1).toInt()) {
+                out.append("2 ")
+            }
+            out.append(n - 2 * (k - 1)).append('\n')
+
+        } else {
+            out.append("NO\n")
         }
     }
 
-    println("YES")
-    strings.forEach { println(it) }
+    print(out.toString())
 }
