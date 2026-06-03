@@ -1,8 +1,10 @@
+package problems.a_division
+
 import java.util.Scanner
 
 fun main() {
     val t = readLine()!!.toInt()
-    
+
     repeat(t){
         val rating = readLine()!!.toInt()
         when{
