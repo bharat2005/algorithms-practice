@@ -3,6 +3,81 @@
   <component name="KHelperProblems">
     <option name="problemsMap">
       <map>
+        <entry key="KOTLIN:a_diverse_team">
+          <value>
+            <ProblemData>
+              <option name="filePath" value="C:\Users\bhara\IdeaProjects\algorithms-practice\src\main\kotlin\problems\a_diverse_team\KSolution.kt" />
+              <option name="language" value="KOTLIN" />
+              <option name="problem">
+                <Problem>
+                  <option name="batch">
+                    <Batch>
+                      <option name="id" value="505e3392-52d0-45b3-9b6b-b8eb5002f31d" />
+                      <option name="size" value="1" />
+                    </Batch>
+                  </option>
+                  <option name="group" value="Codeforces - Codeforces Round 486 (Div. 3)" />
+                  <option name="input">
+                    <InputOutput>
+                      <option name="type" value="stdin" />
+                    </InputOutput>
+                  </option>
+                  <option name="languages">
+                    <Languages>
+                      <option name="java">
+                        <JavaLanguage>
+                          <option name="mainClass" value="Main" />
+                          <option name="taskClass" value="ADiverseTeam" />
+                        </JavaLanguage>
+                      </option>
+                    </Languages>
+                  </option>
+                  <option name="memoryLimit" value="256" />
+                  <option name="name" value="A. Diverse Team" />
+                  <option name="output">
+                    <InputOutput>
+                      <option name="type" value="stdout" />
+                    </InputOutput>
+                  </option>
+                  <option name="tests">
+                    <list>
+                      <TestCase>
+                        <option name="input" value="5 3&#10;15 13 15 15 12&#10;" />
+                        <option name="output" value="YES&#10;1 2 5&#10;" />
+                      </TestCase>
+                      <TestCase>
+                        <option name="input" value="5 4&#10;15 13 15 15 12&#10;" />
+                        <option name="output" value="NO&#10;" />
+                      </TestCase>
+                      <TestCase>
+                        <option name="input" value="4 4&#10;20 10 40 30&#10;" />
+                        <option name="output" value="YES&#10;1 2 3 4&#10;" />
+                      </TestCase>
+                    </list>
+                  </option>
+                  <option name="timeLimit" value="1000" />
+                  <option name="url" value="https://codeforces.com/contest/988/problem/A" />
+                </Problem>
+              </option>
+              <option name="testCases">
+                <list>
+                  <TestCase>
+                    <option name="input" value="5 3&#10;15 13 15 15 12&#10;" />
+                    <option name="output" value="YES&#10;1 2 5&#10;" />
+                  </TestCase>
+                  <TestCase>
+                    <option name="input" value="5 4&#10;15 13 15 15 12&#10;" />
+                    <option name="output" value="NO&#10;" />
+                  </TestCase>
+                  <TestCase>
+                    <option name="input" value="4 4&#10;20 10 40 30&#10;" />
+                    <option name="output" value="YES&#10;1 2 3 4&#10;" />
+                  </TestCase>
+                </list>
+              </option>
+            </ProblemData>
+          </value>
+        </entry>
         <entry key="KOTLIN:a_slimes_on_a_line">
           <value>
             <ProblemData>

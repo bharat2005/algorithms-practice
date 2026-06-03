@@ -1,17 +1,24 @@
 fun main() {
-    val (x, y) = readLine()!!.split(" ").map { it.toInt() }
+    val (n, k) = readLine()!!.split(" ").map { it.toInt() }
+    val arr = readLine()!!.split(" ").map { it.toInt() }
+    val map = mutableMapOf<Int, Int>()
 
-    val fav = 6 - maxOf(x, y) + 1
 
-    var a = fav
-    var b = 6
-
-    while(b != 0){
-        val temp = a
-        a = b
-        b = temp % b
+    for(i in arr.indices){
+        val std = arr[i]
+        map[std] = map.getOrDefault(std, 0) + 1
     }
 
-    println("${fav/a}/${6/a}")
+    var ans = 0
+    for(i in map.keys){
+       ans++
+    }
+
+    if(ans == k){
+        println("YES")
+        map.keys.forEach { print(it) }
+    }else {
+        println("NO")
+    }
 
 }
