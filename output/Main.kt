@@ -14,9 +14,11 @@ fun main() {
         }
     }
     
-    if(res.size == k){
+    if(res.size >= k){
         println("YES")
-        res.forEach { print("$it ") }
+        for(i in 0 until k){
+            print("${res[i]}" + " ")
+        }
     } else {
         println("NO")
     }
