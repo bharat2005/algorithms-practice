@@ -3,6 +3,73 @@
   <component name="KHelperProblems">
     <option name="problemsMap">
       <map>
+        <entry key="KOTLIN:a_adjacent_replacements">
+          <value>
+            <ProblemData>
+              <option name="filePath" value="C:\Users\bhara\IdeaProjects\algorithms-practice\src\main\kotlin\problems\a_adjacent_replacements\KSolution.kt" />
+              <option name="language" value="KOTLIN" />
+              <option name="problem">
+                <Problem>
+                  <option name="batch">
+                    <Batch>
+                      <option name="id" value="9a654c92-eccf-41a7-88f9-9aaf7f07d0d7" />
+                      <option name="size" value="1" />
+                    </Batch>
+                  </option>
+                  <option name="group" value="Codeforces - Codeforces Round 498 (Div. 3)" />
+                  <option name="input">
+                    <InputOutput>
+                      <option name="type" value="stdin" />
+                    </InputOutput>
+                  </option>
+                  <option name="languages">
+                    <Languages>
+                      <option name="java">
+                        <JavaLanguage>
+                          <option name="mainClass" value="Main" />
+                          <option name="taskClass" value="AAdjacentReplacements" />
+                        </JavaLanguage>
+                      </option>
+                    </Languages>
+                  </option>
+                  <option name="memoryLimit" value="256" />
+                  <option name="name" value="A. Adjacent Replacements" />
+                  <option name="output">
+                    <InputOutput>
+                      <option name="type" value="stdout" />
+                    </InputOutput>
+                  </option>
+                  <option name="tests">
+                    <list>
+                      <TestCase>
+                        <option name="input" value="5&#10;1 2 4 5 10&#10;" />
+                        <option name="output" value="1 1 3 5 9&#10;" />
+                      </TestCase>
+                      <TestCase>
+                        <option name="input" value="10&#10;10000 10 50605065 1 5 89 5 999999999 60506056 1000000000&#10;" />
+                        <option name="output" value="9999 9 50605065 1 5 89 5 999999999 60506055 999999999&#10;" />
+                      </TestCase>
+                    </list>
+                  </option>
+                  <option name="timeLimit" value="1000" />
+                  <option name="url" value="https://codeforces.com/contest/1006/problem/A" />
+                </Problem>
+              </option>
+              <option name="testCases">
+                <list>
+                  <TestCase>
+                    <option name="input" value="5&#10;1 2 4 5 10&#10;" />
+                    <option name="output" value="1 1 3 5 9&#10;" />
+                  </TestCase>
+                  <TestCase>
+                    <option name="input" value="10&#10;10000 10 50605065 1 5 89 5 999999999 60506056 1000000000&#10;" />
+                    <option name="output" value="9999 9 50605065 1 5 89 5 999999999 60506055 999999999&#10;" />
+                  </TestCase>
+                </list>
+              </option>
+            </ProblemData>
+          </value>
+        </entry>
         <entry key="KOTLIN:a_diverse_team">
           <value>
             <ProblemData>
