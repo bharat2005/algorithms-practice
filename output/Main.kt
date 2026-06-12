@@ -9,13 +9,11 @@ fun main() {
             if(arr[j] == i){
                 arr[j] = i + 1
             }
-        }
-    
-        for(j in 0 until n){
             if(arr[j] == i + 1){
                 arr[j] = i
             }
         }
+    
     }
     
     
