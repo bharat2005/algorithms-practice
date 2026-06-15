@@ -1,27 +1,51 @@
 import kotlin.math.pow
 
+ class ListNode(var `val`: Int) {
+         var next: ListNode? = null
+ }
+
 fun main() {
-//    val t = readLine()!!.toInt()
-//
-//    repeat(t){
-//        var n = readLine()!!.toInt()
-        var n = 5009
-        val len = n.toString().length
-        var f = len
-        val arr = mutableListOf<Double>()
+    fun deleteMiddle(head: ListNode?): ListNode? {
 
-        while(n != 0){
-            val lastDigit = n % 10
-            println(lastDigit)
-
-            arr.add(lastDigit * 10.0.pow(len - f))
-            n /= 10
-            f++
+        //transverse the ll and get length
+        var curr = head
+        var indexCount = -1
+        while(curr != null){
+            indexCount++
+            curr = curr.next
         }
 
-        arr.reversed().forEach{println(it.toInt())}
-//    }
+        //find middle index
+        val middleIndex = indexCount / 2
 
+
+        //recrreate the ll
+        val newHead = head
+        var xcurr = newHead
+        var ncurr = head
+
+        var indexCount2 = -1
+        while(ncurr != null){
+            indexCount2++
+
+            if(indexCount2 + 1 == middleIndex){
+                xcurr?.next = ncurr?.next?.next
+                ncurr = ncurr?.next?.next
+                xcurr = xcurr?.next
+
+                continue
+            }
+
+            xcurr?.next = ncurr?.next
+            ncurr = ncurr?.next
+            xcurr = xcurr?.next
+        }
+
+
+
+
+        return newHead
+    }
 }
 
 
