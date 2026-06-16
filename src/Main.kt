@@ -7,10 +7,10 @@ fun main() {
     //without zeros
     val op1x = op1.toString().filter { it != '0' }.toInt()
     val op2x = op2.toString().filter { it != '0' }.toInt()
-    val sumx = op1x + op2x
+    val sumx = sum.toString().filter { it != '0' }.toInt()
 
 
-    if(sum == sumx) println("YES") else println("NO")
+    if(op1x + op2x == sumx) println("YES") else println("NO")
 }
 
 
