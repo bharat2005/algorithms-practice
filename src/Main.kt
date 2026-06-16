@@ -1,51 +1,16 @@
-import kotlin.math.pow
-
- class ListNode(var `val`: Int) {
-         var next: ListNode? = null
- }
 
 fun main() {
-    fun deleteMiddle(head: ListNode?): ListNode? {
+    val op1 = readLine()!!.toInt()
+    val op2 = readLine()!!.toInt()
+    val sum = op1 + op2
 
-        //transverse the ll and get length
-        var curr = head
-        var indexCount = -1
-        while(curr != null){
-            indexCount++
-            curr = curr.next
-        }
-
-        //find middle index
-        val middleIndex = indexCount / 2
+    //without zeros
+    val op1x = op1.toString().filter { it != '0' }.toInt()
+    val op2x = op2.toString().filter { it != '0' }.toInt()
+    val sumx = op1x + op2x
 
 
-        //recrreate the ll
-        val newHead = head
-        var xcurr = newHead
-        var ncurr = head
-
-        var indexCount2 = -1
-        while(ncurr != null){
-            indexCount2++
-
-            if(indexCount2 + 1 == middleIndex){
-                xcurr?.next = ncurr?.next?.next
-                ncurr = ncurr?.next?.next
-                xcurr = xcurr?.next
-
-                continue
-            }
-
-            xcurr?.next = ncurr?.next
-            ncurr = ncurr?.next
-            xcurr = xcurr?.next
-        }
-
-
-
-
-        return newHead
-    }
+    if(sum == sumx) println("YES") else println("NO")
 }
 
 
