@@ -263,6 +263,73 @@
             </ProblemData>
           </value>
         </entry>
+        <entry key="KOTLIN:b_facetook_priority_wall">
+          <value>
+            <ProblemData>
+              <option name="filePath" value="C:\Users\bhara\IdeaProjects\algorithms-practice\src\main\kotlin\problems\b_facetook_priority_wall\KSolution.kt" />
+              <option name="language" value="KOTLIN" />
+              <option name="problem">
+                <Problem>
+                  <option name="batch">
+                    <Batch>
+                      <option name="id" value="0da1432b-5741-4481-8a45-ea8898e8dcf0" />
+                      <option name="size" value="1" />
+                    </Batch>
+                  </option>
+                  <option name="group" value="Codeforces - Codeforces Beta Round 67 (Div. 2)" />
+                  <option name="input">
+                    <InputOutput>
+                      <option name="type" value="stdin" />
+                    </InputOutput>
+                  </option>
+                  <option name="languages">
+                    <Languages>
+                      <option name="java">
+                        <JavaLanguage>
+                          <option name="mainClass" value="Main" />
+                          <option name="taskClass" value="BFacetookPriorityWall" />
+                        </JavaLanguage>
+                      </option>
+                    </Languages>
+                  </option>
+                  <option name="memoryLimit" value="256" />
+                  <option name="name" value="B. Facetook Priority Wall" />
+                  <option name="output">
+                    <InputOutput>
+                      <option name="type" value="stdout" />
+                    </InputOutput>
+                  </option>
+                  <option name="tests">
+                    <list>
+                      <TestCase>
+                        <option name="input" value="ahmed&#10;3&#10;ahmed posted on fatma's wall&#10;fatma commented on ahmed's post&#10;mona likes ahmed's post&#10;" />
+                        <option name="output" value="fatma&#10;mona&#10;" />
+                      </TestCase>
+                      <TestCase>
+                        <option name="input" value="aba&#10;1&#10;likes likes posted's post&#10;" />
+                        <option name="output" value="likes&#10;posted&#10;" />
+                      </TestCase>
+                    </list>
+                  </option>
+                  <option name="timeLimit" value="2000" />
+                  <option name="url" value="https://codeforces.com/contest/75/problem/B" />
+                </Problem>
+              </option>
+              <option name="testCases">
+                <list>
+                  <TestCase>
+                    <option name="input" value="ahmed&#10;3&#10;ahmed posted on fatma's wall&#10;fatma commented on ahmed's post&#10;mona likes ahmed's post&#10;" />
+                    <option name="output" value="fatma&#10;mona&#10;" />
+                  </TestCase>
+                  <TestCase>
+                    <option name="input" value="aba&#10;1&#10;likes likes posted's post&#10;" />
+                    <option name="output" value="likes&#10;posted&#10;" />
+                  </TestCase>
+                </list>
+              </option>
+            </ProblemData>
+          </value>
+        </entry>
         <entry key="KOTLIN:b_file_name">
           <value>
             <ProblemData>
