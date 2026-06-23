@@ -32,8 +32,11 @@ fun main() {
         }
     }
 
-
-    map.entries.sortedBy { it.value}.forEach { println(it.key) }
+    //positive priority list sorted
+    map.entries.sortedWith (
+        compareByDescending<Map.Entry<String, Int>> { it.value }.thenBy { it.key }
+    ).forEach{ println(it.key) }
+    //zero priority list sorted
     set.sorted().forEach { println(it) }
 }
 
