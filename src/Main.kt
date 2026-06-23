@@ -26,18 +26,18 @@ fun main() {
             map[y] = map.getOrDefault(y, 0) + priority
         } else if(me == y) {
             map[x] = map.getOrDefault(x, 0) + priority
-        } else {
-            set.add(x)
-            set.add(y)
         }
+
+        set.add(x)
+        set.add(y)
+
     }
 
     //positive priority list sorted
-    map.entries.sortedWith (
-        compareByDescending<Map.Entry<String, Int>> { it.value }.thenBy { it.key }
-    ).forEach{ println(it.key) }
-    //zero priority list sorted
-    set.sorted().forEach { println(it) }
+    set.filter{ it !== me }.sortedWith (
+        compareByDescending<String> { map[it]!! }.thenBy { it }
+    ).forEach{ println(it) }
+
 }
 
 
