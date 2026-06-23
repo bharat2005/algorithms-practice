@@ -36,8 +36,15 @@ fun main() {
     }
     
     //positive priority list sorted
-    set.filter{ it !== me }.sortedWith (
-        compareByDescending<String> { map[it]!! }.thenBy { it }
-    ).forEach{ println(it) }
+    set.filter{ it != me }.sortedWith { a, b ->
+        val sa = map.getOrDefault(a, 0)
+        val sb = map.getOrDefault(b, 0)
+    
+        if(sa != sb){
+            sb.compareTo(sa)
+        }else {
+            a.compareTo(b)
+        }
+    }.forEach { println(it) }
     
 }

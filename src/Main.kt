@@ -1,43 +1,17 @@
 fun main() {
-    val me = readLine()!!
-    val n = readLine()!!.toInt()
-    val map = mutableMapOf<String, Int>()
-    val set = mutableSetOf<String>()
+    val numbers = mutableListOf(5, 2, 8, 1)
 
-    repeat(n){
-        val arr = readLine()!!.split(" ")
-        val x = arr[0]
-        val action = arr[1]
-        val y = if(arr[1] == "likes"){
-            arr[2].removeSuffix("'s")
-        } else
-        {
-            arr[3].removeSuffix("'s")
+    for(j in 0 until numbers.size) {
+        for (i in 0 until numbers.size - 1 - j) {
+            if (numbers[i] > numbers[i + 1]) {
+                val temp = numbers[i]
+                numbers[i] = numbers[i + 1]
+                numbers[i + 1] = temp
+            }
         }
-        val priority = when(action){
-            "likes" -> 5
-            "commented" -> 10
-            "posted" -> 15
-            else -> 0
-        }
-
-
-        if(me == x) {
-            map[y] = map.getOrDefault(y, 0) + priority
-        } else if(me == y) {
-            map[x] = map.getOrDefault(x, 0) + priority
-        }
-
-        set.add(x)
-        set.add(y)
-
     }
 
-    //positive priority list sorted
-    set.filter{ it !== me }.sortedWith (
-        compareByDescending<String> { map[it]!! }.thenBy { it }
-    ).forEach{ println(it) }
-
+    println(numbers)
 }
 
 
