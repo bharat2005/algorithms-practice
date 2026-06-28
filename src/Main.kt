@@ -1,17 +1,23 @@
-fun main() {
-    val numbers = mutableListOf(5, 2, 8, 1)
+import kotlin.math.abs
 
-    for(j in 0 until numbers.size) {
-        for (i in 0 until numbers.size - 1 - j) {
-            if (numbers[i] > numbers[i + 1]) {
-                val temp = numbers[i]
-                numbers[i] = numbers[i + 1]
-                numbers[i + 1] = temp
-            }
+fun main() {
+    val n = readLine()!!.toInt()
+    val ls = readLine()!!.split(" ").map { it.toInt() }
+    val total = ls.sum()
+    var min = Int.MAX_VALUE
+
+    fun dfs(currIdx : Int, currSum : Int) : Unit {
+        if(currIdx == n){
+            //update final anser min
+            min = abs(total - currSum - currSum)
+            return
         }
+
+        dfs(currIdx + 1,currSum + ls[currIdx] )
+        dfs(currIdx + 1, currSum )
     }
 
-    println(numbers)
+    dfs(0, 0)
 }
 
 
