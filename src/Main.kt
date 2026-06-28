@@ -9,7 +9,7 @@ fun main() {
     fun dfs(currIdx : Int, currSum : Int) : Unit {
         if(currIdx == n){
             //update final anser min
-            min = abs(total - currSum - currSum)
+            min = minOf(min, abs(total - currSum - currSum))
             return
         }
 
