@@ -2,11 +2,11 @@ import kotlin.math.abs
 
 fun main() {
     val n = readLine()!!.toInt()
-    val ls = readLine()!!.split(" ").map { it.toInt() }
-    val total = ls.sum()
-    var min = Int.MAX_VALUE
+    val ls = readLine()!!.split(" ").map { it.toLong() }
+    var total = ls.sum()
+    var min = Long.MAX_VALUE // exceeds int range
 
-    fun dfs(currIdx : Int, currSum : Int) : Unit {
+    fun dfs(currIdx : Int, currSum : Long) : Unit {
         if(currIdx == n){
             //update final anser min
             min = minOf(min, abs(total - currSum - currSum))
@@ -18,6 +18,8 @@ fun main() {
     }
 
     dfs(0, 0)
+
+    println(min)
 }
 
 

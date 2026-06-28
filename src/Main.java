@@ -1,18 +1,17 @@
 import java.io.*;
 import java.util.*;
-import static java.lang.Math.*;
 
 public class Main {
 
     static int n;
-    static int[] ls;
-    static int total;
-    static int min = Integer.MAX_VALUE;
+    static long[] ls;
+    static long total;
+    static long min = Long.MAX_VALUE;
 
-    static void dfs(int currIdx, int currSum) {
+    static void dfs(int currIdx, long currSum) {
         if (currIdx == n) {
             // update final anser min
-            min = abs(total - currSum - currSum);
+            min = Math.min(min, Math.abs(total - currSum - currSum));
             return;
         }
 
@@ -25,15 +24,16 @@ public class Main {
 
         n = Integer.parseInt(br.readLine());
 
-        ls = new int[n];
-        StringTokenizer st = new StringTokenizer(br.readLine());
+        String[] parts = br.readLine().split(" ");
+        ls = new long[n];
 
-        total = 0;
         for (int i = 0; i < n; i++) {
-            ls[i] = Integer.parseInt(st.nextToken());
+            ls[i] = Long.parseLong(parts[i]);
             total += ls[i];
         }
 
         dfs(0, 0);
+
+        System.out.println(min);
     }
 }
