@@ -18,10 +18,10 @@ fun main() {
         }
 
         //Recursive part
-        for(i in rowIndex until n){
+        for(i in 0 until n){
 
             //conditions --> row + column + dig1 + dig2 + extra condition
-            val isExtraRestricted = arr[rowIndex][i] == '.'
+            val isExtraRestricted = arr[rowIndex][i] == '*'
             val isColumnRestricted = column[i]
             val isDig1Restricted = dig1[rowIndex + i]
             val isDig2Restricted = dig2[rowIndex - i + 7]
@@ -45,6 +45,7 @@ fun main() {
 
         }
     }
+    dfs(0)
 
     print(ans)
 

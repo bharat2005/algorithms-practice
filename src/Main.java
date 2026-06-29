@@ -19,10 +19,10 @@ public class Main {
         }
 
         // Recursive part
-        for (int i = rowIndex; i < n; i++) {
+        for (int i = 0; i < n; i++) {
 
             // conditions --> row + column + dig1 + dig2 + extra condition
-            boolean isExtraRestricted = arr[rowIndex][i] == '.';
+            boolean isExtraRestricted = arr[rowIndex][i] == '*';
             boolean isColumnRestricted = column[i];
             boolean isDig1Restricted = dig1[rowIndex + i];
             boolean isDig2Restricted = dig2[rowIndex - i + 7];
