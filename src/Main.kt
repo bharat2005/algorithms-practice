@@ -24,7 +24,7 @@ fun main() {
                     val nc = c + dc[i]
                     if (nr >= n || nc >= m) continue
 
-                    val thisScore = board[nr][nc] - '0'
+                    val thisScore = scoreboard[nr][nc]
                     if (thisScore == -1) continue
 
                     if (thisScore > bestScore) {
