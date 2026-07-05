@@ -35,7 +35,13 @@ fun main() {
                     }
                 }
 
-                scoreboard[r][c] = board[r][c] - '0' + bestScore
+                if(bestScore == -1) continue
+
+                val value = when(board[r][c]){
+                    'E' -> 0
+                    else -> board[r][c] - '0'
+                }
+                scoreboard[r][c] = value + bestScore
                 pathsboard[r][c] = bestPath
 
             }
