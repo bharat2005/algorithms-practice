@@ -1,59 +1,28 @@
 
 fun main() {
+    val n = readLine()!!.toInt()
+    val arr = readLine()!!.split(" ").map { it.toInt() }
 
-    val dr = intArrayOf(0, 1, 1)
-    val dc = intArrayOf(1, 0, 1)
 
-    fun pathsWithMaxScore(board: List<String>): IntArray {
-        val MOD = 1_000_000_000 + 7
-        val n = board.size
-        val m = board[0].length
-        val scoreboard = Array(n) { IntArray(m){ -1 } }
-        val pathsboard = Array(n) { IntArray(m) }
-        scoreboard[n-1][m-1] = 0
-        pathsboard[n-1][m-1] = 1
+    val sumArray = BooleanArray(n)
 
-        for( r in n-1 downTo 0){
-            for(c in m-1 downTo 0) {
-                if (board[r][c] == 'X' || board[r][c] == 'S') continue
-
-                var bestScore = -1
-                var bestPath = 0
-
-                for (i in 0..2) {
-                    val nr = r + dr[i]
-                    val nc = c + dc[i]
-                    if (nr >= n || nc >= m) continue
-
-                    val thisScore = scoreboard[nr][nc]
-                    if (thisScore == -1) continue
-
-                    if (thisScore > bestScore) {
-                        bestScore = thisScore
-                        bestPath = pathsboard[nr][nc]
-                    } else if (thisScore == bestScore) {
-                        bestPath = (bestPath + pathsboard[nr][nc]) % MOD
-                    }
-                }
-
-                if(bestScore == -1) continue
-
-                val value = when(board[r][c]){
-                    'E' -> 0
-                    else -> board[r][c] - '0'
-                }
-                scoreboard[r][c] = value + bestScore
-                pathsboard[r][c] = bestPath
-
-            }
+    for( i in 0 until n){
+        var currSum = arr[i]
+        for( j in i + 1 until n){
+            currSum += arr[j]
+            if(currSum > n) break
+            sumArray[currSum] = true
         }
-
-
-
-        return if(pathsboard[0][0] == 0) intArrayOf(0,0) else intArrayOf(scoreboard[0][0],pathsboard[0][0])
-
+    }
+    var count = 0
+    for(x in arr){
+        if(sumArray[x]){
+            count++
+        }
     }
 
+
+    println(count)
 }
 
 
