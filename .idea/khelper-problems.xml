@@ -464,6 +464,65 @@
             </ProblemData>
           </value>
         </entry>
+        <entry key="KOTLIN:e_special_elements">
+          <value>
+            <ProblemData>
+              <option name="filePath" value="C:\Users\bhara\IdeaProjects\algorithms-practice\src\main\kotlin\problems\e_special_elements\KSolution.kt" />
+              <option name="language" value="KOTLIN" />
+              <option name="problem">
+                <Problem>
+                  <option name="batch">
+                    <Batch>
+                      <option name="id" value="efd132b4-f236-435d-9d2c-c374c7b6ad74" />
+                      <option name="size" value="1" />
+                    </Batch>
+                  </option>
+                  <option name="group" value="Codeforces - Codeforces Round 640 (Div. 4)" />
+                  <option name="input">
+                    <InputOutput>
+                      <option name="type" value="stdin" />
+                    </InputOutput>
+                  </option>
+                  <option name="languages">
+                    <Languages>
+                      <option name="java">
+                        <JavaLanguage>
+                          <option name="mainClass" value="Main" />
+                          <option name="taskClass" value="ESpecialElements" />
+                        </JavaLanguage>
+                      </option>
+                    </Languages>
+                  </option>
+                  <option name="memoryLimit" value="64" />
+                  <option name="name" value="E. Special Elements" />
+                  <option name="output">
+                    <InputOutput>
+                      <option name="type" value="stdout" />
+                    </InputOutput>
+                  </option>
+                  <option name="tests">
+                    <list>
+                      <TestCase>
+                        <option name="input" value="5&#10;9&#10;3 1 4 1 5 9 2 6 5&#10;3&#10;1 1 2&#10;5&#10;1 1 1 1 1&#10;8&#10;8 7 6 5 4 3 2 1&#10;1&#10;1&#10;" />
+                        <option name="output" value="5&#10;1&#10;0&#10;4&#10;0&#10;" />
+                      </TestCase>
+                    </list>
+                  </option>
+                  <option name="timeLimit" value="1000" />
+                  <option name="url" value="https://codeforces.com/contest/1352/problem/E" />
+                </Problem>
+              </option>
+              <option name="testCases">
+                <list>
+                  <TestCase>
+                    <option name="input" value="5&#10;9&#10;3 1 4 1 5 9 2 6 5&#10;3&#10;1 1 2&#10;5&#10;1 1 1 1 1&#10;8&#10;8 7 6 5 4 3 2 1&#10;1&#10;1&#10;" />
+                    <option name="output" value="5&#10;1&#10;0&#10;4&#10;0&#10;" />
+                  </TestCase>
+                </list>
+              </option>
+            </ProblemData>
+          </value>
+        </entry>
       </map>
     </option>
   </component>

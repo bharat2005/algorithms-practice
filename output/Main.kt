@@ -1,50 +1,31 @@
 import java.util.Scanner
 
 fun main() {
-    val me = readLine()!!
-    val n = readLine()!!.toInt()
-    val map = mutableMapOf<String, Int>()
-    val set = mutableSetOf<String>()
+    val t = readLine()!!.toInt()
     
-    repeat(n){
-        val arr = readLine()!!.split(" ")
-        val x = arr[0]
-        val action = arr[1]
-        val y = if(arr[1] == "likes"){
-            arr[2].removeSuffix("'s")
-        } else
-        {
-            arr[3].removeSuffix("'s")
+    repeat(t) {
+        val n = readLine()!!.toInt()
+        val arr = readLine()!!.split(" ").map { it.toInt() }
+    
+    
+        val sumArray = BooleanArray(n + 1)
+    
+        for (i in 0 until n - 1) {
+            var currSum = arr[i]
+            for (j in i + 1 until n) {
+                currSum += arr[j]
+                if (currSum > n) break
+                sumArray[currSum] = true
+            }
         }
-        val priority = when(action){
-            "likes" -> 5
-            "commented" -> 10
-            "posted" -> 15
-            else -> 0
-        }
-    
-    
-        if(me == x) {
-            map[y] = map.getOrDefault(y, 0) + priority
-        } else if(me == y) {
-            map[x] = map.getOrDefault(x, 0) + priority
+        var count = 0
+        for (x in arr) {
+            if (sumArray[x]) {
+                count++
+            }
         }
     
-        set.add(x)
-        set.add(y)
     
+        println(count)
     }
-    
-    //positive priority list sorted
-    set.filter{ it != me }.sortedWith { a, b ->
-        val sa = map.getOrDefault(a, 0)
-        val sb = map.getOrDefault(b, 0)
-    
-        if(sa != sb){
-            sb.compareTo(sa)
-        }else {
-            a.compareTo(b)
-        }
-    }.forEach { println(it) }
-    
 }

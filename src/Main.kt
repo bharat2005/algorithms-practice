@@ -1,28 +1,34 @@
 
 fun main() {
-    val n = readLine()!!.toInt()
-    val arr = readLine()!!.split(" ").map { it.toInt() }
+    val t = readLine()!!.toInt()
 
+    repeat(t){
+        val n = readLine()!!.toInt()
+        val arr = readLine()!!.split(" ").map { it.toInt() }
 
-    val sumArray = BooleanArray(n)
+        var minOne = false
+        var minTwo = false
+        var flag = false
 
-    for( i in 0 until n){
-        var currSum = arr[i]
-        for( j in i + 1 until n){
-            currSum += arr[j]
-            if(currSum > n) break
-            sumArray[currSum] = true
+        for(x in arr){
+
+            if(x >= 2){
+                minTwo = true
+            } else if(x >= 1){
+                minOne = true
+            }
+
+            if(minOne && minTwo || x >= 3){
+                flag = true
+                break
+            }
+        }
+        if(flag) {
+            println("YES")
+        } else {
+            println("NO")
         }
     }
-    var count = 0
-    for(x in arr){
-        if(sumArray[x]){
-            count++
-        }
-    }
-
-
-    println(count)
 }
 
 
