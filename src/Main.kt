@@ -6,19 +6,13 @@ fun main() {
         val n = readLine()!!.toInt()
         val arr = readLine()!!.split(" ").map { it.toInt() }
 
-        var minOne = false
-        var minTwo = false
+        var minTwoCount = 0
         var flag = false
 
         for(x in arr){
+            if(x >= 2) minTwoCount++
 
-            if(x >= 2){
-                minTwo = true
-            } else if(x >= 1){
-                minOne = true
-            }
-
-            if(minOne && minTwo || x >= 3){
+            if(minTwoCount >= 2 || x >= 3){
                 flag = true
                 break
             }
