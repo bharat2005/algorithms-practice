@@ -1,7 +1,7 @@
 
 fun main() {
     fun romanToInt(s: String): Int {
-        val map = mapOf(
+        val map = mapOf<Char, Int>(
             'I' to 1,
             'V' to 5,
             'X' to 10,
@@ -10,7 +10,7 @@ fun main() {
             'D' to 500,
             'M' to 1000
         )
-        var sum = map[s[0]]!!
+        var sum = 0
 
         for(i in 0 until s.length - 1) {
             val currCh = s[i]
@@ -25,7 +25,6 @@ fun main() {
             }
 
         }
-
-        return sum
+        return sum + map[s[s.length - 1]]!!
     }
 }
