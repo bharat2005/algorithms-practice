@@ -12,17 +12,16 @@ fun main() {
         )
         var sum = map[s[0]]!!
 
-        for(i in 1 until s.length) {
-            val prevCh = s[i-1]
+        for(i in 0 until s.length - 1) {
             val currCh = s[i]
-            val preVal = map[prevCh]!!
+            val nxtCh = s[i+1]
             val currVal = map[currCh]!!
+            val nxtVal = map[nxtCh]!!
 
-            if(preVal >= currVal){
+            if(currVal >= nxtVal) {
                 sum += currVal
             } else {
-                sum -= preVal
-                sum += currVal - preVal
+                sum -= currVal
             }
 
         }
