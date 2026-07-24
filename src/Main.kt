@@ -12,7 +12,7 @@ fun main() {
         )
         var sum = map[s[0]]!!
 
-        for(i in s.indices){
+        for(i in 1 until s.length) {
             val prevCh = s[i-1]
             val currCh = s[i]
             val preVal = map[prevCh]!!
