@@ -1,30 +1,37 @@
 
 fun main() {
-    fun romanToInt(s: String): Int {
-        val map = mapOf<Char, Int>(
-            'I' to 1,
-            'V' to 5,
-            'X' to 10,
-            'L' to 50,
-            'C' to 100,
-            'D' to 500,
-            'M' to 1000
-        )
-        var sum = 0
+    val (m, d) = readLine()!!.split(" ").map { it.toInt() }
+    val s = readLine()!!
+    var c = 0
+    var i = 0
 
-        for(i in 0 until s.length - 1) {
-            val currCh = s[i]
-            val nxtCh = s[i+1]
-            val currVal = map[currCh]!!
-            val nxtVal = map[nxtCh]!!
+    //keep iterate over s
+    while (i < m){
 
-            if(currVal >= nxtVal) {
-                sum += currVal
-            } else {
-                sum -= currVal
+        if(s[i] != 'G'){
+            //keep counting '.'
+            c++
+        } else {
+            //if caught 'G' then remove m count from c
+            c-= d
+
+            //try to skip the remaining part
+            var x = i
+            while(i < m && i <= x + d){
+
+                //if encountred 'G' while skipping then update x and continue skipping fromwards
+                if(s[i] == 'G') {
+                    x = i
+                } else {
+                    i++
+                }
+
             }
-
         }
-        return sum + map[s[s.length - 1]]!!
+        i++
+
     }
+
+    println(c)
+
 }
