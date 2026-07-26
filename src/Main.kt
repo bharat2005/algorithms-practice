@@ -8,6 +8,8 @@ fun main() {
         if(a + b > n || a >= n || b >= n) {
             println("NO")
             continue
+        } else{
+            println("YES")
         }
 
         //defulat a wins permutation
