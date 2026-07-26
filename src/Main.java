@@ -1,7 +1,5 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.StringTokenizer;
+import java.io.*;
+import java.util.*;
 
 public class Main {
 
@@ -32,11 +30,11 @@ public class Main {
             }
 
             int[] first = new int[n];
-            int[] second = new int[n];
-
             for (int i = 0; i < n; i++) {
                 first[i] = i + 1;
             }
+
+            int[] second = new int[n];
 
             boolean swapped = false;
             if (a < b) {
@@ -53,8 +51,12 @@ public class Main {
 
             // Rotation on first (a+b) positions
             int k = a + b;
-            for (int i = 0; i < k; i++) {
-                second[i] = (i + b) % k + 1;
+            for (int i = 1; i <= k; i++) {
+                int u = (i - b + k) % k;
+                if (u == 0) {
+                    u = k;
+                }
+                second[i - 1] = u;
             }
 
             if (swapped) {
@@ -65,17 +67,19 @@ public class Main {
 
             System.out.println("YES");
 
+            StringBuilder sb = new StringBuilder();
             for (int i = 0; i < n; i++) {
-                if (i > 0) System.out.print(" ");
-                System.out.print(first[i]);
+                if (i > 0) sb.append(' ');
+                sb.append(first[i]);
             }
-            System.out.println();
+            System.out.println(sb);
 
+            sb.setLength(0);
             for (int i = 0; i < n; i++) {
-                if (i > 0) System.out.print(" ");
-                System.out.print(second[i]);
+                if (i > 0) sb.append(' ');
+                sb.append(second[i]);
             }
-            System.out.println();
+            System.out.println(sb);
         }
     }
 }
