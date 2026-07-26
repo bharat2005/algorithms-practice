@@ -1,5 +1,6 @@
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
 public class Main {
 
@@ -7,7 +8,7 @@ public class Main {
         private final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         private StringTokenizer st;
 
-        int nextInt() throws IOException {
+        int nextInt() throws Exception {
             while (st == null || !st.hasMoreTokens()) {
                 st = new StringTokenizer(br.readLine());
             }
@@ -17,6 +18,7 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
         FastScanner fs = new FastScanner();
+
         int t = fs.nextInt();
 
         while (t-- > 0) {
@@ -24,62 +26,62 @@ public class Main {
             int a = fs.nextInt();
             int b = fs.nextInt();
 
-            if (a + b > n || Math.max(a, b) == n) {
+            if (a + b > n || (Math.min(a, b) == 0 && Math.max(a, b) != 0)) {
                 System.out.println("NO");
                 continue;
             }
 
-            int[] first = new int[n];
-            for (int i = 0; i < n; i++) {
-                first[i] = i + 1;
+            System.out.println("YES");
+
+            // Player 1
+            for (int i = 1; i <= n; i++) {
+                if (i > 1) System.out.print(" ");
+                System.out.print(i);
+            }
+            System.out.println();
+
+            // Player 2
+            int[] ans = new int[n];
+
+            int idx = 0;
+
+            // Bob wins (player 2 wins)
+            for (int x = a + 1; x <= a + b; x++) {
+                ans[idx] = x;
+                idx++;
             }
 
-            int[] second = new int[n];
-
-            boolean swapped = false;
-            if (a < b) {
-                swapped = true;
-                int tmp = a;
-                a = b;
-                b = tmp;
+            // Alice wins (player 1 wins)
+            for (int x = 1; x <= a; x++) {
+                ans[idx] = x;
+                idx++;
             }
 
             // Draws
-            for (int i = a + b; i < n; i++) {
-                second[i] = i + 1;
+            for (int x = a + b + 1; x <= n; x++) {
+                ans[idx] = x;
+                idx++;
             }
 
-            // Rotation on first (a+b) positions
-            int k = a + b;
-            for (int i = 1; i <= k; i++) {
-                int u = (i - b + k) % k;
-                if (u == 0) {
-                    u = k;
+            boolean ok = true;
+
+            for (int i = 0; i < n; i++) {
+                if (i + 1 > ans[i]) {
+                    a--;
+                } else if (i + 1 < ans[i]) {
+                    b--;
                 }
-                second[i - 1] = u;
             }
 
-            if (swapped) {
-                int[] tmp = first;
-                first = second;
-                second = tmp;
+            if (a != 0 || b != 0) {
+                System.out.println("NO");
+            } else {
+                for (int i = 0; i < n; i++) {
+                    if (i > 0) System.out.print(" ");
+                    System.out.print(ans[i]);
+                }
+                System.out.println();
             }
-
-            System.out.println("YES");
-
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < n; i++) {
-                if (i > 0) sb.append(' ');
-                sb.append(first[i]);
-            }
-            System.out.println(sb);
-
-            sb.setLength(0);
-            for (int i = 0; i < n; i++) {
-                if (i > 0) sb.append(' ');
-                sb.append(second[i]);
-            }
-            System.out.println(sb);
         }
     }
 }

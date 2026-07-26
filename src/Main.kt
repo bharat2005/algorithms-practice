@@ -26,10 +26,9 @@ fun main() {
         }
 
         //rest targeted shift
-        val s = n - a
         for(i in t+1..n){
-            var u = (i - s + n) % n
-            if(u == 0) u = n
+            var u = i - b
+            if(u <= t) u = i + 1
             print("${u} ")
         }
 
