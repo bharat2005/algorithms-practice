@@ -41,7 +41,7 @@ fun main() {
     repeat(t) {
         val (n, a , b) = readLine()!!.split(" ").map { it.toInt() }
 
-        if(a + b > n || a >= n || b >= n){
+        if(a + b > n || (minOf(a, b) == 0 && maxOf(a, b) != 0)){
             println("NO")
             return@repeat
         } else {
@@ -58,7 +58,7 @@ fun main() {
 
 
         //b wins
-        for(i in a+1..b){
+        for(i in a+1..a+b){
             print("$i ")
         }
 
@@ -68,7 +68,7 @@ fun main() {
         }
 
         //draws
-        for(i in b+1..n){
+        for(i in a+b+1..n){
             print("$i ")
         }
         println()
