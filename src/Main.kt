@@ -23,6 +23,8 @@ fun main(){
             while(set[mex]) mex++
             arr[r][c] = mex
         }
+
+        arr[r].forEach{ print("$it ")}
     }
 }
 
