@@ -1,17 +1,15 @@
 
-fun main(){
-    fun minimumPushes(word: String): Int {
-        var ans = 0
+fun main() {
+    val (n, k) = readln().split(" ").map { it.toLong() }
 
-        for (i in word.indices) {
-            ans += (i / 8) + 1
-        }
+    var ans = k
 
-        return ans
+    repeat((n - 1).toInt()) {
+        ans *= (k - 1)
     }
 
+    println(ans)
 }
-
 
 
 
