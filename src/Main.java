@@ -22,7 +22,7 @@ public class Main {
                 }
 
                 // above
-                for (int y = 0; y < j; y++) {
+                for (int y = 0; y < i; y++) {
                     set[grid[y][j]] = true;
                 }
 
@@ -38,6 +38,7 @@ public class Main {
             for (int value : grid[i]) {
                 System.out.print(value + " ");
             }
+            System.out.println();
         }
     }
 }

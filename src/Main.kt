@@ -14,7 +14,7 @@ fun main() {
                 set[grid[i][x]] = true
             }
                 //above
-            for(y in 0 until j){
+            for(y in 0 until i){
                 set[grid[y][j]] = true
             }
 
@@ -24,6 +24,7 @@ fun main() {
             grid[i][j] = mex
         }
         grid[i].forEach { print("$it ") }
+        println()
     }
 }
 
