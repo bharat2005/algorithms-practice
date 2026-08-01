@@ -1,30 +1,25 @@
 
 fun main() {
-    val n = readLine()!!.toInt()
-    val grid = Array(n) {
-        IntArray(n)
-    }
+    fun predictTheWinner(nums: IntArray): Boolean {
+        var p1 = 0
+        var p2 = 0
+        var start = 0
+        var end = nums.size - 1
+        var p1turn = true
 
-    for(i in 0 until n){
-        for(j in 0 until n){
-            //build union set
-            val set = BooleanArray(2 * n)
-                //left
-            for(x in 0 until j){
-                set[grid[i][x]] = true
+        while(start <= end){
+            if(nums[start] >= nums[end]){
+                if(p1turn) p1+= nums[start++] else p2 += nums[start++]
+            } else {
+                if(p1turn) p1+= nums[end--] else p2 += nums[end--]
             }
-                //above
-            for(y in 0 until i){
-                set[grid[y][j]] = true
-            }
-
-            //check mex
-            var mex = 0
-            while(set[mex]) mex++
-            grid[i][j] = mex
+            p1turn = !p1turn
         }
-        grid[i].forEach { print("$it ") }
-        println()
+
+
+
+        return p1 >= p2
+
     }
 }
 
