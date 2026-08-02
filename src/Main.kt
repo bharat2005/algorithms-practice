@@ -1,7 +1,7 @@
 
 fun main() {
     val n = readLine()!!.toInt()
-    val arr = Array(n){ IntArray(n){ Int.MAX_VALUE } }
+    val arr = Array(n){ IntArray(n){ -1 } }
     arr[0][0] = 0
     val que = ArrayDeque<Pair<Int, Int>>()
     que.add(Pair(0,0))
@@ -17,16 +17,11 @@ fun main() {
             val nc = c + dc[i]
             if(nr !in 0..<n || nc !in 0..<n) continue
 
-            val currDist = arr[nr][nc]
-            val newDist = arr[r][c] + 1
-            if(newDist < currDist){
-                arr[nr][nc] = newDist
+            if(arr[nr][nc] == -1){
+                arr[nr][nc] = arr[r][c] + 1
+                que.add(Pair(nr,nc))
             }
-
-            que.add(Pair(nr,nc))
         }
-
-
     }
 
     arr.forEach{
