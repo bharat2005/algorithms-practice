@@ -6,8 +6,8 @@ fun main() {
     val que = ArrayDeque<Pair<Int, Int>>()
     que.add(Pair(0,0))
 
-    val dr = listOf<Int>(-1,1,0,0,-1,1,1,-1)
-    val dc = listOf<Int>(0,0,-1,1,1,-1,1,-1)
+    val dr = listOf<Int>(2,2,-2,-2,1,-1,-1,1)
+    val dc = listOf<Int>(1,-1,-1,1,2,2,-2,-2)
     while(que.isNotEmpty()) {
         val (r, c) = que.removeFirst()
 
