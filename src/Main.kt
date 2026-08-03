@@ -5,7 +5,7 @@ fun main(){
     for(i in 0 until m){
         for(j in 0 until n){
             val current = grid[i][j]
-            if( i + j % 2 == 0){
+            if( (i + j) % 2 == 0){
                 grid[i][j] = if(current == 'A') 'B' else 'A'
             } else {
                 grid[i][j] = if(current == 'C') 'D' else 'C'

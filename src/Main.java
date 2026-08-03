@@ -19,7 +19,7 @@ public class Main {
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
                 char current = grid[i][j];
-                if (i + j % 2 == 0) {
+                if ((i + j) % 2 == 0) {
                     grid[i][j] = (current == 'A') ? 'B' : 'A';
                 } else {
                     grid[i][j] = (current == 'C') ? 'D' : 'C';
