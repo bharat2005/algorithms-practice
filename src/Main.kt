@@ -12,7 +12,7 @@ fun main(){
             }
 
         }
-        println(grid[i].joinToString(" "))
+        println(grid[i].joinToString(""))
     }
 }
 

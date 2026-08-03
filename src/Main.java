@@ -27,7 +27,6 @@ public class Main {
             }
 
             for (int j = 0; j < n; j++) {
-                if (j > 0) out.append(' ');
                 out.append(grid[i][j]);
             }
             out.append('\n');
