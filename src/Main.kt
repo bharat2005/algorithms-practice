@@ -1,19 +1,21 @@
-fun main(){
-    val (m, n) = readLine()!!.split(" ").map { it.toInt() }
-    val grid = Array(m) { readLine()!!.toCharArray() }
+fun main() {
+    val q = readLine()!!.toInt()
 
-    for(i in 0 until m){
-        for(j in 0 until n){
-            val current = grid[i][j]
-            if( (i + j) % 2 == 0){
-                grid[i][j] = if(current == 'A') 'B' else 'A'
-            } else {
-                grid[i][j] = if(current == 'C') 'D' else 'C'
-            }
+    repeat(q){
+        val k = readLine()!!.toLong()
+        var count = 9L
+        var digits = 1L
 
+        while(k > count * digits){
+            count *= 10
+            digits++
         }
-        println(grid[i].joinToString(""))
+
+        val num = count / 9 - 1 + k / digits
+        val idxDig = if(k % digits == 0L) num.toString()[num.toString().length - 1] else (num+1).toString()[(k % digits).toInt()]
+
+        println(idxDig)
+
     }
+
 }
-
-

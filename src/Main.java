@@ -1,37 +1,35 @@
 import java.io.*;
-import java.util.*;
 
 public class Main {
+
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        StringTokenizer st = new StringTokenizer(br.readLine());
-        int m = Integer.parseInt(st.nextToken());
-        int n = Integer.parseInt(st.nextToken());
+        int q = Integer.parseInt(br.readLine());
 
-        char[][] grid = new char[m][];
-        for (int i = 0; i < m; i++) {
-            grid[i] = br.readLine().toCharArray();
-        }
+        while (q-- > 0) {
+            long k = Long.parseLong(br.readLine());
 
-        StringBuilder out = new StringBuilder();
+            long count = 9L;
+            long digits = 1L;
 
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                char current = grid[i][j];
-                if ((i + j) % 2 == 0) {
-                    grid[i][j] = (current == 'A') ? 'B' : 'A';
-                } else {
-                    grid[i][j] = (current == 'C') ? 'D' : 'C';
-                }
+            while (k > count * digits) {
+                count *= 10;
+                digits++;
             }
 
-            for (int j = 0; j < n; j++) {
-                out.append(grid[i][j]);
-            }
-            out.append('\n');
-        }
+            long num = count / 9 - 1 + k / digits;
 
-        System.out.print(out);
+            char idxDig;
+            if (k % digits == 0L) {
+                String s = Long.toString(num);
+                idxDig = s.charAt(s.length() - 1);
+            } else {
+                String s = Long.toString(num + 1);
+                idxDig = s.charAt((int) (k % digits));
+            }
+
+            System.out.println(idxDig);
+        }
     }
 }
