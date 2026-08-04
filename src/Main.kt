@@ -1,64 +1,89 @@
 
-fun fesCheck(freq : Map<Char, Int>, prev : Char = '0') : Boolean {
-    var maxFreq = Int.MIN_VALUE
-    var letter = '0'
-    var sum = 0
 
-    for((key, value) in freq){
-        sum += value
-        maxFreq = if(maxFreq > value){
-            maxFreq
-        } else {
-            letter = key
-            value
-        }
 
-    }
-
-    return maxFreq <= (sum + 1)/2 && prev != letter
-}
 
 fun main() {
-    val str = readLine()!!
-    var prev = '0'
-    val sb = StringBuilder()
+    val path = readLine()!!
+    val n = path.length
+    var ans = 0
+    val grid = Array(7) { BooleanArray(7)}
 
-    //build freq
-    val freq = HashMap<Char, Int>()
-    for(ch in str){
-        freq[ch] = freq.getOrDefault(ch, 0) + 1
+    fun isblock(r : Int,c : Int) : Boolean {
+        //out of grid
+        if(r !in 0 until 7 || c !in 0 until 7) return true
+
+        //alredy visited
+        return grid[r][c]
+
     }
-    //intial check for whole fesibility
-    if(!fesCheck(freq)) {
-        println(-1)
-        return
-    }
+    fun dfs(r : Int, c : Int, step : Int){
 
-    //try building res from ascending a.z for lex min
-    repeat(str.length) {
-        var flag = false
-        for (letter in 'A'..'Z') {
-            //default conditions
-            if ((freq[letter] ?: 0) == 0) continue
-            if (prev == letter) continue
+        //base case
+            //reached
+        if(r == 0 && c == 6 && step == n-1){
+            ans++
+            return
+        }
+            //incorrect path
+        if(step == n-1) return
 
-            //try with curr letter
-            freq[letter] = freq[letter]!! - 1
-            if (fesCheck(freq)) {
-                sb.append(letter)
-                prev = letter
-                flag = true
-                break
+        //pruning
+            //horizontal split
+        if(isblock(r-1, c) && isblock(r+1, c) && !isblock(r,c-1) && !isblock(r,c+1))return
+            //vertical split
+        if(!isblock(r-1, c) && !isblock(r+1, c) && isblock(r,c-1) && isblock(r,c+1))return
+
+        //mark visited
+        grid[r][c] = true
+        //try further path
+        if(path[step] != '?'){
+            //try perticular dir
+            when(path[step]){
+                'U' -> {
+                    if(!isblock(r-1,c)){
+                        dfs(r-1,c, step+1)
+                    }
+                }
+                'D' -> {
+                    if(!isblock(r+1,c)){
+                        dfs(r+1,c, step+1)
+                    }
+                }
+                'R' -> {
+                    if(!isblock(r,c+1)){
+                        dfs(r,c+1, step+1)
+                    }
+                }
+                'L' -> {
+                    if(!isblock(r,c-1)){
+                        dfs(r,c-1, step+1)
+                    }
+                }
             }
-
-            //if not possible, undo try
-            freq[letter] = freq[letter]!! + 1
-
+        } else
+        {
+            //try all dir
+            if(!isblock(r-1,c)){
+                dfs(r-1,c, step+1)
+            }
+            if(!isblock(r+1,c)){
+                dfs(r+1,c, step+1)
+            }
+            if(!isblock(r,c+1)){
+                dfs(r,c+1, step+1)
+            }
+            if(!isblock(r,c-1)){
+                dfs(r,c-1, step+1)
+            }
         }
-        if(!flag) {
-            return@repeat
-        }
+
+
     }
 
-    println(sb.toString())
+    dfs(0,0, 0)
+
+    println(ans)
+
 }
+
+
