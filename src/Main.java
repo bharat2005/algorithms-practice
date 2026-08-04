@@ -67,7 +67,8 @@ public class Main {
                     break;
             }
 
-        } else {
+        } else
+        {
 
             // try all dir
             if (!isblock(r - 1, c)) {
@@ -83,6 +84,9 @@ public class Main {
                 dfs(r, c - 1, step + 1);
             }
         }
+        
+        //unmark visited
+        grid[r][c] = false;
     }
 
     public static void main(String[] args) throws Exception {

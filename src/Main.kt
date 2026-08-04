@@ -76,6 +76,8 @@ fun main() {
                 dfs(r,c-1, step+1)
             }
         }
+        //unmark visited
+        grid[r][c] = false
 
 
     }
