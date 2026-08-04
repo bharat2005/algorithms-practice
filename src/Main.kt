@@ -15,7 +15,7 @@ fun main() {
         val number = (count / 9) + (k - 1) / digits
         val digitIndex = ((k) % digits).toInt()
 
-        println(number.toString()[digitIndex - 1])
+        println(number.toString()[if(digitIndex == 0) number.toString().length - 1  else digitIndex - 1 ])
 
 
     }

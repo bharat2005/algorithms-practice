@@ -1,35 +1,16 @@
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class Main {
-    static class FastReader {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st;
-
-        String next() throws IOException {
-            while (st == null || !st.hasMoreTokens()) {
-                st = new StringTokenizer(br.readLine());
-            }
-            return st.nextToken();
-        }
-
-        int nextInt() throws IOException {
-            return Integer.parseInt(next());
-        }
-
-        long nextLong() throws IOException {
-            return Long.parseLong(next());
-        }
-    }
-
     public static void main(String[] args) throws Exception {
-        FastReader fs = new FastReader();
-        StringBuilder out = new StringBuilder();
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        int q = fs.nextInt();
+        int q = Integer.parseInt(br.readLine());
 
         while (q-- > 0) {
-            long k = fs.nextLong();
+            long k = Long.parseLong(br.readLine());
+
             long count = 9L;
             long digits = 1L;
 
@@ -39,20 +20,10 @@ public class Main {
                 digits++;
             }
 
-            long num = count / 9 - 1 + k / digits;
+            long number = (count / 9) + (k - 1) / digits;
+            int digitIndex = (int) ((k - 1) % digits);
 
-            char idxDig;
-            if (k % digits == 0L) {
-                String s = Long.toString(num);
-                idxDig = s.charAt(s.length() - 1);
-            } else {
-                String s = Long.toString(num + 1);
-                idxDig = s.charAt((int) (k % digits) - 1);
-            }
-
-            out.append(idxDig).append('\n');
+            System.out.println(Long.toString(number).charAt(digitIndex));
         }
-
-        System.out.print(out);
     }
 }
