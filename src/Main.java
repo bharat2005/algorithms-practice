@@ -4,15 +4,28 @@ import java.util.*;
 public class Main {
 
     static boolean fesCheck(Map<Character, Integer> freq) {
+        return fesCheck(freq, '0');
+    }
+
+    static boolean fesCheck(Map<Character, Integer> freq, char prev) {
         int maxFreq = Integer.MIN_VALUE;
+        char letter = '0';
         int sum = 0;
 
-        for (int x : freq.values()) {
-            sum += x;
-            maxFreq = Math.max(maxFreq, x);
+        for (Map.Entry<Character, Integer> entry : freq.entrySet()) {
+            char key = entry.getKey();
+            int value = entry.getValue();
+
+            sum += value;
+            if (maxFreq > value) {
+                // keep maxFreq
+            } else {
+                letter = key;
+                maxFreq = value;
+            }
         }
 
-        return maxFreq <= (sum - maxFreq) + 1;
+        return maxFreq <= (sum - maxFreq) + 1 && prev != letter;
     }
 
     public static void main(String[] args) throws Exception {
@@ -34,7 +47,7 @@ public class Main {
             return;
         }
 
-        // try building res from ascending A..Z for lex min
+        // try building res from ascending A-Z for lex min
         for (int i = 0; i < str.length(); i++) {
             for (char letter = 'A'; letter <= 'Z'; letter++) {
 
@@ -44,6 +57,7 @@ public class Main {
 
                 // try with curr letter
                 freq.put(letter, freq.get(letter) - 1);
+
                 if (fesCheck(freq)) {
                     sb.append(letter);
                     prev = letter;
@@ -51,7 +65,7 @@ public class Main {
                 }
 
                 // if not possible, undo try
-                freq.put(letter, freq.get(letter) - 1);
+                freq.put(letter, freq.get(letter) + 1);
             }
         }
 

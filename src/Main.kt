@@ -1,14 +1,21 @@
 
-fun fesCheck(freq : Map<Char, Int>) : Boolean {
+fun fesCheck(freq : Map<Char, Int>, prev : Char = '0') : Boolean {
     var maxFreq = Int.MIN_VALUE
+    var letter = '0'
     var sum = 0
 
-    for(x in freq.values){
-        sum += x
-        maxFreq = maxOf(maxFreq, x)
+    for((key, value) in freq){
+        sum += value
+        maxFreq = if(maxFreq > value){
+            maxFreq
+        } else {
+            letter = key
+            value
+        }
+
     }
 
-    return maxFreq <= (sum - maxFreq) + 1
+    return maxFreq <= (sum - maxFreq) + 1 && prev != letter
 }
 
 fun main() {
@@ -43,7 +50,7 @@ fun main() {
             }
 
             //if not possible, undo try
-            freq[letter] = freq[letter]!! - 1
+            freq[letter] = freq[letter]!! + 1
 
         }
     }
