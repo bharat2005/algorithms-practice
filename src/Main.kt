@@ -15,7 +15,7 @@ fun fesCheck(freq : Map<Char, Int>, prev : Char = '0') : Boolean {
 
     }
 
-    return maxFreq <= (sum - maxFreq) + 1 && prev != letter
+    return maxFreq <= (sum + 1)/2 && prev != letter
 }
 
 fun main() {
@@ -36,6 +36,7 @@ fun main() {
 
     //try building res from ascending a.z for lex min
     repeat(str.length) {
+        var flag = false
         for (letter in 'A'..'Z') {
             //default conditions
             if ((freq[letter] ?: 0) == 0) continue
@@ -46,12 +47,16 @@ fun main() {
             if (fesCheck(freq)) {
                 sb.append(letter)
                 prev = letter
+                flag = true
                 break
             }
 
             //if not possible, undo try
             freq[letter] = freq[letter]!! + 1
 
+        }
+        if(!flag) {
+            return@repeat
         }
     }
 
