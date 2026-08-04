@@ -1,23 +1,44 @@
+
+fun fesCheck(freq : Map<Char, Int>) : Boolean {
+    var maxFreq = Int.MIN_VALUE
+    var sum = 0
+
+    for(x in freq.values){
+        sum += x
+        maxFreq = maxOf(maxFreq, x)
+    }
+
+    return maxFreq <= (sum - maxFreq) + 1
+}
+
 fun main() {
-    val q = readLine()!!.toInt()
+    val str = readLine()!!
+    var prev = '0'
+    val sb = StringBuilder()
 
-    repeat(q){
-        var k = readLine()!!.toLong()
-        var count = 9L
-        var digits = 1L
+    //build freq
+    val freq = HashMap<Char, Int>()
+    for(ch in str){
+        freq[ch] = freq.getOrDefault(ch, 0) + 1
+    }
 
-        while(k > count * digits){
-            k -=  count * digits
-            count *= 10
-            digits++
+    //try building res from ascending a.z for lex min
+    for(letter in 'A'..'Z'){
+        //default conditions
+        if((freq[letter] ?: 0) == 0) continue
+        if(prev == letter) continue
+
+        //try with curr letter
+        freq[letter] = freq[letter]!! - 1
+        if(fesCheck(freq)){
+            sb.append(letter)
+            break
         }
 
-        val number = (count / 9) + (k - 1) / digits
-        val digitIndex = ((k) % digits).toInt()
-
-        println(number.toString()[if(digitIndex == 0) number.toString().length - 1  else digitIndex - 1 ])
-
+        //if not possible, undo try
+        freq[letter] = freq[letter]!! - 1
 
     }
 
+    println(sb.toString())
 }
