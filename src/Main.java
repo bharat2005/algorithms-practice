@@ -1,80 +1,98 @@
 import java.io.*;
-import java.util.*;
 
 public class Main {
 
-    static boolean fesCheck(Map<Character, Integer> freq) {
-        return fesCheck(freq, '0');
+    static String path;
+    static int n;
+    static int ans = 0;
+    static boolean[][] grid = new boolean[7][7];
+
+    static boolean isblock(int r, int c) {
+        // out of grid
+        if (r < 0 || r >= 7 || c < 0 || c >= 7) return true;
+
+        // already visited
+        return grid[r][c];
     }
 
-    static boolean fesCheck(Map<Character, Integer> freq, char prev) {
-        int maxFreq = Integer.MIN_VALUE;
-        char letter = '0';
-        int sum = 0;
+    static void dfs(int r, int c, int step) {
 
-        for (Map.Entry<Character, Integer> entry : freq.entrySet()) {
-            char key = entry.getKey();
-            int value = entry.getValue();
-
-            sum += value;
-            if (maxFreq > value) {
-                maxFreq = maxFreq;
-            } else {
-                letter = key;
-                maxFreq = value;
-            }
+        // base case
+        // reached
+        if (r == 0 && c == 6 && step == n - 1) {
+            ans++;
+            return;
         }
 
-        return maxFreq <= (sum + 1) / 2 && prev != letter;
+        // incorrect path
+        if (step == n - 1) return;
+
+        // pruning
+        // horizontal split
+        if (isblock(r - 1, c) && isblock(r + 1, c) && !isblock(r, c - 1) && !isblock(r, c + 1)) return;
+
+        // vertical split
+        if (!isblock(r - 1, c) && !isblock(r + 1, c) && isblock(r, c - 1) && isblock(r, c + 1)) return;
+
+        // mark visited
+        grid[r][c] = true;
+
+        // try further path
+        if (path.charAt(step) != '?') {
+
+            // try particular dir
+            switch (path.charAt(step)) {
+                case 'U':
+                    if (!isblock(r - 1, c)) {
+                        dfs(r - 1, c, step + 1);
+                    }
+                    break;
+
+                case 'D':
+                    if (!isblock(r + 1, c)) {
+                        dfs(r + 1, c, step + 1);
+                    }
+                    break;
+
+                case 'R':
+                    if (!isblock(r, c + 1)) {
+                        dfs(r, c + 1, step + 1);
+                    }
+                    break;
+
+                case 'L':
+                    if (!isblock(r, c - 1)) {
+                        dfs(r, c - 1, step + 1);
+                    }
+                    break;
+            }
+
+        } else {
+
+            // try all dir
+            if (!isblock(r - 1, c)) {
+                dfs(r - 1, c, step + 1);
+            }
+            if (!isblock(r + 1, c)) {
+                dfs(r + 1, c, step + 1);
+            }
+            if (!isblock(r, c + 1)) {
+                dfs(r, c + 1, step + 1);
+            }
+            if (!isblock(r, c - 1)) {
+                dfs(r, c - 1, step + 1);
+            }
+        }
     }
 
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String str = br.readLine();
 
-        char prev = '0';
-        StringBuilder sb = new StringBuilder();
+        path = br.readLine();
+        n = path.length();
 
-        // build freq
-        HashMap<Character, Integer> freq = new HashMap<>();
-        for (char ch : str.toCharArray()) {
-            freq.put(ch, freq.getOrDefault(ch, 0) + 1);
-        }
+        dfs(0, 0, 0);
 
-        // initial check for whole feasibility
-        if (!fesCheck(freq)) {
-            System.out.println(-1);
-            return;
-        }
-
-        // try building res from ascending A-Z for lex min
-        for (int i = 0; i < str.length(); i++) {
-            boolean flag = false;
-
-            for (char letter = 'A'; letter <= 'Z'; letter++) {
-                // default conditions
-                if (freq.getOrDefault(letter, 0) == 0) continue;
-                if (prev == letter) continue;
-
-                // try with curr letter
-                freq.put(letter, freq.get(letter) - 1);
-
-                if (fesCheck(freq)) {
-                    sb.append(letter);
-                    prev = letter;
-                    flag = true;
-                    break;
-                }
-
-                // if not possible, undo try
-                freq.put(letter, freq.get(letter) + 1);
-            }
-
-            if (!flag) {
-                return;
-            }
-        }
-
-        System.out.println(sb.toString());
+        System.out.println(ans);
     }
 }
