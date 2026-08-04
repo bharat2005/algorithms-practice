@@ -19,13 +19,13 @@ public class Main {
 
         // base case
         // reached
-        if (r == 0 && c == 6 && step == n - 1) {
+        if (r == 0 && c == 6 && step == n) {
             ans++;
             return;
         }
 
         // incorrect path
-        if (step == n - 1) return;
+        if (step == n) return;
 
         // pruning
         // horizontal split
@@ -84,7 +84,7 @@ public class Main {
                 dfs(r, c - 1, step + 1);
             }
         }
-        
+
         //unmark visited
         grid[r][c] = false;
     }

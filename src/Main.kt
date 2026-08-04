@@ -20,12 +20,12 @@ fun main() {
 
         //base case
             //reached
-        if(r == 0 && c == 6 && step == n-1){
+        if(r == 0 && c == 6 && step == n){
             ans++
             return
         }
             //incorrect path
-        if(step == n-1) return
+        if(step == n) return
 
         //pruning
             //horizontal split
