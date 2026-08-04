@@ -12,10 +12,11 @@ fun main() {
             digits++
         }
 
-        val num = count / 9 - 1 + k / digits
-        val idxDig = if(k % digits == 0L) num.toString()[num.toString().length - 1] else (num+1).toString()[(k % digits).toInt() - 1]
+        val number = (count / 9) + (k - 1) / digits
+        val digitIndex = ((k) % digits).toInt()
 
-        println(idxDig)
+        println(number.toString()[digitIndex - 1])
+
 
     }
 
