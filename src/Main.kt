@@ -21,23 +21,31 @@ fun main() {
     for(ch in str){
         freq[ch] = freq.getOrDefault(ch, 0) + 1
     }
+    //intial check for whole fesibility
+    if(!fesCheck(freq)) {
+        println(-1)
+        return
+    }
 
     //try building res from ascending a.z for lex min
-    for(letter in 'A'..'Z'){
-        //default conditions
-        if((freq[letter] ?: 0) == 0) continue
-        if(prev == letter) continue
+    repeat(str.length) {
+        for (letter in 'A'..'Z') {
+            //default conditions
+            if ((freq[letter] ?: 0) == 0) continue
+            if (prev == letter) continue
 
-        //try with curr letter
-        freq[letter] = freq[letter]!! - 1
-        if(fesCheck(freq)){
-            sb.append(letter)
-            break
+            //try with curr letter
+            freq[letter] = freq[letter]!! - 1
+            if (fesCheck(freq)) {
+                sb.append(letter)
+                prev = letter
+                break
+            }
+
+            //if not possible, undo try
+            freq[letter] = freq[letter]!! - 1
+
         }
-
-        //if not possible, undo try
-        freq[letter] = freq[letter]!! - 1
-
     }
 
     println(sb.toString())

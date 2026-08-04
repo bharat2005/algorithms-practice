@@ -1,0 +1,60 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+    static boolean fesCheck(Map<Character, Integer> freq) {
+        int maxFreq = Integer.MIN_VALUE;
+        int sum = 0;
+
+        for (int x : freq.values()) {
+            sum += x;
+            maxFreq = Math.max(maxFreq, x);
+        }
+
+        return maxFreq <= (sum - maxFreq) + 1;
+    }
+
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        String str = br.readLine();
+        char prev = '0';
+        StringBuilder sb = new StringBuilder();
+
+        // build freq
+        HashMap<Character, Integer> freq = new HashMap<>();
+        for (char ch : str.toCharArray()) {
+            freq.put(ch, freq.getOrDefault(ch, 0) + 1);
+        }
+
+        // initial check for whole feasibility
+        if (!fesCheck(freq)) {
+            System.out.println(-1);
+            return;
+        }
+
+        // try building res from ascending A..Z for lex min
+        for (int i = 0; i < str.length(); i++) {
+            for (char letter = 'A'; letter <= 'Z'; letter++) {
+
+                // default conditions
+                if (freq.getOrDefault(letter, 0) == 0) continue;
+                if (prev == letter) continue;
+
+                // try with curr letter
+                freq.put(letter, freq.get(letter) - 1);
+                if (fesCheck(freq)) {
+                    sb.append(letter);
+                    prev = letter;
+                    break;
+                }
+
+                // if not possible, undo try
+                freq.put(letter, freq.get(letter) - 1);
+            }
+        }
+
+        System.out.println(sb.toString());
+    }
+}
