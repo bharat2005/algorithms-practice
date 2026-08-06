@@ -2,89 +2,92 @@
 
 
 
+
+
 fun main() {
-    val path = readLine()!!
-    val n = path.length
-    var ans = 0
-    val grid = Array(7) { BooleanArray(7)}
+    val paths = readLine()!!
+    val visited = Array(7) { BooleanArray(7)}
+    var res = 0
+    val map = mapOf<Char, Pair<Int, Int>>(
+        'U' to Pair(-1,0),
+        'D' to Pair(1,0),
+        'L' to Pair(0, -1),
+        'R' to Pair(0, 1)
+    )
 
-    fun isblock(r : Int,c : Int) : Boolean {
-        //out of grid
-        if(r !in 0 until 7 || c !in 0 until 7) return true
+    fun isBlocked(row : Int, column : Int) : Boolean {
+        //out of bound
+        if(row !in 0..7 || column !in 0..7) return true
+        //already visited
+        if(!visited[row][column]) return true
 
-        //alredy visited
-        return grid[r][c]
+        //else
+        return false
 
     }
     fun dfs(r : Int, c : Int, step : Int){
 
         //base case
-            //reached
-        if(r == 0 && c == 6 && step == n){
-            ans++
+        if(r == 6 && c == 0){
+            res++
             return
         }
-            //incorrect path
-        if(step == n) return
 
-        //pruning
-            //horizontal split
-        if(isblock(r-1, c) && isblock(r+1, c) && !isblock(r,c-1) && !isblock(r,c+1))return
-            //vertical split
-        if(!isblock(r-1, c) && !isblock(r+1, c) && isblock(r,c-1) && isblock(r,c+1))return
 
-        //mark visited
-        grid[r][c] = true
-        //try further path
-        if(path[step] != '?'){
-            //try perticular dir
-            when(path[step]){
-                'U' -> {
-                    if(!isblock(r-1,c)){
-                        dfs(r-1,c, step+1)
-                    }
+
+
+        //pruning cases (2)
+            //i) ending in wrong cell
+        if(step == 47) return
+
+            //ii)future failer cases
+                //-horizontal closure
+        if(    isBlocked(r-1, c)
+            && isBlocked(r+1, c)
+            && !isBlocked(r,c-1)
+            && !isBlocked(r,c+1)
+            )return
+                //-vertical closure
+        if(    isBlocked(r, c-1)
+            && isBlocked(r, c+1)
+            && !isBlocked(r+1,c)
+            && !isBlocked(r-1,c)
+            )return
+
+
+
+
+        //move ahead
+        visited[r][c] = true
+        val ch = paths[step]
+        if(ch == '?'){
+            //move all possible dir
+            for(i in listOf('U', 'D', 'L', 'R')){
+                val nr = r + map[i]!!.first
+                val nc = c + map[i]!!.second
+                if(!isBlocked(nr,nc )){
+                    dfs(nr,nc, step+1)
                 }
-                'D' -> {
-                    if(!isblock(r+1,c)){
-                        dfs(r+1,c, step+1)
-                    }
-                }
-                'R' -> {
-                    if(!isblock(r,c+1)){
-                        dfs(r,c+1, step+1)
-                    }
-                }
-                'L' -> {
-                    if(!isblock(r,c-1)){
-                        dfs(r,c-1, step+1)
-                    }
-                }
             }
-        } else
-        {
-            //try all dir
-            if(!isblock(r-1,c)){
-                dfs(r-1,c, step+1)
+        } else {
+            //move to path dir
+            val nr = r + map[ch]!!.first
+            val nc = c + map[ch]!!.second
+            if(!isBlocked(nr,nc )){
+                dfs(nr,nc, step+1)
             }
-            if(!isblock(r+1,c)){
-                dfs(r+1,c, step+1)
-            }
-            if(!isblock(r,c+1)){
-                dfs(r,c+1, step+1)
-            }
-            if(!isblock(r,c-1)){
-                dfs(r,c-1, step+1)
-            }
+
         }
-        //unmark visited
-        grid[r][c] = false
+
+
+
 
 
     }
 
-    dfs(0,0, 0)
-
-    println(ans)
+    dfs(0,0,0)
+    
+    println(res)
 
 }
 
