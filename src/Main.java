@@ -37,8 +37,8 @@ public class Main {
 
         // pruning cases (2)
 
-        // i) ending in wrong cell
-        if (step == 48) return;
+        // i) ending in wrong cell or reaching to early
+        if (step == 48 || (r == 6 && c == 0)) return;
 
         // ii) future failer cases
 

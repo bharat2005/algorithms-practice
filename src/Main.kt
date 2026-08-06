@@ -37,8 +37,8 @@ fun main() {
 
 
         //pruning cases (2)
-            //i) ending in wrong cell
-        if(step == 48) return
+            //i) ending in wrong cell or reaching too early
+        if(step == 48 || (r == 6 && c == 0)) return
 
             //ii)future failer cases
                 //-horizontal closure
