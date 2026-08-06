@@ -17,9 +17,9 @@ fun main() {
 
     fun isBlocked(row : Int, column : Int) : Boolean {
         //out of bound
-        if(row !in 0..7 || column !in 0..7) return true
+        if(row !in 0..6 || column !in 0..6) return true
         //already visited
-        if(!visited[row][column]) return true
+        if(visited[row][column]) return true
 
         //else
         return false
@@ -28,7 +28,7 @@ fun main() {
     fun dfs(r : Int, c : Int, step : Int){
 
         //base case
-        if(r == 6 && c == 0){
+        if(r == 6 && c == 0 && step == 48){
             res++
             return
         }
@@ -38,7 +38,7 @@ fun main() {
 
         //pruning cases (2)
             //i) ending in wrong cell
-        if(step == 47) return
+        if(step == 48) return
 
             //ii)future failer cases
                 //-horizontal closure
@@ -78,15 +78,12 @@ fun main() {
             }
 
         }
-
-
-
-
+        visited[r][c] = false
 
     }
 
     dfs(0,0,0)
-    
+
     println(res)
 
 }
