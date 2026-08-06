@@ -7,7 +7,7 @@ public class Main {
     static boolean[][] visited = new boolean[7][7];
     static int res = 0;
 
-    static Map<Character, int[]> map = new HashMap<>();
+    static HashMap<Character, int[]> map = new HashMap<>();
 
     static {
         map.put('U', new int[]{-1, 0});
@@ -18,10 +18,10 @@ public class Main {
 
     static boolean isBlocked(int row, int column) {
         // out of bound
-        if (row < 0 || row > 7 || column < 0 || column > 7) return true;
+        if (row < 0 || row > 6 || column < 0 || column > 6) return true;
 
         // already visited
-        if (!visited[row][column]) return true;
+        if (visited[row][column]) return true;
 
         // else
         return false;
@@ -30,7 +30,7 @@ public class Main {
     static void dfs(int r, int c, int step) {
 
         // base case
-        if (r == 6 && c == 0) {
+        if (r == 6 && c == 0 && step == 48) {
             res++;
             return;
         }
@@ -38,7 +38,7 @@ public class Main {
         // pruning cases (2)
 
         // i) ending in wrong cell
-        if (step == 47) return;
+        if (step == 48) return;
 
         // ii) future failer cases
 
@@ -63,9 +63,10 @@ public class Main {
 
         if (ch == '?') {
             // move all possible dir
-            for (char dir : new char[]{'U', 'D', 'L', 'R'}) {
-                int nr = r + map.get(dir)[0];
-                int nc = c + map.get(dir)[1];
+            for (char i : new char[]{'U', 'D', 'L', 'R'}) {
+                int nr = r + map.get(i)[0];
+                int nc = c + map.get(i)[1];
+
                 if (!isBlocked(nr, nc)) {
                     dfs(nr, nc, step + 1);
                 }
@@ -74,10 +75,13 @@ public class Main {
             // move to path dir
             int nr = r + map.get(ch)[0];
             int nc = c + map.get(ch)[1];
+
             if (!isBlocked(nr, nc)) {
                 dfs(nr, nc, step + 1);
             }
         }
+
+        visited[r][c] = false;
     }
 
     public static void main(String[] args) throws Exception {
