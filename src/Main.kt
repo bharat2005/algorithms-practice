@@ -1,20 +1,12 @@
-
-
-
-
-
-
 fun main() {
     val paths = readLine()!!
     val visited = Array(7) { BooleanArray(7)}
     var res = 0
-    val dir = listOf('U', 'D', 'L', 'R')
-    val map = mapOf<Char, Pair<Int, Int>>(
-        'U' to Pair(-1,0),
-        'D' to Pair(1,0),
-        'L' to Pair(0, -1),
-        'R' to Pair(0, 1)
-    )
+
+    val dir = listOf('U','D','L','R')
+    val dr = listOf(-1,1,0,0)
+    val dc = listOf(0,0,-1,1)
+
 
     fun isBlocked(row : Int, column : Int) : Boolean {
         //out of bound
@@ -64,25 +56,15 @@ fun main() {
         //move ahead
         visited[r][c] = true
         val ch = paths[step]
-        if(ch == '?'){
-            //move all possible dir
-            for(x in 0..3){
-                val i = dir[x]
-                val nr = r + map[i]!!.first
-                val nc = c + map[i]!!.second
-                if(!isBlocked(nr,nc )){
-                    dfs(nr,nc, step+1)
-                }
+        for(i in 0..3){
+            if(ch != '?' && dir[i] != ch) continue
+            val nr = r + dr[i]
+            val nc = c + dc[i]
+            if(!isBlocked(nr, nc)){
+                dfs(nr,nc,step + 1)
             }
-        } else {
-            //move to path dir
-            val nr = r + map[ch]!!.first
-            val nc = c + map[ch]!!.second
-            if(!isBlocked(nr,nc )){
-                dfs(nr,nc, step+1)
-            }
-
         }
+
         visited[r][c] = false
 
     }

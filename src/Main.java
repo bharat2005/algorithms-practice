@@ -7,14 +7,9 @@ public class Main {
     static boolean[][] visited = new boolean[7][7];
     static int res = 0;
 
-    static HashMap<Character, int[]> map = new HashMap<>();
-
-    static {
-        map.put('U', new int[]{-1, 0});
-        map.put('D', new int[]{1, 0});
-        map.put('L', new int[]{0, -1});
-        map.put('R', new int[]{0, 1});
-    }
+    static char[] dir = {'U', 'D', 'L', 'R'};
+    static int[] dr = {-1, 1, 0, 0};
+    static int[] dc = {0, 0, -1, 1};
 
     static boolean isBlocked(int row, int column) {
         // out of bound
@@ -29,16 +24,21 @@ public class Main {
 
     static void dfs(int r, int c, int step) {
 
-        // base case
+        // base cases
+
+        // reached desired end
         if (r == 6 && c == 0 && step == 48) {
             res++;
             return;
         }
 
-        // pruning cases (2)
+        // reached at wrong end
+        if (step == 48) return;
 
-        // i) ending in wrong cell or reaching to early
-        if (step == 48 || (r == 6 && c == 0)) return;
+        // pruning cases
+
+        // i) reaching too early
+        if (r == 6 && c == 0) return;
 
         // ii) future failer cases
 
@@ -61,20 +61,11 @@ public class Main {
 
         char ch = paths.charAt(step);
 
-        if (ch == '?') {
-            // move all possible dir
-            for (char i : new char[]{'U', 'D', 'L', 'R'}) {
-                int nr = r + map.get(i)[0];
-                int nc = c + map.get(i)[1];
+        for (int i = 0; i <= 3; i++) {
+            if (ch != '?' && dir[i] != ch) continue;
 
-                if (!isBlocked(nr, nc)) {
-                    dfs(nr, nc, step + 1);
-                }
-            }
-        } else {
-            // move to path dir
-            int nr = r + map.get(ch)[0];
-            int nc = c + map.get(ch)[1];
+            int nr = r + dr[i];
+            int nc = c + dc[i];
 
             if (!isBlocked(nr, nc)) {
                 dfs(nr, nc, step + 1);
@@ -86,6 +77,7 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
         paths = br.readLine();
 
         dfs(0, 0, 0);
