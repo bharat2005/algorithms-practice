@@ -1,3 +1,6 @@
+
+
+
 fun main() {
     val paths = readLine()!!
     val visited = Array(7) { BooleanArray(7)}
@@ -9,14 +12,8 @@ fun main() {
 
 
     fun isBlocked(row : Int, column : Int) : Boolean {
-        //out of bound
-        if(row !in 0..6 || column !in 0..6) return true
-        //already visited
-        if(visited[row][column]) return true
-
-        //else
-        return false
-
+        //out of bound or alredy visited
+        return row !in 0..6 || column !in 0..6 || visited[row][column]
     }
     fun dfs(r : Int, c : Int, step : Int){
 
@@ -31,10 +28,14 @@ fun main() {
 
 
 
+        visited[r][c] = true
 
         //pruning cases
             //i) reaching too early
-        if(r == 6 && c == 0) return
+        if(r == 6 && c == 0){
+            visited[r][c] = false
+            return
+        }
 
             //ii)future failer cases
                 //-horizontal closure
@@ -42,19 +43,24 @@ fun main() {
             && isBlocked(r+1, c)
             && !isBlocked(r,c-1)
             && !isBlocked(r,c+1)
-            )return
+            ) {
+            visited[r][c] = false
+            return
+        }
                 //-vertical closure
         if(    isBlocked(r, c-1)
             && isBlocked(r, c+1)
             && !isBlocked(r+1,c)
             && !isBlocked(r-1,c)
-            )return
+            ){
+            visited[r][c] = false
+            return
+        }
 
 
 
 
         //move ahead
-        visited[r][c] = true
         val ch = paths[step]
         for(i in 0..3){
             if(ch != '?' && dir[i] != ch) continue
