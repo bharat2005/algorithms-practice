@@ -1,5 +1,4 @@
 import java.io.*;
-import java.util.*;
 
 public class Main {
 
@@ -12,20 +11,13 @@ public class Main {
     static int[] dc = {0, 0, -1, 1};
 
     static boolean isBlocked(int row, int column) {
-        // out of bound
-        if (row < 0 || row > 6 || column < 0 || column > 6) return true;
-
-        // already visited
-        if (visited[row][column]) return true;
-
-        // else
-        return false;
+        // out of bound or already visited
+        return row < 0 || row > 6 || column < 0 || column > 6 || visited[row][column];
     }
 
     static void dfs(int r, int c, int step) {
 
         // base cases
-
         // reached desired end
         if (r == 6 && c == 0 && step == 48) {
             res++;
@@ -35,30 +27,37 @@ public class Main {
         // reached at wrong end
         if (step == 48) return;
 
+        visited[r][c] = true;
+
         // pruning cases
 
         // i) reaching too early
-        if (r == 6 && c == 0) return;
+        if (r == 6 && c == 0) {
+            visited[r][c] = false;
+            return;
+        }
 
         // ii) future failer cases
 
-        // horizontal closure
+        // -horizontal closure
         if (isBlocked(r - 1, c)
                 && isBlocked(r + 1, c)
                 && !isBlocked(r, c - 1)
-                && !isBlocked(r, c + 1))
+                && !isBlocked(r, c + 1)) {
+            visited[r][c] = false;
             return;
+        }
 
-        // vertical closure
+        // -vertical closure
         if (isBlocked(r, c - 1)
                 && isBlocked(r, c + 1)
                 && !isBlocked(r + 1, c)
-                && !isBlocked(r - 1, c))
+                && !isBlocked(r - 1, c)) {
+            visited[r][c] = false;
             return;
+        }
 
         // move ahead
-        visited[r][c] = true;
-
         char ch = paths.charAt(step);
 
         for (int i = 0; i <= 3; i++) {
