@@ -8,6 +8,7 @@ fun main() {
     val paths = readLine()!!
     val visited = Array(7) { BooleanArray(7)}
     var res = 0
+    val dir = listOf('U', 'D', 'L', 'R')
     val map = mapOf<Char, Pair<Int, Int>>(
         'U' to Pair(-1,0),
         'D' to Pair(1,0),
@@ -65,7 +66,8 @@ fun main() {
         val ch = paths[step]
         if(ch == '?'){
             //move all possible dir
-            for(i in listOf('U', 'D', 'L', 'R')){
+            for(x in 0..3){
+                val i = dir[x]
                 val nr = r + map[i]!!.first
                 val nc = c + map[i]!!.second
                 if(!isBlocked(nr,nc )){
