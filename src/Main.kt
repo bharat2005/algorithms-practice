@@ -27,18 +27,21 @@ fun main() {
     }
     fun dfs(r : Int, c : Int, step : Int){
 
-        //base case
+        //base cases
+        //reached desired end
         if(r == 6 && c == 0 && step == 48){
             res++
             return
         }
+        //reached at wrong end
+        if(step == 48) return
 
 
 
 
-        //pruning cases (2)
-            //i) ending in wrong cell or reaching too early
-        if(step == 48 || (r == 6 && c == 0)) return
+        //pruning cases
+            //i) reaching too early
+        if(r == 6 && c == 0) return
 
             //ii)future failer cases
                 //-horizontal closure
