@@ -10,7 +10,7 @@ fun main() {
         visited[0][i] = true
         visited[8][i] = true
         visited[i][0] = true
-        visited[8][i] = true
+        visited[i][8] = true
     }
 
     var res = 0
@@ -23,7 +23,7 @@ fun main() {
 
         //base cases
         //reached desired end
-        if(r == 6 && c == 0 && step == 48){
+        if(r == 7 && c == 1 && step == 48){
             res++
             return
         }
@@ -36,7 +36,7 @@ fun main() {
 
         //pruning cases
             //i) reaching too early
-        if(r == 6 && c == 0) return
+        if(r == 7 && c == 1) return
 
 
             //ii)future failer cases
@@ -72,7 +72,7 @@ fun main() {
 
     }
 
-    dfs(0,0,0)
+    dfs(1,1,0)
 
     println(res)
 

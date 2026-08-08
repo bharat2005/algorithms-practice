@@ -75,10 +75,10 @@ public class Main {
             visited[0][i] = true;
             visited[8][i] = true;
             visited[i][0] = true;
-            visited[8][i] = true;
+            visited[i][8] = true;
         }
 
-        dfs(0, 0, 0);
+        dfs(1, 1, 0);
 
         System.out.println(res);
     }
