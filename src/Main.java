@@ -1,10 +1,14 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class Main {
 
     static String paths;
-    static boolean[] visited;
-    static int res;
+
+    static boolean[] visited = new boolean[81];
+
+    static int res = 0;
 
     static char[] dir = {'U', 'D', 'L', 'R'};
     static int[] dr = {-1, 1, 0, 0};
@@ -15,7 +19,7 @@ public class Main {
 
         // base cases
         // reached desired end
-        if (idx == 72 && step == 48) {
+        if (idx == 64 && step == 48) {
             res++;
             return;
         }
@@ -23,42 +27,29 @@ public class Main {
         // reached at wrong end
         if (step == 48) return;
 
-
-
-
-
         // pruning cases
+
         // i) reaching too early
-        if (idx == 72) return;
+        if (idx == 64) return;
 
         // ii) future failer cases
+        boolean up = visited[idx - 9];
+        boolean down = visited[idx + 9];
+        boolean right = visited[idx + 1];
+        boolean left = visited[idx - 1];
 
         // horizontal closure
-        if (visited[idx - 9]
-                && visited[idx + 9]
-                && !visited[idx - 1]
-                && !visited[idx + 1]) {
-            return;
-        }
+        if (up && down && !right && !left) return;
 
         // vertical closure
-        if (visited[idx - 1]
-                && visited[idx + 1]
-                && !visited[idx + 9]
-                && !visited[idx - 9]) {
-            return;
-        }
-
-
-
-
+        if (right && left && !up && !down) return;
 
         // move ahead
         visited[idx] = true;
 
         char ch = paths.charAt(step);
 
-        for (int i = 0; i <= 3; i++) {
+        for (int i = 0; i < 4; i++) {
             if (ch != '?' && dir[i] != ch) continue;
 
             int nr = r + dr[i];
@@ -77,17 +68,13 @@ public class Main {
 
         paths = br.readLine();
 
-        visited = new boolean[81];
-
         // add padding
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i <= 8; i++) {
             visited[i] = true;
             visited[72 + i] = true;
             visited[9 * i] = true;
             visited[9 * i + 8] = true;
         }
-
-        res = 0;
 
         dfs(1, 1, 0);
 

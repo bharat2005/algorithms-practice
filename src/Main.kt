@@ -1,12 +1,9 @@
-
-import java.io.InputStream
-
 fun main() {
     val paths = readLine()!!
 
     val visited = BooleanArray(81)
     //add padding
-    for(i in 0 until 8){
+    for(i in 0..8){
         visited[i] = true
         visited[72 + i] = true
         visited[9 * i] = true
@@ -24,7 +21,7 @@ fun main() {
 
         //base cases
         //reached desired end
-        if(idx == 72 && step == 48){
+        if(idx == 64 && step == 48){
             res++
             return
         }
@@ -37,21 +34,25 @@ fun main() {
 
         //pruning cases
             //i) reaching too early
-        if(idx == 72) return
+        if(idx == 64) return
 
 
             //ii)future failer cases
+        val up = visited[idx - 9]
+        val down = visited[idx + 9]
+        val right = visited[idx + 1]
+        val left = visited[idx - 1]
                 //-horizontal closure
-        if(    visited[idx-9]
-            && visited[idx+9]
-            && !visited[idx-1]
-            && !visited[idx+1]
+        if(    up
+            && down
+            && !right
+            && !left
             ) return
                 //-vertical closure
-        if(    visited[idx-1]
-            && visited[idx+1]
-            && !visited[idx + 9]
-            && !visited[idx - 9]
+        if(    right
+            && left
+            && !up
+            && !down
             ) return
 
 
