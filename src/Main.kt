@@ -4,13 +4,13 @@ import java.io.InputStream
 fun main() {
     val paths = readLine()!!
 
-    val visited = Array(9) { BooleanArray(9)}
+    val visited = BooleanArray(81)
     //add padding
     for(i in 0 until 8){
-        visited[0][i] = true
-        visited[8][i] = true
-        visited[i][0] = true
-        visited[i][8] = true
+        visited[i] = true
+        visited[72 + i] = true
+        visited[9 * i] = true
+        visited[9 * i + 8] = true
     }
 
     var res = 0
@@ -20,10 +20,11 @@ fun main() {
     val dc = listOf(0,0,-1,1)
 
     fun dfs(r : Int, c : Int, step : Int){
+        val idx = r * 9 + c
 
         //base cases
         //reached desired end
-        if(r == 7 && c == 1 && step == 48){
+        if(idx == 72 && step == 48){
             res++
             return
         }
@@ -36,21 +37,21 @@ fun main() {
 
         //pruning cases
             //i) reaching too early
-        if(r == 7 && c == 1) return
+        if(idx == 72) return
 
 
             //ii)future failer cases
                 //-horizontal closure
-        if(    visited[r-1][c]
-            && visited[r+1][c]
-            && !visited[r][c-1]
-            && !visited[r][c+1]
+        if(    visited[idx-9]
+            && visited[idx+9]
+            && !visited[idx-1]
+            && !visited[idx+1]
             ) return
                 //-vertical closure
-        if(    visited[r][c-1]
-            && visited[r][c+1]
-            && !visited[r+1][c]
-            && !visited[r-1][c]
+        if(    visited[idx-1]
+            && visited[idx+1]
+            && !visited[idx + 9]
+            && !visited[idx - 9]
             ) return
 
 
@@ -58,17 +59,17 @@ fun main() {
 
 
         //move ahead
-        visited[r][c] = true
+        visited[idx] = true
         val ch = paths[step]
         for(i in 0..3){
             if(ch != '?' && dir[i] != ch) continue
             val nr = r + dr[i]
             val nc = c + dc[i]
-            if(!visited[nr][nc]){
+            if(!visited[nr * 9 + nc]){
                 dfs(nr,nc,step + 1)
             }
         }
-        visited[r][c] = false
+        visited[idx] = false
 
     }
 

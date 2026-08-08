@@ -1,21 +1,21 @@
 import java.io.*;
-import java.util.*;
 
 public class Main {
 
     static String paths;
-    static boolean[][] visited;
-    static int res = 0;
+    static boolean[] visited;
+    static int res;
 
     static char[] dir = {'U', 'D', 'L', 'R'};
     static int[] dr = {-1, 1, 0, 0};
     static int[] dc = {0, 0, -1, 1};
 
     static void dfs(int r, int c, int step) {
+        int idx = r * 9 + c;
 
         // base cases
         // reached desired end
-        if (r == 7 && c == 1 && step == 48) {
+        if (idx == 72 && step == 48) {
             res++;
             return;
         }
@@ -23,31 +23,38 @@ public class Main {
         // reached at wrong end
         if (step == 48) return;
 
-        // pruning cases
 
+
+
+
+        // pruning cases
         // i) reaching too early
-        if (r == 7 && c == 1) return;
+        if (idx == 72) return;
 
         // ii) future failer cases
 
-        // -horizontal closure
-        if (visited[r - 1][c]
-                && visited[r + 1][c]
-                && !visited[r][c - 1]
-                && !visited[r][c + 1]) {
+        // horizontal closure
+        if (visited[idx - 9]
+                && visited[idx + 9]
+                && !visited[idx - 1]
+                && !visited[idx + 1]) {
             return;
         }
 
-        // -vertical closure
-        if (visited[r][c - 1]
-                && visited[r][c + 1]
-                && !visited[r + 1][c]
-                && !visited[r - 1][c]) {
+        // vertical closure
+        if (visited[idx - 1]
+                && visited[idx + 1]
+                && !visited[idx + 9]
+                && !visited[idx - 9]) {
             return;
         }
+
+
+
+
 
         // move ahead
-        visited[r][c] = true;
+        visited[idx] = true;
 
         char ch = paths.charAt(step);
 
@@ -57,12 +64,12 @@ public class Main {
             int nr = r + dr[i];
             int nc = c + dc[i];
 
-            if (!visited[nr][nc]) {
+            if (!visited[nr * 9 + nc]) {
                 dfs(nr, nc, step + 1);
             }
         }
 
-        visited[r][c] = false;
+        visited[idx] = false;
     }
 
     public static void main(String[] args) throws Exception {
@@ -70,15 +77,17 @@ public class Main {
 
         paths = br.readLine();
 
-        visited = new boolean[9][9];
+        visited = new boolean[81];
 
         // add padding
         for (int i = 0; i < 8; i++) {
-            visited[0][i] = true;
-            visited[8][i] = true;
-            visited[i][0] = true;
-            visited[i][8] = true;
+            visited[i] = true;
+            visited[72 + i] = true;
+            visited[9 * i] = true;
+            visited[9 * i + 8] = true;
         }
+
+        res = 0;
 
         dfs(1, 1, 0);
 
