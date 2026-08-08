@@ -1,18 +1,14 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
+import java.util.*;
 
 public class Main {
 
-    static String paths;
-
-    static boolean[] visited = new boolean[81];
-
+    static int[] paths;
+    static boolean[] visited;
     static int res = 0;
 
-    static char[] dir = {'U', 'D', 'L', 'R'};
-    static int[] dr = {-1, 1, 0, 0};
-    static int[] dc = {0, 0, -1, 1};
+    static final int[] dr = {-1, 1, 0, 0};
+    static final int[] dc = {0, 0, -1, 1};
 
     static void dfs(int r, int c, int step) {
         int idx = r * 9 + c;
@@ -28,35 +24,72 @@ public class Main {
         if (step == 48) return;
 
         // pruning cases
-
         // i) reaching too early
         if (idx == 64) return;
 
-        // ii) future failer cases
+        // ii) future failure cases
         boolean up = visited[idx - 9];
         boolean down = visited[idx + 9];
         boolean right = visited[idx + 1];
         boolean left = visited[idx - 1];
 
-        // horizontal closure
-        if (up && down && !right && !left) return;
+        // - horizontal closure
+        if (up
+                && down
+                && !right
+                && !left) {
+            return;
+        }
 
-        // vertical closure
-        if (right && left && !up && !down) return;
+        // - vertical closure
+        if (right
+                && left
+                && !up
+                && !down) {
+            return;
+        }
 
         // move ahead
         visited[idx] = true;
 
-        char ch = paths.charAt(step);
+        int ch = paths[step];
 
-        for (int i = 0; i < 4; i++) {
-            if (ch != '?' && dir[i] != ch) continue;
+        if (ch == 0) {
+            // up
+            if (!visited[idx - 9]) {
+                dfs(r - 1, c, step + 1);
+            }
+        } else if (ch == 1) {
+            // Down
+            if (!visited[idx + 9]) {
+                dfs(r + 1, c, step + 1);
+            }
+        } else if (ch == 2) {
+            // left
+            if (!visited[idx - 1]) {
+                dfs(r, c - 1, step + 1);
+            }
+        } else if (ch == 3) {
+            // right
+            if (!visited[idx + 1]) {
+                dfs(r, c + 1, step + 1);
+            }
+        } else {
+            // all
+            if (!visited[idx - 9]) {
+                dfs(r - 1, c, step + 1);
+            }
 
-            int nr = r + dr[i];
-            int nc = c + dc[i];
+            if (!visited[idx + 9]) {
+                dfs(r + 1, c, step + 1);
+            }
 
-            if (!visited[nr * 9 + nc]) {
-                dfs(nr, nc, step + 1);
+            if (!visited[idx - 1]) {
+                dfs(r, c - 1, step + 1);
+            }
+
+            if (!visited[idx + 1]) {
+                dfs(r, c + 1, step + 1);
             }
         }
 
@@ -66,7 +99,23 @@ public class Main {
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        paths = br.readLine();
+        String s = br.readLine();
+
+        paths = new int[s.length()];
+
+        for (int i = 0; i < s.length(); i++) {
+            char ch = s.charAt(i);
+
+            paths[i] = switch (ch) {
+                case 'U' -> 0;
+                case 'D' -> 1;
+                case 'L' -> 2;
+                case 'R' -> 3;
+                default -> 4;
+            };
+        }
+
+        visited = new boolean[81];
 
         // add padding
         for (int i = 0; i <= 8; i++) {
@@ -75,6 +124,8 @@ public class Main {
             visited[9 * i] = true;
             visited[9 * i + 8] = true;
         }
+
+        res = 0;
 
         dfs(1, 1, 0);
 

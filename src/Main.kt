@@ -1,5 +1,14 @@
 fun main() {
-    val paths = readLine()!!
+    val paths = readLine()!!.map {
+        when(it) {
+            'U' -> 0
+            'D' -> 1
+            'L' -> 2
+            'R' -> 3
+            else -> 4
+        }
+    }.toIntArray()
+
 
     val visited = BooleanArray(81)
     //add padding
@@ -62,14 +71,26 @@ fun main() {
         //move ahead
         visited[idx] = true
         val ch = paths[step]
-        for(i in 0..3){
-            if(ch != '?' && dir[i] != ch) continue
-            val nr = r + dr[i]
-            val nc = c + dc[i]
-            if(!visited[nr * 9 + nc]){
-                dfs(nr,nc,step + 1)
-            }
+        if(ch == 0){
+            //up
+            if(!visited[idx - 9]) dfs(r - 1, c, step+1)
+        } else if(ch == 1){
+            //Down
+            if(!visited[idx + 9]) dfs(r + 1, c, step+1)
+        }else if(ch == 2){
+            //left
+            if(!visited[idx - 1]) dfs(r, c-1, step+1)
+        } else if(ch == 3){
+            //right
+            if(!visited[idx + 1]) dfs(r, c+1, step+1)
+        } else{
+            //all
+            if(!visited[idx - 9]) dfs(r - 1, c, step+1)
+            if(!visited[idx + 9]) dfs(r + 1, c, step+1)
+            if(!visited[idx - 1]) dfs(r, c-1, step+1)
+            if(!visited[idx + 1]) dfs(r, c+1, step+1)
         }
+
         visited[idx] = false
 
     }
