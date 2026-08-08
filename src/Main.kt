@@ -8,22 +8,14 @@ fun main() {
             else -> 4
         }
     }.toIntArray()
-
-
     val visited = BooleanArray(81)
-    //add padding
     for(i in 0..8){
         visited[i] = true
         visited[72 + i] = true
         visited[9 * i] = true
         visited[9 * i + 8] = true
     }
-
     var res = 0
-
-    val dir = listOf('U','D','L','R')
-    val dr = listOf(-1,1,0,0)
-    val dc = listOf(0,0,-1,1)
 
     fun dfs(r : Int, c : Int, step : Int){
         val idx = r * 9 + c

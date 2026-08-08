@@ -4,11 +4,8 @@ import java.util.*;
 public class Main {
 
     static int[] paths;
-    static boolean[] visited;
+    static boolean[] visited = new boolean[81];
     static int res = 0;
-
-    static final int[] dr = {-1, 1, 0, 0};
-    static final int[] dc = {0, 0, -1, 1};
 
     static void dfs(int r, int c, int step) {
         int idx = r * 9 + c;
@@ -33,7 +30,7 @@ public class Main {
         boolean right = visited[idx + 1];
         boolean left = visited[idx - 1];
 
-        // - horizontal closure
+        // horizontal closure
         if (up
                 && down
                 && !right
@@ -41,7 +38,7 @@ public class Main {
             return;
         }
 
-        // - vertical closure
+        // vertical closure
         if (right
                 && left
                 && !up
@@ -97,7 +94,8 @@ public class Main {
     }
 
     public static void main(String[] args) throws Exception {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedReader br =
+                new BufferedReader(new InputStreamReader(System.in));
 
         String s = br.readLine();
 
@@ -106,26 +104,31 @@ public class Main {
         for (int i = 0; i < s.length(); i++) {
             char ch = s.charAt(i);
 
-            paths[i] = switch (ch) {
-                case 'U' -> 0;
-                case 'D' -> 1;
-                case 'L' -> 2;
-                case 'R' -> 3;
-                default -> 4;
-            };
+            switch (ch) {
+                case 'U':
+                    paths[i] = 0;
+                    break;
+                case 'D':
+                    paths[i] = 1;
+                    break;
+                case 'L':
+                    paths[i] = 2;
+                    break;
+                case 'R':
+                    paths[i] = 3;
+                    break;
+                default:
+                    paths[i] = 4;
+                    break;
+            }
         }
 
-        visited = new boolean[81];
-
-        // add padding
         for (int i = 0; i <= 8; i++) {
             visited[i] = true;
             visited[72 + i] = true;
             visited[9 * i] = true;
             visited[9 * i + 8] = true;
         }
-
-        res = 0;
 
         dfs(1, 1, 0);
 
