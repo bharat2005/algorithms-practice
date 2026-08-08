@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.*;
 
 public class Main {
 
@@ -14,7 +15,7 @@ public class Main {
 
         // base cases
         // reached desired end
-        if (r == 6 && c == 0 && step == 48) {
+        if (r == 7 && c == 1 && step == 48) {
             res++;
             return;
         }
@@ -25,11 +26,11 @@ public class Main {
         // pruning cases
 
         // i) reaching too early
-        if (r == 6 && c == 0) return;
+        if (r == 7 && c == 1) return;
 
         // ii) future failer cases
 
-        // horizontal closure
+        // -horizontal closure
         if (visited[r - 1][c]
                 && visited[r + 1][c]
                 && !visited[r][c - 1]
@@ -37,7 +38,7 @@ public class Main {
             return;
         }
 
-        // vertical closure
+        // -vertical closure
         if (visited[r][c - 1]
                 && visited[r][c + 1]
                 && !visited[r + 1][c]
@@ -47,6 +48,7 @@ public class Main {
 
         // move ahead
         visited[r][c] = true;
+
         char ch = paths.charAt(step);
 
         for (int i = 0; i <= 3; i++) {
