@@ -20,8 +20,8 @@ fun main(){
                 }
             }
         }
+        count += abs(currPos - arr[minIndex])
         currPos = arr[minIndex]
-        count += abs(currPos)
         visited[minIndex] = true
     }
 
