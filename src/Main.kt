@@ -1,23 +1,16 @@
 fun main(){
-    val (a, b) = readLine()!!.split(" ").map { it.toInt() }
+    val n = readLine()!!.toInt()
+    val map = HashMap<String,Int>()
+    var max = Int.MIN_VALUE
 
-    if(a + b == 9) {
-        println("Nine")
-        return
-    }
-    if(a - b == 9) {
-        println("Nine")
-        return
-    }
-    if(a * b == 9) {
-        println("Nine")
-        return
-    }
-    if(a / b == 9) {
-        println("Nine")
-        return
+    repeat(n){
+        val str = readLine()!!
+        val nVal =map.getOrDefault(str,0) + 1
+        map[str] = nVal
+        max = maxOf(max,nVal)
+
     }
 
-    println("Nein")
+    println(max)
 
 }
