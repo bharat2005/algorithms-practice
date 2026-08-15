@@ -1,30 +1,26 @@
-import kotlin.math.abs
 
 fun main(){
-    val n = readLine()!!.toInt()
-    val arr = readLine()!!.split(" ").map { it.toInt() }
-    val visited = BooleanArray(arr.size){false}
+    val t = readLine()!!.toInt()
 
-    var currPos = 0
-    var count = 0
+    repeat(t){
+        val n = readLine()!!.toInt()
+        var product= 1
+        val arr = readLine()!!.split(" ").map {
+            if(it.toInt() != 1 || it.toInt() != 0) product *= it.toInt()
+            it.toInt()
+        }.sorted()
 
-    repeat(n){
-        var minDiff = Int.MAX_VALUE
-        var minIndex = -1
-        for(i in 0 until n ){
-            if(!visited[i]){
-                val curDiff = abs(currPos - arr[i])
-                if(minDiff > curDiff ){
-                    minIndex = i
-                    minDiff = curDiff
-                }
-            }
+        if(arr[0] == 0) {
+            println(product)
+            return
         }
-        count += abs(currPos - arr[minIndex])
-        currPos = arr[minIndex]
-        visited[minIndex] = true
-    }
+        if(arr[0] == 1){
+            println(product * 2)
+            return
+        }
 
-    print(count)
+        println((product / arr[n - 1]) * (arr[n-1] + 1))
+
+    }
 
 }
