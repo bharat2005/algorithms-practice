@@ -1,19 +1,22 @@
-import java.util.Locale
-import java.util.Locale.getDefault
+import kotlin.math.abs
 
 fun main(){
     val n = readLine()!!.toInt()
-    val map = HashMap<String,Int>()
-    var max = Int.MIN_VALUE
+    val arr = readLine()!!.split(" ").map { it.toInt() }
+    val visited = BooleanArray(arr.size){false}
+
+    var curr = 0
 
     repeat(n){
-        val str = readLine()!!.lowercase()
-        val nVal =map.getOrDefault(str,0) + 1
-        map[str] = nVal
-        max = maxOf(max,nVal)
-
+        var min = Int.MAX_VALUE
+        for(i in 0 until n ){
+            if(visited[i]){
+                min = minOf(min, abs(curr - arr[i]))
+            }
+        }
+        curr += min
     }
 
-    println(max)
+    print(curr)
 
 }
