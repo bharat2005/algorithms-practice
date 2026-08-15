@@ -5,18 +5,26 @@ fun main(){
     val arr = readLine()!!.split(" ").map { it.toInt() }
     val visited = BooleanArray(arr.size){false}
 
-    var curr = 0
+    var currPos = 0
+    var count = 0
 
     repeat(n){
-        var min = Int.MAX_VALUE
+        var minDiff = Int.MAX_VALUE
+        var minIndex = -1
         for(i in 0 until n ){
-            if(visited[i]){
-                min = minOf(min, abs(curr - arr[i]))
+            if(!visited[i]){
+                val curDiff = abs(currPos - arr[i])
+                if(minDiff > curDiff ){
+                    minIndex = i
+                    minDiff = curDiff
+                }
             }
         }
-        curr += min
+        currPos = arr[minIndex]
+        count += abs(currPos)
+        visited[minIndex] = true
     }
 
-    print(curr)
+    print(count)
 
 }
