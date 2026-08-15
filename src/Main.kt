@@ -1,22 +1,23 @@
 fun main(){
-    fun main() {
-        val t = readln().toInt()
+    val (a, b) = readLine()!!.split(" ").map { it.toInt() }
 
-        repeat(t) {
-            val grid = Array(8) { readln() }
-
-            val word = StringBuilder()
-
-            for (i in 0 until 8) {
-                for (j in 0 until 8) {
-                    if (grid[i][j] != '.') {
-                        word.append(grid[i][j])
-                    }
-                }
-            }
-
-            println(word)
-        }
+    if(a + b == 9) {
+        println("Nine")
+        return
     }
+    if(a - b == 9) {
+        println("Nine")
+        return
+    }
+    if(a * b == 9) {
+        println("Nine")
+        return
+    }
+    if(a / b == 9) {
+        println("Nine")
+        return
+    }
+
+    println("Nein")
 
 }
