@@ -4,33 +4,36 @@ import kotlin.math.abs
 fun main() {
     val s = readLine()!!
     val n = s.length
-    var usl = -1
-    var usr = -1
+    val freq = HashMap<Char, Int>()
+    val leftArr = IntArray(26) { -1 }
+    val rightArr = IntArray(26) { -1 }
 
-    for(left in 0 until n-1){
-
-        for(right in left+1 until n){
-
-            val freq = HashMap<Char,Int>()
-            var max = Int.MIN_VALUE
-            for(i in left..right){
-                val ch = s[i]
-                val count = freq.getOrDefault(ch, 0) + 1
-                freq[ch] = count
-                max = maxOf(max, count)
-            }
-            if(max > (right - left + 1) / 2){
-                //unbalanced substring exists
-                usl = left + 1
-                usr = right + 1
-                break
-            }
-
+    for(i in s.indices){
+        val ch = s[i]
+        val count = freq.getOrDefault(ch, 0)
+        if(count == 0){
+            //first most occurrence
+            leftArr[ch - 'a'] = i
+        } else {
+            rightArr[ch - 'a'] = i
         }
-        if(usl != -1 && usr != -1)break
+        freq[ch] =  count + 1
     }
 
-    println("${usl} ${usr}")
 
+    for(i  in 0..25){
+        val left = leftArr[i]
+        val right = rightArr[i]
+        val ch = (97 + i).toChar()
+        val charFreq = freq.getOrDefault(ch, 0)
+        if(charFreq == 0 || charFreq == 1) break
+
+        val substr = right - left + 1
+        if(charFreq > substr / 2) {
+            println("${left + 1} ${right + 1}")
+            return
+        }
+
+    }
 
 }
