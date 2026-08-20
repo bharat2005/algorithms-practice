@@ -1,104 +1,36 @@
 
 import kotlin.math.abs
 
-fun main(){
-    val n = readLine()!!.toInt()
-    val arr = readLine()!!.split(" ").map { it.toInt() }
-    if(n <= 2){
-        println(0)
-        return
-    }
+fun main() {
+    val s = readLine()!!
+    val n = s.length
+    var usl = -1
+    var usr = -1
 
-    var min = Int.MAX_VALUE
+    for(left in 0 until n-1){
 
-    for(c1 in -1..1){
-        for(c2 in -1..1){
-            val first = arr[0] + c1
-            val second = arr[1] + c2
-            val diff = second - first
+        for(right in left+1 until n){
 
-            var ops = 0
-            if(c1 != 0){
-                ops++
+            val freq = HashMap<Char,Int>()
+            var max = Int.MIN_VALUE
+            for(i in left..right){
+                val ch = s[i]
+                val count = freq.getOrDefault(ch, 0) + 1
+                freq[ch] = count
+                max = maxOf(max, count)
             }
-            if(c2 != 0){
-                ops++
+            if(max > (right - left + 1) / 2){
+                //unbalanced substring exists
+                usl = left + 1
+                usr = right + 1
+                break
             }
 
-            var prev = second
-            for(i in 2 until n){
-                val req = prev + diff
-                val curr = arr[i]
-
-                if(abs(req - curr) == 1){
-                    ops++
-                    prev = curr + (req - curr)
-                } else if(abs(req - curr) == 0){
-                    prev = curr
-                } else {
-                    break
-                }
-                if(i == n-1){
-                    min =minOf(ops, min)
-                }
-            }
         }
+        if(usl != -1 && usr != -1)break
     }
 
-    println(if(min == Int.MAX_VALUE) -1 else min)
-
-}
-
-fun main2() {
+    println("${usl} ${usr}")
 
 
-//    var min = Int.MAX_VALUE
-//
-//    fun dfs(index : Int, prev : Int, ops : Int, diff : Int){
-//        if(index == n){
-//            min = minOf(min, ops)
-//            return
-//        }
-//        val curr = arr[index]
-//        val d1 = curr - prev
-//        val d2 = curr + 1 - prev
-//        val d3 = curr - 1 - prev
-//
-//        if(diff == d1 ){
-//            dfs(index + 1, curr, ops, diff)
-//        } else if(diff == d2){
-//            dfs(index + 1, curr + 1, ops+1, diff)
-//        } else if(diff == d3){
-//            dfs(index + 1, curr - 1, ops+1, diff)
-//        }
-//    }
-//
-//
-//
-//    val curr1 = arr[0]
-//    val curr2 = curr1 + 1
-//    val curr3 = curr1 - 1
-//
-//    val next1 = arr[1]
-//    val next2 = next1 + 1
-//    val next3 = next1 - 1
-
-
-//    //curr1
-//    dfs(1,curr1, 0, next1 - curr1 )
-//    dfs(1,curr1, 0, next2 - curr1 )
-//    dfs(1,curr1, 0, next3 - curr1 )
-//
-//    //curr2
-//    dfs(1,curr2, 1, next1 - curr2 )
-//    dfs(1,curr2, 1, next2 - curr2 )
-//    dfs(1,curr2, 1, next3 - curr2 )
-//
-//    //curr3
-//    dfs(1,curr3, 1, next1 - curr3 )
-//    dfs(1,curr3, 1, next2 - curr3 )
-//    dfs(1,curr3, 1, next3 - curr3 )
-
-
-    println(if(min == Int.MAX_VALUE) -1 else min)
 }
