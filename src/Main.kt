@@ -2,39 +2,50 @@
 import kotlin.math.abs
 
 fun main() {
-    val s = readLine()!!
-    val n = s.length
-    val freq = HashMap<Char, Int>()
-    val leftArr = IntArray(26) { -1 }
-    val rightArr = IntArray(26) { -1 }
-
-    for(i in s.indices){
-        val ch = s[i]
-        val count = freq.getOrDefault(ch, 0)
-        if(count == 0){
-            //first most occurrence
-            leftArr[ch - 'a'] = i
-        } else {
-            rightArr[ch - 'a'] = i
+    fun shortestBeautifulSubstring(s: String, k: Int): String {
+        val n = s.length
+        
+        //crop accutal substring
+        var start = 0
+        while(start < n){
+            if(s[start] == '1') break
+            start++
         }
-        freq[ch] =  count + 1
-    }
-
-
-    for(i  in 0..25){
-        val left = leftArr[i]
-        val right = rightArr[i]
-        val ch = (97 + i).toChar()
-        val charFreq = freq.getOrDefault(ch, 0)
-        if(charFreq == 0 || charFreq == 1) break
-
-        val substr = right - left + 1
-        if(charFreq > substr / 2) {
-            println("${left + 1} ${right + 1}")
-            return
+        var end = n - 1
+        while(end > start){
+            if(s[end] == '1') break
+            end--
         }
 
+
+        //try every possible substring
+        fun countOnes(st : Int, end : Int) : Int{
+            var count = 0
+            for(i in st..end){
+                if(s[i] == '1')count++
+            }
+            return count
+        }
+        var min = Int.MAX_VALUE
+        var st = -1
+        var en = -1
+        for(i in start until end - k + 1){
+            for(j in i+k-1 until end + 1){
+                if(countOnes(i, j) == k){
+                    if(j - i + 1 < min){
+                        min = j - i + 1
+                        st = i
+                        en = j
+                    }
+
+                }
+
+            }
+        }
+
+
+        return if(st != -1 && en != -1) s.substring(st, en) else ""
+
     }
-    println("-1 -1")
 
 }
