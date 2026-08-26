@@ -4,48 +4,36 @@ import kotlin.math.abs
 fun main() {
     fun shortestBeautifulSubstring(s: String, k: Int): String {
         val n = s.length
-        
-        //crop accutal substring
-        var start = 0
-        while(start < n){
-            if(s[start] == '1') break
-            start++
-        }
-        var end = n - 1
-        while(end > start){
-            if(s[end] == '1') break
-            end--
+
+        //build prefix sum arr
+        val pfx = IntArray(n)
+        pfx[0] = if(s[0] == '1') 1 else 0
+        for(i in 1 until n){
+            val curr = if(s[i] == '1') 1 else 0
+            pfx[i] = curr + pfx[i-1]
         }
 
 
-        //try every possible substring
-        fun countOnes(st : Int, end : Int) : Int{
-            var count = 0
-            for(i in st..end){
-                if(s[i] == '1')count++
-            }
-            return count
-        }
+        //try every substring
         var min = Int.MAX_VALUE
-        var st = -1
-        var en = -1
-        for(i in start until end - k + 1){
-            for(j in i+k-1 until end + 1){
-                if(countOnes(i, j) == k){
-                    if(j - i + 1 < min){
-                        min = j - i + 1
-                        st = i
-                        en = j
+        var start = -1
+        var end = -1
+        for(i in 0 until n-1){
+            for(j in i+1 until n){
+                val left = if(i == 0) 0 else pfx[i-1]
+                val diff = pfx[j] - left
+                if(diff == k){
+                    if(diff < min){
+                        min = diff
+                        start = i
+                        end = j
                     }
-
+                } else if(diff > k){
+                    break
                 }
-
             }
         }
 
-
-        return if(st != -1 && en != -1) s.substring(st, en) else ""
-
+        return if(start != -1 && end != -1) s.substring(start,end) else ""
     }
-
 }
