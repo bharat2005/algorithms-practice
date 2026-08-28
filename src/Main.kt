@@ -1,6 +1,4 @@
 
-import kotlin.math.abs
-
 fun main() {
     fun shortestBeautifulSubstring(s: String, k: Int): String {
         val n = s.length
@@ -37,3 +35,29 @@ fun main() {
         return if(start != -1 && end != -1) s.substring(start,end) else ""
     }
 }
+
+
+
+  class TreeNode(var `val`: Int) {
+     var left: TreeNode? = null
+      var right: TreeNode? = null
+ }
+
+
+fun main(){
+    val t = readLine()!!.toInt()
+
+    repeat(t) {
+        val (a, b, c) = readLine()!!.split(" ").map { it.toInt() }
+
+        if (a < b && b > c) {
+            println("PEAK")
+        } else if (a < b && b < c) {
+            println("STAIR")
+        } else {
+            println("NONE")
+        }
+    }
+}
+
+
