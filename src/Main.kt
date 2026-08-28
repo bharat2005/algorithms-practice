@@ -38,3 +38,7 @@ fun main() {
 
 
 
+fun main() {
+    val (a, d)  = readLine()!!.split(" ").map { it.toInt() }
+    if(a <= d) println("Yes") else println("No")
+} 
