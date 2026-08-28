@@ -44,20 +44,22 @@ fun main() {
  }
 
 
-fun main(){
-    val t = readLine()!!.toInt()
 
-    repeat(t) {
-        val (a, b, c) = readLine()!!.split(" ").map { it.toInt() }
 
-        if (a < b && b > c) {
-            println("PEAK")
-        } else if (a < b && b < c) {
-            println("STAIR")
-        } else {
-            println("NONE")
-        }
+fun isSameTree(p: TreeNode?, q: TreeNode?): Boolean {
+    val sbp = StringBuilder()
+    val sbq = StringBuilder()
+
+    fun dfs(node : TreeNode?, sb: StringBuilder) {
+        if(node == null) return
+
+        dfs(node.left, sb)
+        sb.append(node.`val`)
+        dfs(node.right, sb)
     }
+    dfs(p, sbp)
+    dfs(q, sbq)
+
+    return sbp.toString() == sbq.toString()
+
 }
-
-
