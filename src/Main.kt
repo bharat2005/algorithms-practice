@@ -38,28 +38,3 @@ fun main() {
 
 
 
-  class TreeNode(var `val`: Int) {
-     var left: TreeNode? = null
-      var right: TreeNode? = null
- }
-
-
-
-
-fun isSameTree(p: TreeNode?, q: TreeNode?): Boolean {
-    val sbp = StringBuilder()
-    val sbq = StringBuilder()
-
-    fun dfs(node : TreeNode?, sb: StringBuilder) {
-        if(node == null) return
-
-        dfs(node.left, sb)
-        sb.append(node.`val`)
-        dfs(node.right, sb)
-    }
-    dfs(p, sbp)
-    dfs(q, sbq)
-
-    return sbp.toString() == sbq.toString()
-
-}
