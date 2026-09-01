@@ -16,16 +16,18 @@ fun main() {
         var min = Int.MAX_VALUE
         var start = -1
         var end = -1
-        for(i in 0 until n){
-            for(j in i until n){
-                val left = if(i == 0) 0 else pfx[i-1]
-                val diff = pfx[j] - left
+        for(i in n-1 downTo 0){
+            for(j in i downTo 0){
+                val right = pfx[i]
+                val left = if(j != 0) pfx[j - 1] else 0
+                val diff = right - left
+
                 if(diff == k){
-                    val subStrLen = j - i + 1
+                    val subStrLen = i - j + 1
                     if(subStrLen < min){
                         min = subStrLen
-                        start = i
-                        end = j
+                        start = j
+                        end = i
                     }
                 } else if(diff > k){
                     break
