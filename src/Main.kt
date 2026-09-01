@@ -14,8 +14,7 @@ fun main() {
 
         //try every substring
         var min = Int.MAX_VALUE
-        var start = -1
-        var end = -1
+        var minSubstr = s
         for(i in n-1 downTo 0){
             for(j in i downTo 0){
                 val right = pfx[i]
@@ -23,19 +22,20 @@ fun main() {
                 val diff = right - left
 
                 if(diff == k){
-                    val subStrLen = i - j + 1
-                    if(subStrLen < min){
-                        min = subStrLen
-                        start = j
-                        end = i
+                    var subStr = s.substring(j, i)
+                    val subStrLength = subStr.length
+                    if(subStr < minSubstr && subStrLength < min){
+                        minSubstr = subStr
+                        min = subStrLength
                     }
+
                 } else if(diff > k){
                     break
                 }
             }
         }
 
-        return if(start != -1 && end != -1) s.substring(start,end + 1) else ""
+        return if(s != minSubstr) minSubstr else ""
     }
 }
 
