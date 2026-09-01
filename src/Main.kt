@@ -2,7 +2,7 @@
 fun main() {
     val (n, m) = readLine()!!.split(" ").map { it.toInt() }
 
-    val pnt = IntArray(n + 1)
+    val pnt = IntArray(n + 1) { it }
     val dg = IntArray(n + 1)
 
     fun find(x : Int): Int{
@@ -10,12 +10,12 @@ fun main() {
         while(pnt[rt] != rt){
             rt = pnt[rt]
         }
-        var c = x
-        while(pnt[c] != rt){
-            var temp = pnt[c]
-            pnt[c] = rt
-            c = temp
-        }
+//        var c = x
+//        while(pnt[c] != rt){
+//            var temp = pnt[c]
+//            pnt[c] = rt
+//            c = temp
+//        }
         return rt
     }
     fun union(u : Int,v : Int){
