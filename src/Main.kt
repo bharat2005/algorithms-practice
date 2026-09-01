@@ -1,73 +1,57 @@
 
-
 fun main() {
-    val (n , m) = readLine()!!.split(" ").map{ it.toInt() }
+    val (n, m) = readLine()!!.split(" ").map { it.toInt() }
 
-    //build adj list
-    val g = Array(n+1){ mutableListOf<Int>() }
+    val pnt = IntArray(n + 1)
+    val dg = IntArray(n + 1)
+
+    fun find(x : Int): Int{
+        var rt = x
+        while(pnt[rt] != rt){
+            rt = pnt[rt]
+        }
+        var c = x
+        while(pnt[c] != rt){
+            var temp = pnt[c]
+            pnt[c] = rt
+            c = temp
+        }
+        return rt
+    }
+    fun union(u : Int,v : Int){
+        val ru = find(u)
+        val rv = find(v)
+
+        if(ru < rv){
+            pnt[rv] = ru
+        } else if(ru > rv){
+            pnt[ru] = rv
+        }
+    }
+
+
     repeat(m){
-        val (n1, n2) = readLine()!!.split(" ").map{ it.toInt() }
-        g[n1].add(n2)
-        g[n2].add(n1)
+        val (u, v) = readLine()!!.split(" ").map { it.toInt() }
+
+        dg[u]++
+        dg[v]++
+
+        union(u,v)
     }
 
+    val isCycle = BooleanArray(n + 1){true}
+    for(i in 1..n){
+        if(dg[i] != 2) isCycle[find(i)] = false
+    }
 
-    //bfs for all nodes
     var ans = 0
-    val visited = BooleanArray(n+1){false}
-    for(x in 1..n){
-        if(visited[x])continue
-
-        val que = ArrayDeque<Int>()
-        que.addLast(x)
-        visited[x] = true
-        var isCycle = true
-
-        while(que.isNotEmpty()){
-            val xx = que.removeFirst()
-            val ls = g[xx]
-
-            if(ls.size != 2){
-                isCycle = false
-            }
-
-            for(i in ls){
-                if(visited[i]) continue
-                que.addLast(i)
-                visited[i] = true
-            }
-        }
-
-        if(isCycle){
-            ans++
-        }
-
+    for(i in 1..n){
+       if(isCycle[find(i)] && pnt[i] == i) ans++
     }
-
 
     println(ans)
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
