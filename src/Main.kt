@@ -13,23 +13,25 @@ fun main() {
 
 
         //try all k len ones substr
-        var minSubStr = s
+        //var minSubStr = s
+        var bestLen = Int.MAX_VALUE
+        var bestStart = -1
         for(i in 0..(ones.size - k)){
             val start = ones[i]
             val end = ones[i + k - 1]
+            val currLen = end - start + 1
 
-            val subStr = s.substring(start, end+1)
-            val currLen = subStr.length
-            val minLen = minSubStr.length
-            if(currLen < minLen){
-                minSubStr = subStr
-            } else if(currLen == minLen && subStr < minSubStr){
-                minSubStr = subStr
+            if(currLen < bestLen){
+                bestLen = currLen
+                bestStart = start
+            } else if(currLen == bestLen && s.substring(start, end + 1) < s.substring(bestStart,  bestStart + bestLen)){
+                bestStart = start
             }
         }
 
 
-        return minSubStr
+        if(bestStart == -1) return ""
+        return s.substring(bestStart, bestStart + bestLen)
 
     }
 
