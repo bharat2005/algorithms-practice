@@ -1,44 +1,58 @@
+import kotlin.math.min
 
 fun main() {
     fun shortestBeautifulSubstring(s: String, k: Int): String {
         val n = s.length
 
         //build prefix sum arr
-        val pfx = IntArray(n)
-        pfx[0] = if(s[0] == '1') 1 else 0
-        for(i in 1 until n){
-            val curr = if(s[i] == '1') 1 else 0
-            pfx[i] = curr + pfx[i-1]
+        val sfx = IntArray(n)
+        sfx[0] = if (s[0] == '1') 1 else 0
+        for (i in 1 until n) {
+            val curr = if (s[i] == '1') 1 else 0
+            sfx[i] = curr + sfx[i - 1]
         }
 
 
         //try every substring
-        var min = Int.MAX_VALUE
+        var minLen = Int.MAX_VALUE
         var minSubstr = s
-        for(i in n-1 downTo 0){
-            for(j in i downTo 0){
-                val right = pfx[i]
-                val left = if(j != 0) pfx[j - 1] else 0
+        for (i in 0 until n) {
+            for (j in 0 until n) {
+                val right = sfx[j]
+                val left = if (i != 0) sfx[i - 1] else 0
                 val diff = right - left
 
-                if(diff == k){
-                    var subStr = s.substring(j, i)
-                    val subStrLength = subStr.length
-                    if(subStr < minSubstr && subStrLength < min){
+                if (diff == k) {
+                    val subStr = s.substring(i, j + 1)
+                    if (subStr.length < minLen) {
+                        minLen = subStr.length
                         minSubstr = subStr
-                        min = subStrLength
+                    } else if (subStr.length == minLen && subStr < minSubstr) {
+                        minLen = subStr.length
+                        minSubstr = subStr
                     }
-
-                } else if(diff > k){
+                } else if (diff > k) {
                     break
                 }
             }
         }
 
-        return if(s != minSubstr) minSubstr else ""
+
+        //got better substring than s
+        if (s != minSubstr) {
+            return minSubstr
+        }
+
+        //s might be the only possible substr
+        val s1count = s.count { it == '1' }
+        if(s1count == k){
+            s
+        }
+
+        // no possible substr
+        return ""
     }
 }
-
 
 
 
