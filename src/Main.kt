@@ -1,56 +1,45 @@
-import kotlin.math.min
 
 fun main() {
-    fun shortestBeautifulSubstring(s: String, k: Int): String {
-        val n = s.length
+    fun firstStableIndex(nums: IntArray, k: Int): Int {
+        val n = nums.size
 
-        //build ones indices array
-        val ones = mutableListOf<Int>()
-        for(i in s.indices){
-            if(s[i] == '1') ones.add(i)
+        //build min arr
+        val minArr = IntArray(n)
+        minArr[0] = nums[0]
+        for(i in 1 until n){
+            val curr = nums[i]
+            if(curr < minArr[i-1]){
+                //new min
+                minArr[i] = curr
+            } else {
+                //old min
+                minArr[i] = minArr[i-1]
+            }
         }
-        if(ones.size < k) return ""
 
-
-        //try all k len ones substr
-        //var minSubStr = s
-        var bestLen = Int.MAX_VALUE
-        var bestStart = -1
-        for(i in 0..(ones.size - k)){
-            val start = ones[i]
-            val end = ones[i + k - 1]
-            val currLen = end - start + 1
-
-            if(currLen < bestLen){
-                bestLen = currLen
-                bestStart = start
-            } else if(currLen == bestLen && s.substring(start, end + 1) < s.substring(bestStart,  bestStart + bestLen)){
-                bestStart = start
+        //build max arr
+        val maxArr = IntArray(n)
+        maxArr[n-1] = nums[n-1]
+        for(i in n-2 downTo 0){
+            val curr = nums[i]
+            if(curr > maxArr[i+1]){
+                //new max
+                maxArr[i] = curr
+            } else {
+                //old max
+                maxArr[i] = maxArr[i+1]
             }
         }
 
 
-        if(bestStart == -1) return ""
-        return s.substring(bestStart, bestStart + bestLen)
+        for(i in 0 until n){
+            val score = maxArr[i] - minArr[i]
+            if(score <= k){
+                return i
+            }
+        }
+
+        return 0
 
     }
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
