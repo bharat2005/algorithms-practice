@@ -33,14 +33,14 @@ fun main() {
     }
 
     //build ans
-    val sb = StringBuilder("")
+    val ls = mutableListOf<Int>()
     var curr = bestEnd
     while(lineageMap.contains(curr)){
-        sb.append("${curr} ")
+        ls.add(curr)
         curr = lineageMap[curr]!!
     }
-    sb.append(curr)
+    ls.add(curr)
 
-    println(sb.toString().reversed() )
+    println(ls.reversed().joinToString(" "))
 
 }
