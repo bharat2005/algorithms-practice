@@ -41,6 +41,7 @@ fun main() {
     }
     ls.add(curr)
 
+    println(maxLen)
     println(ls.reversed().joinToString(" "))
 
 }
