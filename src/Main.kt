@@ -32,8 +32,6 @@ fun main() {
     }
     sb.append(curr)
 
-    println(sb.toString())
-
-
+    println(sb.toString().reversed())
 
 }
