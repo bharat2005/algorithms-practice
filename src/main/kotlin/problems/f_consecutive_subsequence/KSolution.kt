@@ -1,3 +1,5 @@
+package problems.f_consecutive_subsequence
+
 import java.util.Scanner
 
 fun main() {
@@ -6,17 +8,17 @@ fun main() {
     val lenMap = mutableMapOf<Int, Int>() //value to count
     val indexMap = mutableMapOf<Int, Int>() //value to index
     val lineageMap = mutableMapOf<Int, Int>() //index to index
-    
+
     var maxLen = Int.MIN_VALUE
     var bestEnd = -1
     for(i in arr.indices){
         val x = arr[i]
         indexMap[x] = i
-    
+
         if(lenMap.contains(x - 1)){
             //maintain len
             lenMap[x] = lenMap[x-1]!! + 1
-    
+
             //maintain idx lineage
             val prevIdx = indexMap[x-1]!!
             lineageMap[i] = prevIdx
@@ -24,15 +26,15 @@ fun main() {
             //default start
             lenMap[x] = 1
         }
-    
+
         //track maxLen last idx
         if(maxLen < lenMap[x]!!){
             maxLen = lenMap[x]!!
             bestEnd = i
         }
-    
+
     }
-    
+
     //build ans
     val ls = mutableListOf<Int>()
     var curr = bestEnd
@@ -41,8 +43,8 @@ fun main() {
         curr = lineageMap[curr]!!
     }
     ls.add(curr)
-    
+
     println(maxLen)
     println(ls.reversed().map { it + 1 }.joinToString(" "))
-    
+
 }
