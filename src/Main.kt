@@ -13,14 +13,23 @@ fun main() {
         indexMap[x] = i
 
         if(lenMap.contains(x - 1)){
+            //maintain len
             lenMap[x] = lenMap[x-1]!! + 1
-            if(maxLen < lenMap[x-1]!! + 1) bestEnd = i
 
+            //maintain idx lineage
             val prevIdx = indexMap[x-1]!!
             lineageMap[i] = prevIdx
         } else {
+            //default start
             lenMap[x] = 1
         }
+
+        //track maxLen last idx
+        if(maxLen < lenMap[x]!!){
+            maxLen = lenMap[x]!!
+            bestEnd = i
+        }
+
     }
 
     //build ans
@@ -32,6 +41,6 @@ fun main() {
     }
     sb.append(curr)
 
-    println(sb.toString().reversed())
+    println(sb.toString().reversed() )
 
 }
