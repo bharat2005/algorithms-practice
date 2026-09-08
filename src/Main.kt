@@ -15,7 +15,7 @@ fun main() {
             if(x == 0) zeros++
         }
 
-        if(zeros >= need) println(need) else println(-1)
+        if(zeros >= 2) println(need) else println(-1)
 
     }
 
