@@ -1,18 +1,8 @@
 
 
 fun main(){
-    val (n,w) = readLine()!!.split(" ").map { it.toInt() }
-    val arr = readLine()!!.split(" ").map { it.toInt() }
-
-    var sum = 0
-    var minS = 0
-    var maxS = 0
-    for(x in arr) {
-        sum+=x
-        minS = minOf(minS,sum)
-        maxS = maxOf(maxS,sum)
+    fun countCommas(n: Int): Int {
+        val len = n.toString().length
+        return if(len >= 4) len / 3 else 0
     }
-    val ans = w - maxS + minS + 1
-
-    if(ans < 0) println(0) else println(ans)
 }
