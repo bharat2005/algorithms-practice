@@ -1,12 +1,17 @@
 
-fun main() {
-    val (n , w) = readLine()!!.split(" ").map{ it.toInt() }
-    val arr = readLine()!!.split(" ").map{ it.toInt() }
+fun main(){
+    val (n,w) = readLine()!!.split(" ").map { it.toInt() }
+    val arr = readLine()!!.split(" ").map { it.toInt() }
 
-    var maxPossible = -1
-    for(a in arr){
-        maxPossible = w - a
+    var sum = 0
+    var minS = 0
+    var maxS = w
+    for(x in arr) {
+        sum+=x
+        minS = minOf(minS,sum)
+        maxS = maxOf(maxS,sum)
     }
+    val ans = w - maxS + minS + 1
 
-    println(maxPossible)
+    if(ans < 0) println(0) else println(ans)
 }
