@@ -4,8 +4,8 @@ fun main(){
     val arr = readLine()!!.split(" ").map { it.toInt() }
 
     var sum = 0
-    var minS = 0
-    var maxS = w
+    var minS = Int.MAX_VALUE
+    var maxS = Int.MIN_VALUE
     for(x in arr) {
         sum+=x
         minS = minOf(minS,sum)
