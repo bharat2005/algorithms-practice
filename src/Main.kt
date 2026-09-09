@@ -10,8 +10,8 @@ fun main() {
         return num * fac(num - 1)
     }
 
-
-    for(i in 0 until w){
+    var i = 0
+    while(i <= w){
         val n1 = h - a + b + i - 1
         val r1 = h - a - 1
         val c1 = fac(n1) / ( fac(r1) * fac(n1 - r1)  )
@@ -22,8 +22,7 @@ fun main() {
 
 
         res += c1 * c2
-
-
+        i++
     }
 
     println(res % MOD)
