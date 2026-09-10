@@ -1,6 +1,6 @@
 
 //atc - bloacked matrx
-fun main1() {
+fun main() {
     val (h,w,a,b) = readLine()!!.split(" ").map { it.toInt() }
     var res = 0
     val MOD = 1_000_000_007
@@ -29,34 +29,30 @@ fun main1() {
 }
 
 
-//lc - node avg ct
-fun main() {
-    fun averageOfSubtree(root: TreeNode?): Int {
-        var ct = 0
 
-        fun dfs(node: TreeNode?): List<Int> {
-            if (node == null) return listOf(0, 0) // sum and denom
-
-            val curr = node.`val`
-            val (sum1, den1) = dfs(node.left)
-            val (sum2, den2) = dfs(node.right)
-
-            val currSum = (sum1 + sum2 + curr)
-            val currDen = (den1 + den2 + 1)
-            val currAvg = currSum / currDen
-
-            if (currAvg == curr) ct++
-            return listOf(currSum, currDen)
-        }
-
-        val (a, b) = dfs(root)
-
-        return ct
-
+fun mainoo() {
+    val n = readLine()!!.toInt()
+    if(n % 2 != 0) {
+        println("NO")
+        return
     }
+    val arr = readLine()!!.split(" ").map { it.toInt() }
+
+    var pos = 0
+    var neg = 0
+    for(i in 0 until n-2){
+        val curr = arr[i]
+        var next = arr[i+1]
+
+        if(-curr == -next) {
+            println("NO")
+            return
+        }
+    }
+
+    println("YES")
+
 }
-
-
 
 
 
