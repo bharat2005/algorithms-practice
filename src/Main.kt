@@ -1,6 +1,6 @@
 
 //atc - bloacked matrx
-fun main() {
+fun maineater() {
     val (h,w,a,b) = readLine()!!.split(" ").map { it.toInt() }
     var res = 0
     val MOD = 1_000_000_007
@@ -32,27 +32,26 @@ fun main() {
 
 fun main() {
     val n = readLine()!!.toInt()
-    if(n % 2 != 0) {
-        println("NO")
-        return
-    }
     val arr = readLine()!!.split(" ").map { it.toInt() }
+    val set = mutableSetOf<Int>()
 
-    var pos = 0
-    var neg = 0
-    for(i in 0 until n-2){
-        val curr = arr[i]
-        var next = arr[i+1]
-
-        if(-curr == -next) {
-            println("NO")
-            return
+    for(i in 0 until n){
+        for(j in i+1 until n){
+            val n1 = arr[i]
+            val n2 = arr[j]
+            val diff = Math.abs(n1 - n2).toDouble()
+            val power = Math.log(diff) / Math.log(2.0)
+            if(power == power.toInt().toDouble()) {
+                set.apply {
+                    add(n1)
+                    add(n2)
+                }
+            }
         }
     }
 
-    println("YES")
-
+    println(set.size)
+    println(set.joinToString(" "))
 }
-
 
 
