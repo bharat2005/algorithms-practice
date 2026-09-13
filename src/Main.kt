@@ -1,7 +1,5 @@
-import kotlin.math.pow
 
-//atc - bloacked matrx
-fun maineater() {
+fun main() {
     val (h,w,a,b) = readLine()!!.split(" ").map { it.toInt() }
     var res = 0
     val MOD = 1_000_000_007
@@ -28,32 +26,3 @@ fun maineater() {
     println(res % MOD)
 
 }
-
-
-
-//cf maxSubset of points-dif pow2
-fun maineater1() {
-    val n = readLine()!!.toInt()
-    val arr = readLine()!!.split(" ").map { it.toInt() }
-    val set = mutableSetOf<Int>()
-
-    for(i in 0 until n){
-        for(j in i+1 until n){
-            val n1 = arr[i]
-            val n2 = arr[j]
-            val diff = Math.abs(n1 - n2).toDouble()
-            val power = Math.log(diff) / Math.log(2.0)
-            if(power == power.toInt().toDouble()) {
-                set.apply {
-                    add(n1)
-                    add(n2)
-                }
-            }
-        }
-    }
-
-    println(set.size)
-    println(set.joinToString(" "))
-}
-
-
