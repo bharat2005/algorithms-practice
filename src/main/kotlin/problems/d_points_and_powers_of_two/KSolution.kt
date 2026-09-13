@@ -5,7 +5,7 @@ import kotlin.math.pow
 
 fun main(){
     val n = readLine()!!.toInt()
-    val set = readLine()!!.split(" ").map { it.toInt() }
+    val set = readLine()!!.split(" ").map { it.toLong()  }.toSet()
 
 
     //3s
@@ -41,7 +41,7 @@ fun main(){
 
 
     println(1)
-    println(set[0])
+    println(set.iterator().next())
 
 
 }
