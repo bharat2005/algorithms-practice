@@ -28,8 +28,6 @@ fun maineater() {
     println(res % MOD)
 
 }
-
-
 //cf maxSubset of points-dif pow2
 fun maineater1() {
     val n = readLine()!!.toInt()
@@ -55,7 +53,6 @@ fun maineater1() {
     println(set.joinToString(" "))
 }
 
-import kotlin.math.pow
 
 fun main(){
     val n = readLine()!!.toInt()
@@ -64,7 +61,7 @@ fun main(){
 
     //3s
     for(x in set){
-        var i = 2
+        var i = 1
 
         while(i <= 2.0.pow(30.0)){
             if(x in set && x+i in set && x+2*i in set){
@@ -79,7 +76,7 @@ fun main(){
 
     //2s
     for(x in set){
-        var i = 2
+        var i = 1
 
         while(i <= 2.0.pow(30)){
             if(x in set && x+i in set){
