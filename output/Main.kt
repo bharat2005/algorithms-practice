@@ -3,35 +3,35 @@ import kotlin.math.pow
 
 fun main() {
     val n = readLine()!!.toInt()
-    val set = readLine()!!.split(" ").map { it.toInt() }
+    val set = readLine()!!.split(" ").map { it.toLong()  }.toSet()
     
     
     //3s
     for(x in set){
-        var i = 1
+        var twos = 1L
     
-        while(i <= 2.0.pow(30.0)){
-            if(x in set && x+i in set && x+2*i in set){
+        while(twos <= (1L shl 30)){
+            if(x in set && (x+twos) in set && x+2*twos in set){
                 println(3)
-                println("${x} ${x+i} ${x+2*i}")
+                println("${x} ${x+twos} ${x+2*twos}")
                 return
             }
-            i *= 2
+            twos *= 2
         }
     
     }
     
     //2s
     for(x in set){
-        var i = 1
+        var twos = 1L
     
-        while(i <= 2.0.pow(30)){
-            if(x in set && x+i in set){
+        while(twos <= (1L shl 30)){
+            if(x in set && x+twos in set){
                 println(2)
-                println("${x} ${x+i}}")
+                println("${x} ${x+twos}}")
                 return
             }
-            i *= 2
+            twos *= 2
         }
     
     }
@@ -39,7 +39,7 @@ fun main() {
     
     
     println(1)
-    println(set[0])
+    println(set.iterator().next())
     
     
 }
