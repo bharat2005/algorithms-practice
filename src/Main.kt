@@ -55,6 +55,7 @@ fun maineater1() {
     println(set.joinToString(" "))
 }
 
+import kotlin.math.pow
 
 fun main(){
     val n = readLine()!!.toInt()
@@ -65,7 +66,7 @@ fun main(){
     for(x in set){
         var i = 2
 
-        while(i <= 2.0.pow(30)){
+        while(i <= 2.0.pow(30.0)){
             if(x in set && x+i in set && x+2*i in set){
                 println(3)
                 println("${x} ${x+i} ${x+2*i}")
