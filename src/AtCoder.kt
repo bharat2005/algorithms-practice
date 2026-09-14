@@ -1,16 +1,28 @@
 
-fun main(){
-    val st = readLine()!!
-    val n = st.length
+fun main() {
+    val (h,w,a,b) = readLine()!!.split(" ").map { it.toInt() }
+    var res = 0
+    val MOD = 1_000_000_007
 
-    for(i in st.indices){
-        if(i > 0 && i < n-1 && st[i] == ' ' && st[i+1] != st[i-1]) {
-            println("NO")
-            return
-        }
+    fun fac(num : Int) : Int {
+        if(num <= 1) return 1
+        return num * fac(num - 1)
     }
 
-    println("YES")
 
-    
+    for(e in (b+1)..w){
+        val n1 = h - a + e - 2
+        val r1 = h - a - 1
+        val c1 = fac(n1) / ( fac(r1) * fac(n1 - r1)  )
+
+        val n2 = a + w - 1 - e
+        val r2 = a - 1
+        val c2 = fac(n2) / ( fac(r2) * fac(n2 - r2) )
+
+
+        res += c1 * c2
+    }
+
+    println(res % MOD)
+
 }
