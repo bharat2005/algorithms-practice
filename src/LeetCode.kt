@@ -25,3 +25,23 @@ fun isRectangleOverlap(rec1: IntArray, rec2: IntArray): Boolean {
     return false
 
 }
+
+fun postorderTraversal(root: TreeNode?): List<Int> {
+    val ls = mutableListOf<Int>()
+
+    fun dfs(node : TreeNode?){
+        if(node == null) return
+
+        dfs(node?.left)
+        dfs(node?.right)
+
+        ls.add(node?.`val`!!)
+
+    }
+
+
+    dfs(root)
+
+    return ls
+
+}
