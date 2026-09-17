@@ -26,3 +26,11 @@ fun main() {
     println(res % MOD)
 
 }
+
+
+fun main() {
+    val n = readLine()!!.toInt()
+    val arr = readLine()!!.split(" ").map { it.toInt() }
+    val i = readLine()!!.toInt()
+    println(arr[i-1])
+}
