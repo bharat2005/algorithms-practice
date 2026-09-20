@@ -28,3 +28,7 @@ fun main() {
 }
 
 
+fun main() {
+    val len = readLine()!!.length
+    if(len % 5 == 0) println("Yes") else println("No")
+}
