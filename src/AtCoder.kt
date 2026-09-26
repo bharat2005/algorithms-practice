@@ -28,3 +28,18 @@ fun main() {
 }
 
 
+fun main2() {
+    val (a, b, c) = readLine()!!.split(" ").map { it.toInt() }
+    if(a == b && b == c) {
+        println("Yes")
+        return
+    }
+    if(a + b == c || b + c == a || a + c == b ) {
+        println("Yes")
+        return
+    }
+
+    println("No")
+
+}
+
