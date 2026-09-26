@@ -24,22 +24,4 @@ fun isRectangleOverlap(rec1: IntArray, rec2: IntArray): Boolean {
 
 }
 
-fun wordPattern(pattern: String, s: String): Boolean {
-    val arr = Array<String>(26){ "" }
-    for(ch in pattern){
-        arr[ch - 'a'] =
-    }
-    var start = 0
-    var end = 1
-    var ct = 0
-    while(end < s.length){
-        if(s[end] == ' '){
-            start..end
-            start = end + 1
-        }
 
-    }
-
-    return false
-
-}
