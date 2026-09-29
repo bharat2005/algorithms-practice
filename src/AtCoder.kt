@@ -14,7 +14,6 @@ fun main() {
         val n1 = h - a + e - 2
         val r1 = h - a - 1
         val c1 = fac(n1) / ( fac(r1) * fac(n1 - r1)  )
-
         val n2 = a + w - 1 - e
         val r2 = a - 1
         val c2 = fac(n2) / ( fac(r2) * fac(n2 - r2) )

@@ -25,13 +25,5 @@ fun isRectangleOverlap(rec1: IntArray, rec2: IntArray): Boolean {
 }
 
 
-fun canConstruct(ransomNote: String, magazine: String): Boolean {
-
-    for(ch in magazine){
-        if(ch !in ransomNote) return false
-    }
-    return true
-
-}
 
 
