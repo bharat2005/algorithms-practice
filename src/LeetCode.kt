@@ -24,6 +24,10 @@ fun isRectangleOverlap(rec1: IntArray, rec2: IntArray): Boolean {
 
 }
 
+fun addStrings(num1: String, num2: String): String {
+    return (num1.toInt() + num2.toInt()).toString()
+}
+
 
 
 
