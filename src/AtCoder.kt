@@ -27,3 +27,11 @@ fun main() {
 }
 
 
+
+fun main2(){
+    val str = readLine()!!
+    print("Of")
+    for(i in str.indices) if(i == 0) print(str[i].uppercase()) else print(str[i].lowercase())
+    println()
+}
+
