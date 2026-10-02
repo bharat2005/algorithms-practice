@@ -28,13 +28,9 @@ fun main() {
 
 
 fun main2(){
-    val n = readLine()!!.toInt()
-    val str = readLine()!!
-    var removed = false
-
-    for(ch in str){
-        if(ch != 'o') removed = true
-        if(removed) print("$ch ")
+    val t = readLine()!!.toInt()
+    repeat(t) {
+        val (x, n) = readLine()!!.split(" ").map { it.toInt() }
+        if (n % 2 == 0) println(0) else println(x)
     }
-    println()
 }
