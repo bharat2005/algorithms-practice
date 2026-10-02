@@ -27,9 +27,14 @@ fun main() {
 }
 
 
-
 fun main2(){
-    val str = readLine()!!.lowercase()
-    print("Of$str")
-}
+    val n = readLine()!!.toInt()
+    val str = readLine()!!
+    var removed = false
 
+    for(ch in str){
+        if(ch != 'o') removed = true
+        if(removed) print("$ch ")
+    }
+    println()
+}
