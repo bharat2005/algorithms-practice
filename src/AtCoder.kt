@@ -26,11 +26,3 @@ fun main() {
 
 }
 
-
-fun main2(){
-    val t = readLine()!!.toInt()
-    repeat(t) {
-        val (x, n) = readLine()!!.split(" ").map { it.toInt() }
-        if (n % 2 == 0) println(0) else println(x)
-    }
-}

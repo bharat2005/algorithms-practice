@@ -26,5 +26,31 @@ fun isRectangleOverlap(rec1: IntArray, rec2: IntArray): Boolean {
 
 
 
+fun isAnagram(s: String, t: String): Boolean {
+    if(s.length !=  t.length) return false
+
+
+    //build freq1 and freq2
+    val freq1 = mutableMapOf<Char, Int>()
+    for(ch in s){
+        freq1[ch] = freq1.getOrDefault(ch, 0) + 1
+    }
+    val freq2 = mutableMapOf<Char, Int>()
+    for(ch in t){
+        freq2[ch] = freq2.getOrDefault(ch, 0) + 1
+    }
+
+
+    //match
+    for(key in freq1.keys){
+        if(freq1[key] != freq2[key]) return false
+    }
+
+    return true
+
+}
+
+
+
 
 
