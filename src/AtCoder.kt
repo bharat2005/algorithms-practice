@@ -26,3 +26,11 @@ fun main() {
 
 }
 
+fun main() {
+    val (n, m) = readLine()!!.split(" ").map { it.toInt() }
+    if(m * 2 - 1 >= n) {
+        println("YES")
+    }else {
+        println("NO")
+    }
+}
