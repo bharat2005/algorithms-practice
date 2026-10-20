@@ -25,12 +25,3 @@ fun main() {
     println(res % MOD)
 
 }
-
-fun main() {
-    val (n, m) = readLine()!!.split(" ").map { it.toInt() }
-    if(m * 2 - 1 >= n) {
-        println("YES")
-    }else {
-        println("NO")
-    }
-}
