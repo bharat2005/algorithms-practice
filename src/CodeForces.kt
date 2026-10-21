@@ -22,10 +22,12 @@ fun main() {
     if(sb.first() == '0'){
         repeat(a) {
             prefix.append('0')
+            a--
         }
     } else {
         repeat(b) {
             prefix.append('1')
+            b--
         }
     }
     prefix.append(sb.toString())
@@ -35,10 +37,12 @@ fun main() {
     if(sb.last() == '0'){
         repeat(a) {
             suffix.append('0')
+            a--
         }
     } else {
         repeat(b) {
             suffix.append('1')
+            b--
         }
     }
     prefix.append(suffix.toString())
