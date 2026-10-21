@@ -9,7 +9,7 @@ fun main() {
 
     val result = StringBuilder()
     var curr = '0'
-    for(i in 0 until x){
+    for(i in 0 until x + 1){
         val r = when(i){
             0 -> 1 + diffZeros
             1 -> 1 + diffOnes
