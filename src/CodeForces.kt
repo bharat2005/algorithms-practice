@@ -4,7 +4,7 @@ fun main() {
     val sb  = StringBuilder()
 
     //build trans
-    var flag = true
+    var flag = if(a > b) true else false //true = 0, false = 1
     repeat(x + 1){
         if(flag){
             sb.append('0')
@@ -28,7 +28,7 @@ fun main() {
     repeat(b){
         suffix.append('1')
     }
-    suffix.append(suffix.toString())
+    result.append(suffix.toString())
 
 
     println(result.toString())
