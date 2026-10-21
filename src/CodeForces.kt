@@ -1,40 +1,26 @@
 fun main() {
-    //a = 0, b = 1
     var (a, b, x) = readLine()!!.split(" ").map { it.toInt() }
-    val sb  = StringBuilder()
 
-    //build trans
-    var flag = if(a > b) true else false //true = 0, false = 1
-    repeat(x + 1){
-        if(flag){
-            sb.append('0')
-            a--
-        }else{
-            sb.append('1')
-            b--
-        }
-        flag = !flag
-    }
+    val altOnes = Math.ceil((x + 1) / 2.0).toInt()
+    val altZeros = Math.floor((x + 1) / 2.0).toInt()
 
+    val diffZeros = a - altZeros
+    val diffOnes = b - altOnes
 
-    //attach back rest
     val result = StringBuilder()
-    for(i in 0 until sb.length){
-        result.append(sb[i])
-        if(sb[i] == '0'){
-            while(a > 0){
-                result.append('0')
-                a--
-            }
-        }else {
-            while(b > 0){
-                result.append('1')
-                b--
-            }
+    var curr = '0'
+    for(i in 0 until x){
+        val r = when(i){
+            0 -> 1 + diffZeros
+            1 -> 1 + diffOnes
+            else -> 1
+        }
+        repeat(r){
+            result.append(curr)
         }
 
+        if(curr == '0') curr = '1' else curr = '0'
     }
 
     println(result.toString())
-
 }
