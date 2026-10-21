@@ -18,22 +18,33 @@ fun main() {
 
 
     //attach back rest
-    val result = StringBuilder()
-    repeat(a){
-        result.append('0')
+    val prefix = StringBuilder()
+    if(sb.first() == '0'){
+        repeat(a) {
+            prefix.append('0')
+        }
+    } else {
+        repeat(b) {
+            prefix.append('1')
+        }
     }
-    result.append(sb.toString())
-    ////
+    prefix.append(sb.toString())
+
+
     val suffix = StringBuilder()
-    repeat(b){
-        suffix.append('1')
+    if(sb.last() == '0'){
+        repeat(a) {
+            suffix.append('0')
+        }
+    } else {
+        repeat(b) {
+            suffix.append('1')
+        }
     }
-    result.append(suffix.toString())
+    prefix.append(suffix.toString())
 
 
-    println(result.toString())
-
-
+    println(prefix.toString())
 
 
 }
