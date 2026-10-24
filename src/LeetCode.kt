@@ -1,28 +1,21 @@
 
 
-fun isRectangleOverlap(rec1: IntArray, rec2: IntArray): Boolean {
-    val rec1bx = rec1[0]
-    val rec1by = rec1[1]
-    val rec1tx = rec1[2]
-    val rec1ty = rec1[3]
 
-    val rec2bx = rec2[0]
-    val rec2by = rec2[1]
-    if(rec2bx in (rec1bx+1)..<rec1tx && rec2by in (rec1by+1)..<rec1tx){
-        return true
+fun peakValleyDifference(nums: IntArray): Int {
+    val n = nums.size
+    var peakSum = 0
+    var vallySum = 0
+
+    for(i in 1 until n - 1){
+        val prev = nums[i-1]
+        val curr = nums[i]
+        val next = nums[i+1]
+        
+        if(curr > prev && curr > next) peakSum++
+        if(curr < prev && curr < next) vallySum++
+
     }
 
-
-
-    val rec2tx = rec2[2]
-    val rec2ty = rec2[3]
-    if(rec2tx in (rec1bx+1)..<rec1tx && rec2ty in (rec1by+1)..<rec1tx){
-        return true
-    }
-
-    return false
+    return peakSum - vallySum
 
 }
-
-
-
