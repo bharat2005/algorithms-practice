@@ -34,16 +34,16 @@ fun main() {
             if(w > currW && h > currH && minDiff < currMinDiff){
                 currW = w
                 currH = h
-
+                currMinDiff = minDiff
                 idx = i
             }
         }
 
         //append closest envlope index
-        que.addLast(idx)
+        if (idx != -1) que.addLast(idx)
     }
 
     println(que.size)
-    que.forEach { print("${it} ") }
+    que.forEach { print("${it + 1} ") }
 
 }
