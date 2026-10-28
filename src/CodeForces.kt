@@ -34,12 +34,11 @@ fun main() {
     //constrct back the chain
     val sb = StringBuilder()
     var curr = best
-    sb.append(arr[curr][2])
     while(curr != -1){
-        sb.append(arr[curr][2])
+        sb.append("${arr[curr][2] + 1} ")
         curr = prnt[curr]
     }
 
-    println(arr.size)
+    println(sb.length / 2)
     println(sb.toString())
 }
