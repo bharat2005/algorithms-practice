@@ -14,6 +14,8 @@ fun main() {
         return
     }
 
+    //sort asce as per width for non full iterations
+    arr.sortBy { it[0] }
 
     //build priority dp
     val m = arr.size
@@ -34,13 +36,13 @@ fun main() {
 
 
     //constrct back the chain
-    val sb = StringBuilder()
+    val set = mutableSetOf<Int>()
     var curr = best
     while(curr != -1){
-        sb.append(" ${arr[curr][2] + 1}")
+        set.add(arr[curr][2] + 1)
         curr = prnt[curr]
     }
 
-    println(sb.length / 2)
-    println(sb.toString().reversed().trim())
+    println(set.size)
+    println(set.reversed().joinToString(" "))
 }
