@@ -5,7 +5,7 @@ fun main() {
     for(i in 0 until n){
         val (w, h) = readLine()!!.split(" ").map { it.toInt() }
         if(w > ws && h > hs){
-            arr.add(listOf(w, h, i+1))
+            arr.add(listOf(w, h))
         }
     }
 
@@ -21,8 +21,8 @@ fun main() {
     var currW = ws
     //repeat to arr.size to build arr.sized chain
     repeat(arr.size){
-        var idx = -1
         var currMinDiff = Int.MAX_VALUE
+        var currMinIdx = -1
 
         //loop through to get next closest envelop
         for(i in 0 until arr.size){
@@ -32,18 +32,51 @@ fun main() {
 
             val minDiff = w - currH + h - currW
             if(w > currW && h > currH && minDiff < currMinDiff){
-                currW = w
-                currH = h
                 currMinDiff = minDiff
-                idx = i
+                currMinIdx= i
             }
         }
 
         //append closest envlope index
-        if (idx != -1) que.addLast(idx)
+        if (currMinIdx != -1){
+            currW = arr[currMinIdx][0]
+            currH = arr[currMinIdx][1]
+            que.addLast(currMinIdx)
+        }
     }
 
     println(que.size)
     que.forEach { print("${it + 1} ") }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
