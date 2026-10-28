@@ -37,10 +37,10 @@ fun main() {
     val sb = StringBuilder()
     var curr = best
     while(curr != -1){
-        sb.append("${arr[curr][2] + 1} ")
+        sb.append(" ${arr[curr][2] + 1}")
         curr = prnt[curr]
     }
 
     println(sb.length / 2)
-    println(sb.toString().reversed())
+    println(sb.toString().reversed().trim())
 }
