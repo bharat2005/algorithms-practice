@@ -19,18 +19,16 @@ fun main() {
 
     //build priority dp
     val m = arr.size
-    val dp = IntArray(m){ 0 }
+    val dp = IntArray(m){ 1 }
     val prnt = IntArray(m) { -1 }
     var best = 0
     for(i in 0 until m){
         for(j in 0 until i){
             if(arr[j][0] < arr[i][0] && arr[j][1] < arr[i][1]){
-//                if(dp[j] + 1 > dp[i]){
-//                    dp[i] = dp[j] + 1
-//                    prnt[i] = j
-//                }
-                dp[i] += dp[j]
-                prnt[i] = j
+                if(dp[j] + 1 > dp[i]){
+                      dp[i] = dp[j] + 1
+                      prnt[i] = j
+                }
             }
         }
         if(dp[best] < dp[i]) best = i
