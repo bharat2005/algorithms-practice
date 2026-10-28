@@ -23,8 +23,10 @@ fun main() {
     for(i in 0 until m){
         for(j in 0 until i){
             if(arr[j][0] < arr[i][0] && arr[j][1] < arr[i][1]){
-                dp[i] += dp[j]
-                prnt[i] = j
+                if(dp[j] + 1 > dp[i]){
+                    dp[i] = dp[j] + 1
+                    prnt[i] = j
+                }
             }
         }
         if(dp[best] < dp[i]) best = i
@@ -40,5 +42,5 @@ fun main() {
     }
 
     println(sb.length / 2)
-    println(sb.toString())
+    println(sb.toString().reversed())
 }
