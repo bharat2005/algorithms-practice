@@ -1,85 +1,45 @@
 fun main() {
-
-    val (n, ws, hs) = readLine()!!.split(" ").map { it.toInt() }
+    //extract
+    val (n, wx, hx) = readLine()!!.split(" ").map { it.toInt() }
     val arr = mutableListOf<List<Int>>()
-    for(i in 0 until n){
+    for (i in 0 until n){
         val (w, h) = readLine()!!.split(" ").map { it.toInt() }
-        if(w > ws && h > hs){
+        if(w > wx && h > hx){
             arr.add(listOf(w, h, i))
         }
     }
-
-    //no res
-    if(arr.isEmpty()){
+    //no possible result
+    if(arr.isEmpty()) {
         println(0)
         return
     }
 
-    //make close first chain
-    val que = ArrayDeque<Int>()
-    var currH = hs
-    var currW = ws
-    //repeat to arr.size to build arr.sized chain
-    repeat(arr.size){
-        var currMinDiff = Int.MAX_VALUE
-        var currMinIdxOrg = -1
-        var currMinIdxStl = -1
 
-        //loop through to get next closest envelop
-        for(i in 0 until arr.size){
-            val w = arr[i][0]
-            val h = arr[i][1]
-            val idx = arr[i][2]
-
-
-            val minDiff = w - currH + h - currW
-            if(w > currW && h > currH && minDiff < currMinDiff){
-                currMinDiff = minDiff
-                currMinIdxOrg = i
-                currMinIdxStl = idx
+    //build priority dp
+    val m = arr.size
+    val dp = IntArray(m){ 0 }
+    val prnt = IntArray(m) { -1 }
+    var best = 0
+    for(i in 0 until m){
+        for(j in 0 until i){
+            if(arr[j][0] < arr[i][0] && arr[j][1] < arr[i][1]){
+                dp[i] += dp[j]
+                prnt[i] = j
             }
         }
-
-        //append closest envlope index
-        if (currMinIdxOrg != -1){
-            currW = arr[currMinIdxOrg][0]
-            currH = arr[currMinIdxOrg][1]
-            que.addLast(currMinIdxStl)
-        }
+        if(dp[best] < dp[i]) best = i
     }
 
-    println(que.size)
-    que.forEach { print("${it + 1} ") }
 
+    //constrct back the chain
+    val sb = StringBuilder()
+    var curr = best
+    sb.append(arr[curr][2])
+    while(curr != -1){
+        sb.append(arr[curr][2])
+        curr = prnt[curr]
+    }
+
+    println(arr.size)
+    println(sb.toString())
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
