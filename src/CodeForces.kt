@@ -17,7 +17,7 @@ fun main() {
 
         //maintain max descding que
         while(maxDeq.isNotEmpty() && arr[maxDeq.last()] <= arr[i]) maxDeq.removeLast()
-        minDeq.addLast(i)
+        maxDeq.addLast(i)
 
 
         //shrink left as per validity andd move to next min/max
