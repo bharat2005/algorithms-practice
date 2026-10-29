@@ -9,7 +9,7 @@ fun main() {
 
     val res = StringBuilder()
 
-    for(i in 0 until k){
+    for(i in 0 until n){
 
         //maintian min asending que
         while (minDeq.isNotEmpty() && minDeq.last() >= arr[i]) minDeq.removeLast()
