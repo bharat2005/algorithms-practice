@@ -45,7 +45,7 @@ fun main() {
         }
 
     }
-
+    println("${bestLen} ${res.lines().size}")
     println(res.toString())
 
 
