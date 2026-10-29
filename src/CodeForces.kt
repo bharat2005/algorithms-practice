@@ -22,7 +22,13 @@ fun main() {
 
         //shrink left as per validity andd move to next min/max
         while(arr[maxDeq.first()] - arr[minDeq.first()] > k) {
-            if(left == maxDeq.first() || left == minDeq.first()) left++
+            if(left == minDeq.first()) {
+                minDeq.removeFirst()
+            }
+            if(left == maxDeq.first()){
+                maxDeq.removeFirst()
+            }
+            left++
         }
 
 
