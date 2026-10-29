@@ -45,8 +45,8 @@ fun main() {
         }
 
     }
-    println("${bestLen} ${res.lines().size}")
-    println(res.toString())
+    println("${bestLen} ${res.lines().size - 1}")
+    println(res.toString().trim())
 
 
 }
