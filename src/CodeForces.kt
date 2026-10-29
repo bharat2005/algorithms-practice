@@ -4,7 +4,6 @@ fun main() {
 
     val minDeq = ArrayDeque<Int>() //asending
     val maxDeq = ArrayDeque<Int>() //desending
-    var left = 0
     var bestLen = Int.MIN_VALUE
 
     val res = StringBuilder()
@@ -21,6 +20,7 @@ fun main() {
 
 
         //shrink left as per validity andd move to next min/max
+        var left = 0
         while(arr[maxDeq.first()] - arr[minDeq.first()] > k) {
             if(left == minDeq.first()) {
                 minDeq.removeFirst()
