@@ -1,45 +1,32 @@
-
 fun main() {
-    val matrix = Array(8) { IntArray(8)}
-    val n = matrix.size
-    val dig1 = BooleanArray(2 * n - 1)
-    val dig2 = BooleanArray(2 * n - 1)
-    val column = BooleanArray(n)
+    val n = 5
+    val arr = intArrayOf(2, -1, 3, 2, -2)
+    val s = 3
+    val k = 2
+
+    val ss = mutableListOf<Int>()
     var count = 0
 
-    fun isSafe(row : Int, col : Int) : Boolean {
-        if(column[col]) return false
-        if(dig1[row + col]) return false
-        if(dig2[row - col + n - 1]) return false
-        return true
-    }
-    fun rec(r : Int){
-        if(r == n) {
-            count++
-            matrix.forEach { println(it.joinToString(" "))}
-            println()
+    fun rec(i : Int){
+        //base case
+        if(ss.size == k || i >= n){
+            //process
+            if(ss.size == k && ss.sum() == s) count++
             return
         }
 
-        for(col in 0 until n){
-            if(isSafe(r, col)){
-                //place
-                matrix[r][col] = 1
-                column[col] = true
-                dig1[r + col] = true
-                dig2[r - col + n - 1] = true
+        //include
+        ss.add(arr[i])
+        rec(i + 1)
 
-                //recursion
-                rec(r + 1)
+        //undo
+        ss.removeLast()
 
-                //backtrack
-                matrix[r][col] = 0
-                column[col] = false
-                dig1[r + col] = false
-                dig2[r - col + n - 1] = false
-            }
-        }
+        //exclude
+        rec(i + 1)
     }
+
     rec(0)
-    println(count)
+
+
 }
