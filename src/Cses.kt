@@ -1,25 +1,31 @@
 
 fun main() {
-    val set = intArrayOf(1,2,3,4,5)
+    val set = listOf(1,2,3)
     val n = set.size
-    var ct = 0
+    val choosed = BooleanArray(n) { false}
+    val permutation = mutableListOf<Int>()
 
-    fun rec(k : Int, subset : MutableList<Int>) {
-        if(k == n){
-            println(subset)
-            ct++
+    fun rec(i : Int){
+        if(permutation.size == n){
+            println(permutation)
             return
         }
 
-        rec(k+1, subset)
 
-        subset.add(set[k])
-        rec(k+1, subset)
+        for(i in 0 until n){
+            //if choosed skip
+            if(choosed[i] == true) continue
 
+            //pick new choice
+            choosed[i] = true
+            permutation.add(set[i])
+            rec(i + 1)
 
-
+            //backtract
+            choosed[i] = false
+            permutation.removeLast()
+        }
     }
 
-    rec(0, mutableListOf())
-    println(ct)
+    rec(0)
 }
