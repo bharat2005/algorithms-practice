@@ -1,47 +1,45 @@
 
 fun main() {
-    val matrix = Array(4) { IntArray(4){ 0 } }
+    val matrix = Array(8) { IntArray(8)}
     val n = matrix.size
-    val dg1 = BooleanArray(2 * n - 1){ false }
-    val dg2 = BooleanArray(2 * n - 1){ false }
-    val column = BooleanArray(n){ false }
+    val dig1 = BooleanArray(2 * n - 1)
+    val dig2 = BooleanArray(2 * n - 1)
+    val column = BooleanArray(n)
+    var count = 0
 
-    fun isSafe(r : Int, c : Int) : Boolean {
-        return !dg2[r - c + n - 1] && !dg1[r + c] && !column[c]
+    fun isSafe(row : Int, col : Int) : Boolean {
+        if(column[col]) return false
+        if(dig1[row + col]) return false
+        if(dig2[row - col + n - 1]) return false
+        return true
     }
-
-
-    fun rec(r : Int) {
-        if(r == 4) {
-            //done
-            matrix.forEach { println(it.joinToString(" ")) }
-            println()
+    fun rec(r : Int){
+        if(r == n) {
+            count++
+            matrix.forEach { println(it.joinToString(" "))}
             println()
             return
         }
-        for(col in 0 until 4){
 
-            //if safe
+        for(col in 0 until n){
             if(isSafe(r, col)){
                 //place
                 matrix[r][col] = 1
                 column[col] = true
-                dg1[col + r] = true
-                dg2[col - r + n - 1] = true
+                dig1[r + col] = true
+                dig2[r - col + n - 1] = true
 
-                //next row
+                //recursion
                 rec(r + 1)
 
-                //try next possible -> undo
+                //backtrack
                 matrix[r][col] = 0
                 column[col] = false
-                dg1[col + r] = false
-                dg2[col - r + n - 1] = false
-
+                dig1[r + col] = false
+                dig2[r - col + n - 1] = false
             }
-
         }
     }
-
     rec(0)
+    println(count)
 }
