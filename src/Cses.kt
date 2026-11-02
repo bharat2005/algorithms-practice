@@ -1,11 +1,11 @@
 
 fun main() {
     val matrix = Array(4) { IntArray(4){ 0 } }
-    matrix[0][0] = 1
+    val n = matrix.size
 
     fun isSafe(r : Int, c : Int) : Boolean {
         //check upper rows
-        var ur = r
+        var ur = r - 1
         while(ur >= 0){
             if(matrix[ur][c] == 1) return false
             ur--
@@ -23,26 +23,26 @@ fun main() {
         //check upper right digonal
         var rdr = r - 1
         var rdc = c + 1
-        while (rdr != r && rdc != c){
-            if(matrix[ldr][ldc] == 1) return false
-            ldr--
-            ldc++
+        while (rdr >= 0 && rdc < n){
+            if(matrix[rdr][rdc] == 1) return false
+            rdr--
+            rdc++
         }
 
 
         //safe
         return true
     }
+
+
     fun rec(r : Int) {
         if(r == 4) {
             //done
-            matrix.forEach { println(it) }
+            matrix.forEach { println(it.joinToString(" ")) }
             println()
             println()
             return
         }
-
-
         for(col in 0 until 4){
 
             //if safe
@@ -61,5 +61,5 @@ fun main() {
         }
     }
 
-    rec(1)
+    rec(0)
 }
