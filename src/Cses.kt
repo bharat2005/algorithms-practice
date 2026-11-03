@@ -1,32 +1,41 @@
 fun main() {
-    val n = 5
-    val arr = intArrayOf(2, -1, 3, 2, -2)
-    val s = 3
-    val k = 2
+    val n = 4
+    val forbiddenPairs = mapOf(
+        1 to 2,
+        3 to 4
+    )
+    val used = BooleanArray(n + 1){false}
+    val permutation = mutableListOf<Int>()
+    var ct = 0
 
-    val ss = mutableListOf<Int>()
-    var count = 0
 
-    fun rec(i : Int){
-        //base case
-        if(ss.size == k || i >= n){
-            //process
-            if(ss.size == k && ss.sum() == s) count++
+
+    fun rec(num : Int){
+        if(num == 1){
+            rec(num + 1)
             return
         }
 
-        //include
-        ss.add(arr[i])
-        rec(i + 1)
+        if(num == n){
+            //process
+            ct++
+            return
+        }
 
-        //undo
-        ss.removeLast()
+        //explore all choices
+        for(n in 2 until n){
+            if(!used[n] && forbiddenPairs[n] != n + 1){
+                //add
+                permutation.add(n)
+                used[n] = true
+                rec(n + 1)
 
-        //exclude
-        rec(i + 1)
+
+                //undo
+                permutation.removeLast()
+                used[n] = false
+            }
+        }
     }
-
-    rec(0)
-
 
 }
