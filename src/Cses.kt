@@ -1,6 +1,10 @@
 fun main() {
-    val n = readLine()!!.toInt()
+    var n = readLine()!!.toInt()
     val k = readLine()!!.toInt()
 
-    println(if(n and (1 shl k) == 0) 0 else 1)
+    n = n or (1 shl k)
+    n = n and (1 shl k).inv()
+    n = n xor (1 shl k)
+
+    println(n.toString(2))
 }
