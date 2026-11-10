@@ -1,6 +1,11 @@
 fun main() {
-    val n = readLine()!!.toInt()
-    val k = 31 - Integer.numberOfLeadingZeros(n)
+    var n = readLine()!!.toLong()
+    var ct = 0
 
-    println(k)
+    while ( n > 1){
+        n shr 1
+        ct++
+    }
+
+    println(ct)
 }
