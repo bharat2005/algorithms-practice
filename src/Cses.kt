@@ -1,11 +1,18 @@
-fun main() {
-    var n = readLine()!!.toLong()
-    var ct = 0
+fun main(){
+    val str = readLine()!!
+    for(i in str.indices){
+        //first case
+        if(i == 0 && str[i].toInt() <= 97){
+            println("No")
+            return
+        } else {
+            if(str[i].toInt() < 97){
+                println("No")
+                return
+            }
+        }
 
-    while ( n > 1){
-       n =  n shr 1
-        ct++
     }
 
-    println(ct)
+    println("Yes")
 }
