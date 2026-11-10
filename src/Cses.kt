@@ -3,7 +3,7 @@ fun main() {
     var ct = 0
 
     while ( n > 1){
-        n shr 1
+       n =  n shr 1
         ct++
     }
 
