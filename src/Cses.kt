@@ -3,14 +3,14 @@ fun main() {
 
     val dp = listOf(1,2,4)
 
-    val aset = intArrayOf(5)
+    val aset = IntArray(5){ 0 }
     var i = 0
     while (a > 0) {
         while(dp[i] <= a) i++
         a -= dp[i++]
         aset[i]++
     }
-    val bset = intArrayOf(5)
+    val bset =  IntArray(5){ 0 }
     i = 0
     while (b > 0) {
         while(dp[i] <= b) i++
@@ -25,6 +25,4 @@ fun main() {
     }
 
     println(sum)
-
-
 }
