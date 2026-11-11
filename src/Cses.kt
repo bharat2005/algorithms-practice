@@ -1,21 +1,18 @@
 fun main() {
     val n = readLine()!!.toInt()
     val s = readLine()!!
-    
-    var sum = 0L
-    var onesCount = 0L
-    
-    for(j in 0 until n){
-        var calculatedOnes = 0L
-        
-        if(s[j] == '0'){
-            calculatedOnes = j.toLong()
-        } else {
-            calculatedOnes = j.toLong() - onesCount
-            onesCount++
+
+    var sum = 0
+
+    for(i in 0 until n){
+        var nandacc = if(s[i] == '0') 0 else 1
+        for(j in i + 1 until n){
+            val end = if(s[j] == '0') 0 else 1
+            nandacc = (nandacc and end).inv()
+
+            sum += nandacc
         }
-        sum += calculatedOnes
     }
-    
+
     println(sum)
 }
