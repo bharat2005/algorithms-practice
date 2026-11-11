@@ -1,18 +1,11 @@
-fun main(){
-    val str = readLine()!!
-    for(i in str.indices){
-        //first case
-        if(i == 0 && str[i].toInt() < 97){
-            println("No")
-            return
-        } else {
-            if(str[i].toInt() >= 97){
-                println("No")
-                return
-            }
-        }
+fun main() {
+    val n = readLine()!!.toInt()
+    //(sub - mask) and mask
+    var sub = 0
 
+    while(true){
+        println(sub)
+        if(sub == n) break
+        sub = (sub - n) and n
     }
-
-    println("Yes")
 }
