@@ -4,11 +4,16 @@ fun main() {
 
     var sum = 0
 
+    fun nandOp(a : Int, b : Int)  : Int{
+        if(a == b && a == 1) return 0
+        return 1
+    }
+
     for(i in 0 until n){
         var nandacc = if(s[i] == '0') 0 else 1
         for(j in i + 1 until n){
             val end = if(s[j] == '0') 0 else 1
-            nandacc = (nandacc and end).inv()
+            nandacc = nandOp(nandacc, end)
 
             sum += nandacc
         }
