@@ -11,6 +11,7 @@ fun main() {
 
     for(i in 0 until n){
         var nandacc = if(s[i] == '0') 0 else 1
+        sum += nandacc
         for(j in i + 1 until n){
             val end = if(s[j] == '0') 0 else 1
             nandacc = nandOp(nandacc, end)
