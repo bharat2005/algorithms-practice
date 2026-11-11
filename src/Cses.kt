@@ -20,8 +20,9 @@ fun main() {
             } else {
                 nand = nandSimu(nand, bitJ)
             }
+            sum += nand
         }
-        sum += nand
+
     }
 
     println(sum)
