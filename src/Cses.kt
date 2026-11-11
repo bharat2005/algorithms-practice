@@ -1,7 +1,7 @@
 fun main() {
-    val n = readLine()!!.toInt()
+    val n = readLine()!!.toLong()
     //(sub - mask) and mask
-    var sub = 0
+    var sub = 0L
 
     while(true){
         println(sub)
