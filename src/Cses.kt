@@ -2,21 +2,21 @@ fun main() {
     val n = readLine()!!.toInt()
     val s = readLine()!!
 
-    var nandac = 0
+    var sum = 0
 
     for(i in 0 until n){
-        val biti = if(s[i] == '1') 1 else 0
-        var subnandac = 0
+        val bitI =  if(s[i] == '1') 1 else 0
+        var nand = 0
         for(j in i until n){
-            val bitj = if(s[j] == '1') 1 else 0
-            if(i == j) {
-                nandac = (subnandac and biti).inv()
+            val bitJ = if(s[j] == '1') 1 else 0
+            if(i == j){
+                nand = bitJ
             } else {
-                nandac = (subnandac and bitj).inv()
+                nand = (nand and bitJ).inv()
             }
         }
-        nandac = (subnandac and nandac).inv()
+        sum += nand
     }
 
-    println(nandac)
+    println(sum)
 }
