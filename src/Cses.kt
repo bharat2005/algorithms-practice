@@ -11,8 +11,8 @@ fun main() {
         if(s[j] == '0'){
             calculatedOnes = j.toLong()
         } else {
+            calculatedOnes = j.toLong() - onesCount
             onesCount++
-            calculatedOnes = j.toLong() + 1 - onesCount
         }
         sum += calculatedOnes
     }
