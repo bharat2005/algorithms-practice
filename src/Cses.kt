@@ -7,7 +7,7 @@ fun main() {
 
     var ans = 0
     //all possible subset
-    for(mask in 0 until (1 shl n)){
+    for(mask in 0 until (1 shl (n+1))){
         var valid = true
 
         //all tests
@@ -36,5 +36,5 @@ fun main() {
         }
         if(valid) ans++
     }
-    println(ans)
+    println(ans / 2)
 }
