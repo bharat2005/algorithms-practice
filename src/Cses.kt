@@ -7,7 +7,7 @@ fun main() {
 
     var ans = 0
     //all possible subset
-    for(mask in 0 until (1 shl (n+1))){
+    for(mask in 0 until (1 shl n)){
         var valid = true
 
         //all tests
@@ -18,7 +18,7 @@ fun main() {
             for(i in 1 until tests[t].size - 1){
                 val x = tests[t][i].toInt()
                 //mem check
-                if(mask and (1 shl x) != 0) kcount++
+                if(mask and (1 shl (x-1)) != 0) kcount++
             }
 
             val res = tests[t].last()
@@ -36,5 +36,5 @@ fun main() {
         }
         if(valid) ans++
     }
-    println(ans / 2)
+    println(ans)
 }
