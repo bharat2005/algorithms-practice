@@ -15,7 +15,7 @@ fun main() {
             var kcount = 0
 
             //all ele of a test
-            for(i in 0 until tests[t].size - 1){
+            for(i in 1 until tests[t].size - 1){
                 val x = tests[t][i].toInt()
                 //mem check
                 if(mask and (1 shl x) == 1) kcount++
