@@ -1,34 +1,18 @@
-fun main() {
+fun main(){
     val n = readln().toInt()
     val k = readln().toInt()
-    val a = readln().split(" ").map { it.toInt() }
+    val a = readln().split(" ").map {it.toInt()}
     var ans = 0
 
-    fun memChek(mask : Int, x : Int) : Boolean {
-        if(mask and (1 shl x) != 0) return true
-        return false
-    }
+    for(s in 1 until (1 shl n)){
+        var accumulatedAnd = -1
 
-    //check all subsets
-    for(s in 0 until (1 shl n)){
-        var sum = 0
-
-        //check all pairs
-        for(i in 0 until n){
-            //check if ele belongs to curr subset
-            if(!memChek(s,i)) continue
-
-            for(j in i + 1 until n){
-                //check if ele belongs to curr subset
-                if(!memChek(s,j)) continue
-
-                sum += a[i] xor a[j]
-
-            }
+        for(i in 0 until a.size){
+            if(s and (1 shl i ) != 0) accumulatedAnd = (accumulatedAnd and a[i])
         }
 
-        if(sum == k)ans++
+        if(accumulatedAnd == k) ans++
     }
-
     println(ans)
+
 }
