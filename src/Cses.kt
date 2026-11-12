@@ -1,28 +1,40 @@
 fun main() {
-    val (n, k) = readln().split(" ").map { it.toInt() }
-    val arr = Array(n){""}
-    for(i in 0 until n){
-        arr[i] = readln()
+    val (n, m, k) = readLine()!!.split(" ").map { it.toInt() }
+    val tests = mutableListOf<List<String>>()
+    repeat(m){
+        tests.add(readln().split(" "))
     }
 
-    var max = Int.MIN_VALUE
-    //check all subset
+    var ans = 0
+    //all possible subset
     for(mask in 0 until (1 shl n)){
-        val freq = IntArray(26){ 0 }
+        var valid = true
 
-        //check all strings
-        for(i in 0 until n){
-            if(mask and (1 shl i) != 0){
+        //all tests
+        for(t in 0 until m){
+            var kcount = 0
 
-                //check all chars
-                val str = arr[i]
-                for(ch in str) freq[ch - 'a']++
-
+            //all ele of a test
+            for(i in 0 until tests[t].size - 1){
+                val x = tests[t][i].toInt()
+                //mem check
+                if(mask and (1 shl x) == 1) kcount++
             }
+
+            val res = tests[t].last()
+            if(kcount >= k && res == "o"){
+                //good going
+            } else if(kcount < k && res == "x"){
+                //good going
+            } else {
+                //its done bro
+                valid = false
+                break
+            }
+
+
         }
-        var ct = 0
-        for(z in freq) if(z == k) ct++
-        max = maxOf(max, ct)
+        if(valid) ans++
     }
-    println(max)
+    println(ans)
 }
