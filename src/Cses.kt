@@ -18,7 +18,7 @@ fun main() {
             for(i in 1 until tests[t].size - 1){
                 val x = tests[t][i].toInt()
                 //mem check
-                if(mask and (1 shl x) == 1) kcount++
+                if(mask and (1 shl x) != 0) kcount++
             }
 
             val res = tests[t].last()
