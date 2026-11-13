@@ -1,28 +1,35 @@
-fun main(){
-    val (n,m) = readln().split(" "). map { it.toInt() }
-    val adj = Array(n + 1){
-        mutableListOf<List<Long>>()
+fun main() {
+    val (n, m, k) = readln().split(" ").map { it.toInt() }
+    val aj = Array(n+1){
+        mutableListOf<List<Int>>()
     }
     repeat(m){
-        val (u,v, w) = readln().split(" ").map { it.toLong() }
-        adj[u.toInt()].add(listOf(v, w))
-        adj[v.toInt()].add(listOf(u,w))
+        val (u,v,w) = readln().split(" ").map { it.toInt() }
+        aj[u].add(listOf(v,w))
+        aj[v].add(listOf(u, w))
     }
-    var minXor = Long.MAX_VALUE
 
+    val xors = mutableListOf<Int>()
+    //using visited other wise it will be recureve infinelty
+    val visited = BooleanArray(n+1){ false }
 
-
-    fun dfs(node : Int, accumulatedXor : Long){
-        //base case
+    fun dfs(node : Int, accumulatedXor : Int){
         if(node == n){
-            minXor = minOf(minXor, accumulatedXor)
+            xors.add(accumulatedXor)
+            return
         }
 
-        for((v,w) in adj[node]){
-            dfs(v.toInt(), accumulatedXor xor w)
+        visited[node] = true
+
+        for((v, w) in aj[node]){
+            if(visited[v]) continue
+            dfs(v, accumulatedXor xor w)
         }
+        visited[node] = false
+
     }
+
 
     dfs(1, 0)
-    println(minXor)
+    println(xors.sorted()[k-1])
 }
