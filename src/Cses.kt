@@ -11,10 +11,10 @@ fun main(){
 
 
     val visited = BooleanArray(n+1){false}
-    var minXor = Int.MAX_VALUE
+    var minXor = Long.MAX_VALUE
 
 
-    fun dfs(u : Int, accumulatedXor : Int){
+    fun dfs(u : Int, accumulatedXor : Long){
         //base case
         if(u == n){
             minXor = minOf(accumulatedXor,minXor)
@@ -26,7 +26,7 @@ fun main(){
         for((v,w) in adj[u]){
             if(visited[v]) continue
             visited[v] = true
-            dfs(v, accumulatedXor xor w)
+            dfs(v, accumulatedXor xor w.toLong())
             visited[v] = false
         }
         visited[u] = false
