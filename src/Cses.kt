@@ -6,6 +6,7 @@ fun main(){
     repeat(m){
         val (u, v, w) = readln().split(" ").map { it.toInt() }
         adj[u].add(listOf(v,w))
+        adj[v].add(listOf(u,w))
     }
 
 
@@ -30,5 +31,6 @@ fun main(){
         }
         visited[u] = false
     }
+    dfs(1,0)
     println(minXor)
 }
