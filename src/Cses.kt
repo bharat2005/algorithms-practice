@@ -25,8 +25,9 @@ fun main(){
         for((v,w) in adj[u]){
             if(visited[v.toInt()]) continue
             dfs(v.toInt(), accumulatedXor xor w.toLong())
+            visited[u] = false
         }
-        visited[u] = false
+
     }
     dfs(1,0L)
     println(minXor)
