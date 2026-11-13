@@ -1,12 +1,12 @@
 fun main(){
     val (n, m) = readln().split(" ").map { it.toInt() }
     val adj = Array(n+1){
-        mutableListOf<List<Int>>()
+        mutableListOf<List<Long>>()
     }
     repeat(m){
-        val (u, v, w) = readln().split(" ").map { it.toInt() }
-        adj[u].add(listOf(v,w))
-        adj[v].add(listOf(u,w))
+        val (u, v, w) = readln().split(" ").map { it.toLong() }
+        adj[u.toInt()].add(listOf(v,w))
+        adj[v.toInt()].add(listOf(u,w))
     }
 
 
@@ -21,16 +21,14 @@ fun main(){
             return
         }
 
-        visited[u] = true
         //recurse
         for((v,w) in adj[u]){
-            if(visited[v]) continue
-            visited[v] = true
-            dfs(v, accumulatedXor xor w.toLong())
-            visited[v] = false
+            if(visited[v.toInt()]) continue
+            visited[v.toInt()] = true
+            dfs(v.toInt(), accumulatedXor xor w.toLong())
+            visited[v.toInt()] = false
         }
-        visited[u] = false
     }
-    dfs(1,0)
+    dfs(1,0L)
     println(minXor)
 }
