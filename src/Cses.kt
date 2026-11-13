@@ -20,14 +20,13 @@ fun main(){
             minXor = minOf(accumulatedXor,minXor)
             return
         }
-
+        visited[u] = true
         //recurse
         for((v,w) in adj[u]){
             if(visited[v.toInt()]) continue
-            visited[v.toInt()] = true
             dfs(v.toInt(), accumulatedXor xor w.toLong())
-            visited[v.toInt()] = false
         }
+        visited[u] = false
     }
     dfs(1,0L)
     println(minXor)
