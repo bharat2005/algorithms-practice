@@ -7,7 +7,7 @@ fun main() {
     var y = 0
     var ct = 0
     var stale = -1
-    while (y < n || x < n){
+    while (y < n && x < n){
         //normal shifting
         if(a[x] == b[y]) {
             x++
