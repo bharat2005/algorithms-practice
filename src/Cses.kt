@@ -1,4 +1,4 @@
-fun main() {
+ fun main() {
     val (n, m, k) = readln().split(" ").map { it.toInt() }
     val aj = Array(n+1){
         mutableListOf<List<Int>>()
@@ -9,13 +9,13 @@ fun main() {
         aj[v].add(listOf(u, w))
     }
 
-    val xors = mutableListOf<Int>()
-    //using visited other wise it will be recureve infinelty
-    val visited = BooleanArray(n+1){ false }
 
-    fun dfs(node : Int, accumulatedXor : Int){
+    val visited = BooleanArray(n+1){ false }
+    var ct = 0
+
+    fun dfs(node : Int, accumulatedSum : Int){
         if(node == n){
-            xors.add(accumulatedXor)
+            if(accumulatedSum % k == 0) ct++
             return
         }
 
@@ -23,7 +23,7 @@ fun main() {
 
         for((v, w) in aj[node]){
             if(visited[v]) continue
-            dfs(v, accumulatedXor xor w)
+            dfs(v, accumulatedSum + w)
         }
         visited[node] = false
 
@@ -31,5 +31,5 @@ fun main() {
 
 
     dfs(1, 0)
-    println(xors.sorted()[k-1])
+    println(ct)
 }
