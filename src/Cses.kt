@@ -19,8 +19,9 @@ fun main() {
 
     for(mask in 1..(1 shl n)){
         for(v in 0 until n){ //0-index v!! take care ahead!!
+            if(v == n)continue
             for((u,w) in adj[v+1]){
-               // if(mask and (1 shl u) != 0) continue // why chekcing alredy visited
+                if(mask and (1 shl u) != 0) continue
                 val nmask = mask or (1 shl u)
                 val nweigth = w % k
 
@@ -31,5 +32,9 @@ fun main() {
         }
     }
 
-    println(dp[n-1][n-1])
+    var ans = 0
+    for(mask in dp){
+        ans += mask[n][0]
+    }
+    println(ans)
 }
