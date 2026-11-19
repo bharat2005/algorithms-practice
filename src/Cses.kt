@@ -1,30 +1,35 @@
-fun main(){
-    val (n, m) = readLine()!!.split(" ").map { it.toInt() }
-    val adj = Array(n+1){
-        mutableListOf<Pair<Int,Int>>()
-    }
-    repeat(m){
-        val (v, u, w) = readLine()!!.split(" ").map { it.toInt() }
-        adj[v].add(Pair(u,w))
-        adj[u].add(Pair(v,w))
+fun main() {
+    val n = readLine()!!.toInt()
+    val a = readLine()!!.split(" ").map { it.toLong() }
+
+    var minXor = Long.MAX_VALUE
+
+    val prefixArr = LongArray(n){ 0 }
+    prefixArr[0] = a[0]
+    for(i in 1 until n){
+        prefixArr[i] = prefixArr[i - 1] or a[i]
     }
 
-    var minXor = 0
-    var visited = BooleanArray(n+1){false}
-    fun dfs(node : Int, accumulatedXor : Int){
-        if(node == n){
-            minXor = minOf(minXor, accumulatedXor xor n)
+    val suffixArr = LongArray(n){ 0 }
+    suffixArr[n-1] = a[n-1]
+    for(i in n-2 downTo 0){
+        suffixArr[i] = suffixArr[i + 1] or a[i]
+    }
+
+
+    fun rec(par : Int, xorSum : Long){
+        if(par == n-1){
             return
         }
-        if(visited[node]) return
-        for((u,w) in adj[node]){
-            dfs(u, accumulatedXor xor w)
+        val xor = prefixArr[par] xor suffixArr[par + 1]
+        minXor = minOf(minXor,xor)
+
+        for(ipar in par + 1 until n){
+            rec(ipar, xor)
         }
-        visited[node] = true
+
     }
 
-    dfs(1, 0)
-
+    rec(0, 0)
     println(minXor)
-
 }
