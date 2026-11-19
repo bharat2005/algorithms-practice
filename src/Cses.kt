@@ -1,24 +1,29 @@
 fun main() {
-    val n = readLine()!!.toInt()
-    val a = readLine()!!.split(" ").map { it.toLong() }
+    val n = readln()!!.toInt()
+    val a = readln()!!.split(" ").map { it.toInt() }
 
-    var minXor = Long.MAX_VALUE
-    for(mask in 0 until (1 shl (n-1)) ){
-        var accumulatedXOR = 0L
-        var currentOR = a[0]
-        for(i in 0 until n-1){
-            if(mask and (1 shl i) != 0){
-                //partition
-                accumulatedXOR = accumulatedXOR xor currentOR
-                currentOR =  a[i+1]
-            } else {
-                //accumulate OR
-                currentOR = currentOR or a[i+1]
-            }
+    fun rec(index : Int, currentOr : Int, accumulatedXor : Int) : Int {
+        if(index == n){
+            return accumulatedXor xor currentOr
         }
-        accumulatedXOR = accumulatedXOR xor currentOR
-        minXor = minOf(minXor, accumulatedXOR)
 
+        //new partition
+        val option1 = rec(
+            index + 1,
+            a[index],
+            accumulatedXor xor currentOr
+        )
+
+        val option2 = rec(
+            index + 1,
+            currentOr or a[index],
+            accumulatedXor
+        )
+
+
+        return minOf(option1, option2)
     }
-    print(minXor)
+
+    val ans = rec(0, 0, 0)
+    println(ans)
 }
