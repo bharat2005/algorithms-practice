@@ -2,34 +2,22 @@ fun main() {
     val n = readLine()!!.toInt()
     val a = readLine()!!.split(" ").map { it.toLong() }
 
-    var minXor = Long.MAX_VALUE
-
-    val prefixArr = LongArray(n){ 0 }
-    prefixArr[0] = a[0]
-    for(i in 1 until n){
-        prefixArr[i] = prefixArr[i - 1] or a[i]
-    }
-
-    val suffixArr = LongArray(n){ 0 }
-    suffixArr[n-1] = a[n-1]
-    for(i in n-2 downTo 0){
-        suffixArr[i] = suffixArr[i + 1] or a[i]
-    }
-
-
-    fun rec(par : Int, xorSum : Long){
-        if(par == n-1){
-            return
+    var minXor = 0L
+    for(mask in 0 until (1 shl (n-1))){
+        var accumulatedXOR = 0L
+        var currentOR = 0L
+        for(i in 0 until n){
+            if(mask and (1 shl i) != 0){
+                //partition
+                accumulatedXOR = accumulatedXOR xor currentOR
+                currentOR = 0
+            } else {
+                //accumulate OR
+                currentOR = currentOR or a[i]
+            }
         }
-        val xor = prefixArr[par] xor suffixArr[par + 1]
-        minXor = minOf(minXor,xor)
-
-        for(ipar in par + 1 until n){
-            rec(ipar, xor)
-        }
+        minXor = minOf(minXor, accumulatedXOR)
 
     }
-
-    rec(0, 0)
-    println(minXor)
+    print(minXor)
 }
