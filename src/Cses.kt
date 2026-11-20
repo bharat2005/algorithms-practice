@@ -1,6 +1,6 @@
 fun main() {
     val n = readln().toInt()
-    val s = readln().map { it.toInt() }
+    val s = readln().map { if(it == '1') 1 else 0 }
     var ct = 0
     fun beautyCheck(l : Int, r : Int) : Boolean {
         var xor = 0
