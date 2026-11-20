@@ -1,29 +1,21 @@
 fun main() {
-    val n = readln()!!.toInt()
-    val a = readln()!!.split(" ").map { it.toInt() }
-
-    fun rec(index : Int, currentOr : Int, accumulatedXor : Int) : Int {
-        if(index == n){
-            return accumulatedXor xor currentOr
+    val n = readln().toInt()
+    val s = readln().split(" ").map { it.toInt() }
+    var ct = 0
+    fun beautyCheck(l : Int, r : Int) : Boolean {
+        var xnor = 1
+        for(i in l..r){
+            xnor = (xnor xor s[i]).inv()
         }
 
-        //new partition
-        val option1 = rec(
-            index + 1,
-            a[index],
-            accumulatedXor xor currentOr
-        )
-
-        val option2 = rec(
-            index + 1,
-            currentOr or a[index],
-            accumulatedXor
-        )
-
-
-        return minOf(option1, option2)
+        return if(xnor > 0) true else false
     }
 
-    val ans = rec(0, 0, 0)
-    println(ans)
+    for(l in 0 until n){
+        for(r in l+1 until n){
+            if(beautyCheck(l, r)) ct++
+        }
+    }
+
+    println(ct)
 }
