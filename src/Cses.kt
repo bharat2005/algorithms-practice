@@ -1,7 +1,7 @@
 fun main() {
     val n = readln().toInt()
     val s = readln().map { if(it == '1') 1 else 0 }
-    var res = 0
+    var res = 0L
 
     val prefixXor = IntArray(n){ 0 }
     prefixXor[0] = s[0]
@@ -10,8 +10,8 @@ fun main() {
     }
 
     fun checkBeauty(l : Int, r : Int) : Boolean {
-        val left = if(l == 0) 0 else l - 1
-        return prefixXor[r] xor prefixXor[left] != (r - l) % 2
+        val prefixXorLeft = if(l == 0) 0 else prefixXor[l - 1]
+        return prefixXor[r] xor prefixXorLeft != (r - l) % 2
     }
     for(i in 0 until n){
         for(j in i until n){
