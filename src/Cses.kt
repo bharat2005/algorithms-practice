@@ -5,15 +5,16 @@ fun main() {
 
     val prefixXor = IntArray(n){ 0 }
     prefixXor[0] = s[0]
-    for(i in 0 until n){
+    for(i in 1 until n){
         prefixXor[i] = prefixXor[i-1] xor s[i]
     }
 
     fun checkBeauty(l : Int, r : Int) : Boolean {
-        return prefixXor[r] xor prefixXor[l-1] != (r - l) % 2
+        val left = if(l == 0) 0 else l - 1
+        return prefixXor[r] xor prefixXor[left] != (r - l) % 2
     }
     for(i in 0 until n){
-        for(j in 0 until n){
+        for(j in i until n){
             if(checkBeauty(i, j)) res++
         }
     }
