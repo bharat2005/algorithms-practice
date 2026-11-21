@@ -25,3 +25,10 @@ fun assignUmbrella(rain: IntArray): Array<String> {
     return a
 
 }
+
+fun minRange(a: Int, b: Int, c: Int): Int {
+    val sorted = intArrayOf(a, b, c).sorted()
+
+    return (sorted[0] + sorted[1]) - minOf(a, b)
+
+}
