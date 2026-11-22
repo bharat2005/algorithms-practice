@@ -1,45 +1,29 @@
 import java.util.Scanner
-import kotlin.math.pow
 
 fun main() {
-    val n = readLine()!!.toInt()
-    val set = readLine()!!.split(" ").map { it.toLong()  }.toSet()
+    val (n, l, r, x) = readLine()!!.split(" ").map { it.toInt() }
+    val a = readLine()!!.split(" ").map { it.toInt() }
+    var ct = 0
     
-    
-    //3s
-    for(x in set){
-        var twos = 1L
-    
-        while(twos <= (1L shl 30)){
-            if(x in set && (x+twos) in set && x+2*twos in set){
-                println(3)
-                println("${x} ${x+twos} ${x+2*twos}")
-                return
+    for(mask in 0 until (1 shl n)){
+        var sum = 0
+        var minNum = Int.MAX_VALUE
+        var maxNum = Int.MIN_VALUE
+        var size = 0
+        for(i in 0 until n){
+            if(mask and (1 shl i) != 0){
+                val ele = a[i]
+                sum += ele
+                minNum = minOf(minNum, ele )
+                maxNum = maxOf(maxNum, ele )
+                size++
             }
-            twos *= 2
         }
     
+    
+    
+        if(sum in l..r && maxNum - minNum >= x && size >= 2) ct++
     }
     
-    //2s
-    for(x in set){
-        var twos = 1L
-    
-        while(twos <= (1L shl 30)){
-            if(x in set && x+twos in set){
-                println(2)
-                println("${x} ${x+twos}}")
-                return
-            }
-            twos *= 2
-        }
-    
-    }
-    
-    
-    
-    println(1)
-    println(set.iterator().next())
-    
-    
+    println(ct)
 }
