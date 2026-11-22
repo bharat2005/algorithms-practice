@@ -5,7 +5,7 @@ fun main() {
 
     fun dfs(i : Int, sum : Int, min : Int, max : Int, size : Int){
         if(i == n){
-            if(size >= 2 && sum >= x && max - min in l..r) ct++
+            if(size >= 2 && sum in l..r && max - min >= x) ct++
             return
         }
 
