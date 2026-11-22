@@ -5,18 +5,22 @@ fun main() {
 
     for(mask in 0 until (1 shl n)){
         var sum = 0
+        var minNum = Int.MAX_VALUE
+        var maxNum = Int.MIN_VALUE
+        var size = 0
         for(i in 0 until n){
             if(mask and (1 shl i) != 0){
-                sum += a[i]
+                val ele = a[i]
+                sum += ele
+                minNum = minOf(minNum, ele )
+                maxNum = maxOf(maxNum, ele )
+                size++
             }
         }
 
-        val min = 31 - Integer.numberOfLeadingZeros(mask)
-        val max = Integer.numberOfTrailingZeros(mask)
 
 
-
-        if(sum in l..r && a[max] - a[min] >= x) ct++
+        if(sum in l..r && maxNum - minNum >= x && size >= 2) ct++
     }
 
     println(ct)
