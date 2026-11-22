@@ -1,20 +1,13 @@
-fun main() {
+fun main(){
     val t = readLine()!!.toInt()
     repeat(t){
         val n = readLine()!!.toInt()
-        val a = readLine()!!.split(" ").map { it.toInt() }
+        var sum = 0
 
-        val freq = mutableMapOf<Int,Int>()
-        for(num in a){
-            freq[num] = freq.getOrDefault(num, 0) + 1
+        for(i in 0 until n-1){
+            sum += (i xor (i+1)).countOneBits()
         }
 
-        for( count in freq.values){
-            if(count % 2 != 0) {
-                println("NO")
-                return@repeat
-            }
-        }
-        println("YES")
+        println(sum)
     }
 }
