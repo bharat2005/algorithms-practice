@@ -1,13 +1,14 @@
-fun main(){
-    val t = readLine()!!.toInt()
-    repeat(t){
-        val n = readLine()!!.toLong()
+fun main() {
+    val t = readln().toInt()
+
+    repeat(t) {
+        val n = readln().toLong()
         var sum = 0L
-
-        for(i in 0 until n-1){
-            sum += (i xor (i+1)).countOneBits()
+        var num = 2L
+        while(num <= n+1){
+            sum += n/num
+            num *= 2L
         }
-
-        println(sum)
+        println(n + sum )
     }
 }
