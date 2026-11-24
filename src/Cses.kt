@@ -1,14 +1,20 @@
 fun main() {
-    val t = readln().toInt()
+    val (n, x, y) = readln().split(" ").map { it.toInt() }
+    val a = readln().split(" ").map { it.toInt() }
 
-    repeat(t) {
-        val n = readln().toLong()
-        var sum = 0L
-        var num = 2L
-        while(num <= n+1){
-            sum += n/num
-            num *= 2L
+
+    for(num in a){
+
+        val alice = x xor num == y || x + num == y
+        val bob = x+3 xor num == y || x+3 + num == y
+
+        if(alice) {
+            println("Alice")
+            return
         }
-        println(n + sum )
+        if(bob){
+            println("Bob")
+            return
+        }
     }
 }
